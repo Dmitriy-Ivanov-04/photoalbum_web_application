@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="@{css/resultSearchStyle.css}">
+	<link rel="shortcut icon" href="@{images/icon.png}" type="image/png">
+    <title>Search</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="@{js/searchScript.js}"></script>
+	<script defer src="@{js/imageAlign.js}"></script>
+	<script src="@{js/tabScript.js}"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="header-wrapper">
+            <div id="polosa">
+                <div id="search-exit">
+                  <a href="#" th:href="/logout" th:text="#{button.exit}" class="exit">Выйти</a>
+                   <img src="@{images/rfln.png}" alt="" class="logo">
+                   <div id="session">
+                        <img src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px">
+                        <a href="#" th:text="${nickname}" class="nick-session">Nickname</a>
+                    </div>
+                   <img src="@{images/rating.png}" class="rate" alt="" >
+                   <img src="@{images/date.png}" class="date" alt="" >
+                   <input type="text" id="search">
+                   <img src="@{images/loupeBackground.png}" class="loupe" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="content-wrapper">
+            <div id="content-menu-wrapper">
+            <label class="tab active" id="publications-tab" th:text="#{button.publications}">Публикации</label>
+            <label class="tab" id="albums-tab" th:text="#{button.albums}">Альбомы</label>
+			<label class='tab' id="one-album-tab" th:text="#{button.albuuuumssss}">Альбоооооооом картинки</label>
+        </div>
+		<div class="publications" id="content">
+            <img src="https://dummyimage.com/768x490/000/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/251x242/000/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/1200x806/000/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/3840x2052/000/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/340x260/000/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/400x200/000/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/500x500/000/fff" class="content-img" alt="">
+			<img src="https://dummyimage.com/1000x700/000/fff" class="content-img" alt="">
+			<img src="https://dummyimage.com/601x400/000/fff" class="content-img" alt="">
+        </div>
+        <div class="albums" id="content">
+            <img src="https://dummyimage.com/345x500/000/fff" class="album-img" alt="">
+            <img src="https://dummyimage.com/750x500/000/fff" class="album-img" alt="">
+        </div>
+		<div class="one-album" id="content">
+            <img src="https://dummyimage.com/500x333/ff3399/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/250x666/99ff33/fff" class="content-img" alt="">
+        </div>
+        <div class="overlay">
+            <img src="" class="open-img">
+        </div>
+        </div>
+    </div>
+</body>
+</html>

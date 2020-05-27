@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+	<link rel="shortcut icon" href="@{images/icon.png}" type="image/png">
+    <title>Feed</title>
+    <link rel="stylesheet" href="@{css/feedStyle.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="@{js/feedScript.js}"></script>
+</head>
+<body>
+	<div id="container">
+		<div id="header-wrapper">
+			<div id="polosa">
+				<div id="search-exit">
+					<a href="#" th:href="/logout" th:text="#{button.exit}" class="exit">Выйти</a>
+					<a href=""><img src="@{images/rfln.png}" alt="" class="logo"></a>
+					<div id="session">
+						<img src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px">
+						<a href="#" class="nick-session">Nickname</a>
+					</div>
+					<img src="@{images/rating.png}" class="rate" alt="" >
+					<img src="@{images/date.png}" class="date" alt="" >
+					<input type="text" id="search">
+					<img src="@{images/loupeBackground.png}" class="loupe" alt="">
+				</div>
+			</div>
+		</div>
+		<div id="content-wrapper">
+			<div id="content">
+				<div id="post-wrapper">
+					<div id="header-post">
+						<img src="@{images/avatar.png}" alt="" width="60px" height="60px">
+						<div id="nickDate-align">
+							<a href="#" class="nick-post" th:text="${nickname}">Nickname</a>
+							<span class="date-post" th:text="${datePost}">dd.mm.yyyy   00:00</span>
+						</div>
+					</div>
+					<div id="hashtags-post">
+						<p th:text="${hashTags}">#hashtag #hashtag #hashtag #hashtag #hashtag #hashtag #hashtag</p>
+					</div>
+					<div id="description-post">
+						<p th:text="#{post.description}">Description</p>
+						<p>description</p>
+					</div>
+					<div><!--удалил id дива-->
+						<img class="post-image" src="https://dummyimage.com/1980x1080/ff5050/fff" alt="">
+					</div>
+					<div id="post-rating">
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<span class="rating">5</span>
+						<a href=""><img src="@{images/comment-sign.png}" class="comment-sign"alt=""></a>
+						<span class="number-comment">5</span>
+					</div>
+					<div id="post-comments">
+					<div id="comment">
+						<div id="avatar-comment">
+							<img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+						</div>
+						<div id="nickDate-comment">
+							<a href="#" class="nick-post" th:text="${nickname}">Nickname</a>
+							<span class="date-post" th:text="${datePost}">dd.mm.yyyy   00:00</span>
+						</div>
+						<div id="comment-text">First comment</div>
+					</div>
+					<div id="comment">
+						<div id="avatar-comment">
+							<img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+						</div>
+						<div id="nickDate-comment">
+							<span class="nick-post" th:text="${nickname}">Nickname</span>
+							<span class="date-post" th:text="${datePost}">dd.mm.yyyy   00:00</span>
+						</div>
+						<div id="comment-text">Second comment</div>
+					</div>
+					<div id="comment">
+						<div id="avatar-comment">
+							<img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+						</div>
+						<div id="nickDate-comment">
+							<span class="nick-post">Nickname</span>
+							<span class="date-post">dd.mm.yyyy   00:00</span>
+						</div>
+						<div id="comment-text">Third comment</div>
+					</div>
+					<div id="comment">
+						<div id="avatar-comment">
+							<img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+						</div>
+						<div id="nickDate-comment">
+							<span class="nick-post" th:text="${nickname}">Nickname</span>
+							<span class="date-post" th:text="${datePost}">dd.mm.yyyy   00:00</span>
+						</div>
+						<div id="comment-text">Fourth comment</div>
+					</div>
+					</div>
+					<div id="read-full-wrapper">
+						<hr class="line">
+						<div id="read-full"><a href="#" th:text="#{button.readFull}">Развернуть</a></div>
+					</div>
+					<div id="addComment">
+						<img src="@{images/avatar.png}" class="avatar-comment1" alt="" width="50px" height="50px">
+						<input type="text" class="user-comment">
+						<a href="#"><img src="@{images/addComment.png}" class="addComment-sign" alt=""></a>
+					</div>
+				</div>
+				<div id="post-wrapper">
+					<div id="header-post">
+						<img src="@{images/avatar.png}" alt="" width="60px" height="60px">
+						<div id="nickDate-align">
+							<a href="#" class="nick-post" th:text="${nickname}">Nickname</a>
+							<span class="date-post" th:text="${datePost}">dd.mm.yyyy   00:00</span>
+						</div>
+					</div>
+					<div id="hashtags-post">
+						<p th:text="${hashTags}">#hashtag #hashtag #hashtag #hashtag #hashtag #hashtag #hashtag</p>
+					</div>
+					<div id="description-post">
+						<p th:text="#{post.description}">Description</p>
+						<p>description</p>
+					</div>
+					<div><!--удалил id дива-->
+						<img class="post-image" src="https://dummyimage.com/1980x1080/ff5050/fff" alt="">
+					</div>
+					<div id="post-rating">
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<span class="rating" th:text="${post.rating}">5</span>
+						<a href=""><img src="@{images/comment-sign.png}" class="comment-sign"alt=""></a>
+						<span class="number-comment" th:text="${post.numberComment}">5</span>
+					</div>
+					<div id="post-comments">
+						<div id="comment">
+							<div id="avatar-comment">
+								<img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+							</div>
+							<div id="nickDate-comment">
+								<a href="#" class="nick-post">Nickname</a>
+								<span class="date-post">dd.mm.yyyy   00:00</span>
+							</div>
+							<div id="comment-text">Comment Comment Comment</div>
+						</div>
+						<div id="comment">
+							<div id="avatar-comment">
+								<img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+							</div>
+							<div id="nickDate-comment">
+								<span class="nick-post">Nickname</span>
+								<span class="date-post">dd.mm.yyyy   00:00</span>
+							</div>
+							<div id="comment-text">Comment Comment Comment</div>
+						</div>
+					</div>
+					<div id="read-full-wrapper">
+						<hr class="line">
+						<div id="read-full"><a href="#">Развернуть</a></div>
+					</div>
+					<div id="addComment">
+						<img src="@{images/avatar.png}" class="avatar-comment1" alt="" width="50px" height="50px">
+						<input type="text" class="user-comment">
+						<a href="#"><img src="@{images/addComment.png}" class="addComment-sign" alt=""></a>
+					</div>
+				</div>
+				<div id="post-wrapper">
+					<div id="header-post">
+						<img src="@{images/avatar.png}" alt="" width="60px" height="60px">
+						<div id="nickDate-align">
+							<a href="#" class="nick-post">Nickname</a>
+							<span class="date-post">dd.mm.yyyy   00:00</span>
+						</div>
+					</div>
+					<div id="hashtags-post">
+						<p>#hashtag #hashtag #hashtag #hashtag #hashtag #hashtag #hashtag</p>
+					</div>
+					<div id="description-post">
+						<p>Description</p>
+						<p>description</p>
+					</div>
+					<div><!--удалил id дива-->
+						<img class="post-image" src="https://dummyimage.com/1980x1080/ff5050/fff" alt="">
+					</div>
+					<div id="post-rating">
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<div id="rating-circle"></div>
+						<span class="rating">5</span>
+						<a href=""><img src="@{images/comment-sign.png}" class="comment-sign"alt=""></a>
+						<span class="number-comment">5</span>
+					</div>
+					<div id="post-comments">
+						<div id="comment">
+							<div id="avatar-comment">
+								<img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+							</div>
+							<div id="nickDate-comment">
+								<a href="#" class="nick-post">Nickname</a>
+								<span class="date-post">dd.mm.yyyy   00:00</span>
+							</div>
+							<div id="comment-text">Comment Comment Comment</div>
+						</div>
+					</div>
+					<div id="read-full-wrapper">
+						<hr class="line">
+						<div id="read-full"><a href="#">Развернуть</a></div>
+					</div>
+					<div id="addComment">
+						<img src="@{images/avatar.png}" class="avatar-comment1" alt="" width="50px" height="50px">
+						<input type="text" class="user-comment">
+						<a href="#"><img src="@{images/addComment.png}" class="addComment-sign" alt=""></a>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

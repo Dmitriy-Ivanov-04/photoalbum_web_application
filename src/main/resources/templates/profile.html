@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="@{css/profileStyle.css}">
+	<link rel="stylesheet" href="@{css/imageOverlay.css}">
+	<link rel="shortcut icon" href="@{images/icon.png}" type="image/png">
+    <title>Profile</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="@{js/profileScript.js}"></script>
+	<script defer src="@{js/imageAlign.js}"></script>
+	<script src="@{js/imageOverlay.js}"></script>
+	<script src="@{js/tabScript.js}"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="header-wrapper">
+            <div id="polosa">
+                <div id="search-exit">
+
+                    <form id="logoutForm" action="#" th:action="@{/logout}" method="post">
+                        <a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
+                    </form>
+                   <img src="@{@{images/rfln.png}" alt="" class="logo">
+                   <img src="@{images/rating.png}" class="rate" alt="" >
+                   <img src="@{images/date.png}" class="date" alt="" >
+                   <input type="text" id="search">
+                   <img src="@{images/loupeBackground.png}" class="loupe" alt="">
+                </div>
+            </div>
+            
+            <!-- ///////////////////////////////////////////// -->
+            <div id="profile-back">
+                <div id="profile-info">
+                    <div id="avatar">
+						<!--<div id="blackout"><a class="upload-ref" href="#">0 Публикации</a></div>-->
+                        <img src="@{images/avatar.png}" alt="">
+                    </div>
+                    <div id="text-profile">
+                        <div id="nickPlus">
+                            <div id="nickText">
+                               <h1 id="nick" th:text="${nickname}">Nickname</h1>
+                            </div>
+                            
+                            <div class="add-friend" id="addFriend">
+                               <img class="add-friend-plus" src="@{images/plus.png}" alt="">
+                               <span class="add-friend-text" th:text="#{addFriend}">Добавить в друзья</span>
+                           </div>
+                        </div>
+                        <div id="menu">
+                            <ul class="user-menu">
+                                <li><a href="#" th:text="#{user.publications}">0 Публикации</a></li>
+                                <li><a href="#" th:text="#{user.subscribes}">0 подписок</a></li>
+                                <li><a href="#" th:text="#{user.friends}">0 друзей</a></li>
+                                <li><a href="#" th:text="#{user.followers}">0 подписчиков</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ///////////////////////////////////////////// -->
+        </div>
+        <div id="content-menu-wrapper">
+            <label class="tab active" id="publications-tab" th:text="#{button.publications}">Публикации</label>
+            <label class="tab" id="albums-tab" th:text="#{button.albums}">Альбомы</label>
+			<label class='tab' id="one-album-tab" th:text="#{button.albuuuumssss}">Альбооооооооооом картинкиии</label>
+			<div class="add-photo">
+                <img class="add-photo-camera" src="@{images/camera.png}">
+                <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>
+            </div>
+        </div>
+		<div class="publications" id="content">
+            <img src="https://dummyimage.com/768x490/ff5050/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/251x242/9900ff/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/800x550/99ffcc/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/3840x2052/9999ff/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/340x260/99ff66/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/400x200/ff9966/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/200x300/cc99ff/fff" class="content-img" alt="">
+			<img src="https://dummyimage.com/600x450/cc99ff/fff" class="content-img" alt="">
+			<img src="https://dummyimage.com/599x449/0000ff/fff" class="content-img" alt="">
+			<img src="https://dummyimage.com/601x410/cc0066/fff" class="content-img" alt="">
+        </div>
+        <div class="albums" id="content">
+            <img src="https://dummyimage.com/345x500/000/fff" class="album-img" alt="">
+            <img src="https://dummyimage.com/750x500/000/fff" class="album-img" alt="">
+        </div>
+		<div class="one-album" id="content">
+            <img src="https://dummyimage.com/500x333/ff3399/fff" class="content-img" alt="">
+            <img src="https://dummyimage.com/250x666/99ff33/fff" class="content-img" alt="">
+        </div>
+        <div id="overlay">
+			<div id="image-window">	
+				<div id="image-post">
+                    <img src="" id="open-img" alt="">
+                    <div class="copy" id="addFriend">
+                        <img class="copy-plus" src="@{images/plus.png}" alt="">
+                        <span class="copy-text" th:text="#{button.copyImage}">Скопировать себе</span>
+                    </div>
+                </div>
+				
+			</div>
+        </div>
+    </div>
+</body>
+</html>

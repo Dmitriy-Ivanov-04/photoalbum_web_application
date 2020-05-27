@@ -1,0 +1,86 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+a{
+    cursor: pointer;
+    text-decoration: none;
+}
+input::-webkit-input-placeholder{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    color: #c7c7c7;
+}
+input[type="text"], input[type="password"]{
+    padding-left: 30px;
+}
+#container{
+    background-color: #c6ccd8;
+    width: 100vw;
+    height: 100vh;
+    display:inline-block;
+}
+
+.form-wrapper{
+    max-width: 400px;
+    height: 434px;
+    margin: 5.4% auto 0 auto;
+    background-color: #FFF;
+    border-radius: 30px;
+    border: solid #c7c7c7 2px;
+}
+
+.auto{
+    margin-top: 46px;
+    text-align: center; 
+}
+#field1{
+    margin-top: 10px;
+}
+.password-input{
+    border: solid #c7c7c7 1px;
+    border-radius: 10px;
+    height: 67px;
+    background-color: #f8f8f8;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    color: #838383;
+    margin-left: 0px;
+	margin-top:26px;
+}
+
+#field1, #field2{
+    position: relative;
+}
+.password-control{
+    position: absolute;
+	top: 50px;
+	right: 60px;
+	display: inline-block;
+	width: 40px;
+	height: 20px;
+	background: url(../images/eyeOff.png) 0 0 no-repeat;
+}
+.password-control.view {
+	background: url(../images/eyeOn.png) 0 0 no-repeat;
+}
+#enter-wrapper{
+    border: solid #c7c7c7 1px;
+    border-radius: 10px;
+    width: 300px;
+    height: 67px;
+    background-color: #274b69;
+    margin: 26px auto 0 auto;
+}
+#enter-wrapper a{
+    display: block;
+    height: 100%;
+}
+.enter{
+    margin: 0;
+    padding-top: 20px;
+    color: #FFF;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+}

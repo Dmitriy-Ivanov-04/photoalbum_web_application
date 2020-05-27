@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+	<link rel="shortcut icon" href="@{images/icon.png}" type="image/png">
+    <title>Autorization</title>
+    <link rel="stylesheet" href="@{css/imageOverlay.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="container">
+       <div id="overlay">
+           <div id="image-window">
+                <div id="image-post">
+                    <img src="https://dummyimage.com/1280x720/99ff33/000" alt="">
+                    <div class="copy" id="addFriend">
+                        <img class="copy-plus" src="@{images/plus.png}" alt="">
+                        <span class="copy-text">Скопировать себе</span>
+                    </div>
+                </div>
+                <div id="info-post">
+                    <div id="header-post">
+                        <img src="@{images/avatar.png}" alt="" width="60px" height="60px">
+                        <div id="nickDate-align">
+                            <a href="#" class="nick-post">Nickname</a>
+                            <span class="date-post">dd.mm.yyyy   00:00</span>
+                        </div>
+                    </div>
+                    <div id="hashtags-post">
+                        <p>#hashtag #hashtag #hashtag #hashtag #hashtag #hashtag #hashtag</p>
+                    </div>
+                    <div id="description-post">
+                        <p>Description</p>
+                        <p>description</p>
+                    </div>
+                    <div id="rating-post">
+                        <div id="rating-circle"></div>
+                        <div id="rating-circle"></div>
+                        <div id="rating-circle"></div>
+                        <div id="rating-circle"></div>
+                        <div id="rating-circle"></div>
+                        <span class="rating">5</span>
+                        <a href=""><img src="@{images/comment-sign.png}" class="comment-sign"alt=""></a>
+                        <span class="number-comment">5</span>
+                    </div>
+                    <div id="hr-wrapper">
+                        <hr>
+                    </div>
+                    <div id="comments-post">
+                   
+                        <div id="comment">
+                            <div id="avatar-comment">
+                                <img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+                            </div>
+                            <div id="nickDate-comment">
+                                <a href="#" class="nick-post">Nickname</a>
+                                <span class="date-post">dd.mm.yyyy   00:00</span>
+                            </div>
+                            <div id="comment-text">
+                                 Comment Comment Comment
+                            </div>
+                        </div>
+                    
+                        <div id="comment">
+                            <div id="avatar-comment">
+                                <img src="@{images/avatar.png}" alt="" width="50px" height="50px">
+                            </div>
+                            <div id="nickDate-comment">
+                                <span class="nick-post">Nickname</span>
+                                <span class="date-post">dd.mm.yyyy   00:00</span>
+                            </div>
+                            <div id="comment-text">
+                                 Comment Comment Comment
+                            </div>
+                        </div>
+                    </div>
+                    <div id="addComment">
+                            <img src="@{images/avatar.png}" class="avatar-comment1" alt="" width="50px" height="50px">
+                            <input type="text" class="user-comment">
+                            <a href="#"><img src="@{images/addComment.png}" class="addComment-sign" alt=""></a>
+                    </div>
+                </div>
+           </div>
+       </div>
+    </div>
+</body>
+</html>

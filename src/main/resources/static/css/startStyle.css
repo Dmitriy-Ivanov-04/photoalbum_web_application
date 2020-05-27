@@ -1,0 +1,142 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+
+#container{
+    background-color: #c6ccd8;
+    width: 100vw;
+    height: 100vh;
+    display:inline-block;
+}
+#overlay{
+	display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0.4);
+    z-index: 1;
+}
+#notification{
+    max-width: 400px;
+    height: 220px;
+    background-color: #FFF; 
+    z-index: 2;
+    border-radius: 30px;
+    margin: 14% auto;
+    border: solid #c7c7c7 2px;
+}
+#text{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #274b69;
+    text-align: center;
+    padding-top: 1px;
+}
+#close-button{
+    margin: 0 auto;
+    border: solid #c7c7c7 1px;
+    border-radius: 10px;
+    width: 300px;
+    height: 67px;
+    background-color: #274b69;
+}
+.close{
+    margin: 0;
+    padding-top: 20px;
+    color: #FFF;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+.form-wrapper{
+    max-width: 400px;
+    height: 533px;
+    margin: 5.4% auto 0 auto;
+    background-color: #FFF;
+    border-radius: 30px;
+    border: solid #c7c7c7 2px;
+}
+
+.auto{
+    margin-top: 46px;
+    text-align: center; 
+}
+#field1{
+    margin-top: 45px;
+}
+.login, #password-input{
+    border: solid #c7c7c7 1px;
+    border-radius: 10px;
+    height: 67px;
+    background-color: #f8f8f8;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    color: #838383;
+    margin-left: 0px;
+}
+input::-webkit-input-placeholder{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    color: #c7c7c7;
+}
+
+#password-input, #field{
+    margin-top:26px;
+}
+input[type="text"], input[type="password"]{
+    padding-left: 30px;
+}
+
+#field2{
+    position: relative;
+    z-index: 0;
+}
+.password-control{
+    position: absolute;
+	top: 50px;
+	right: 60px;
+	display: inline-block;
+	width: 40px;
+	height: 20px;
+	background: url(../images/eyeOff.png) 0 0 no-repeat;
+}
+.password-control.view {
+	background: url(../images/eyeOn.png) 0 0 no-repeat;
+}
+#field3{
+    border: solid #c7c7c7 1px;
+    border-radius: 10px;
+    width: 300px;
+    height: 67px;
+    background-color: #274b69;
+    margin: 26px auto 0 auto;
+}
+#field3 a{
+    display: block;
+    height: 100%;
+}
+.enter{
+    margin: 0;
+    padding-top: 20px;
+    color: #FFF;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+}
+#restore-wrapper{
+    margin-top:25px;
+}
+#field5{
+   margin-top: 19px;
+}
+.goReg{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px; 
+    color: #274b69;
+}
+a{
+    cursor: pointer;
+    text-decoration: none;
+}
