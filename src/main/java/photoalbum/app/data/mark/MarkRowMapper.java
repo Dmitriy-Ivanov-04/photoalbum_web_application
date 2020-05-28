@@ -1,4 +1,4 @@
-package photoalbum.app.data.photoalbum.app.data.mark;
+package photoalbum.app.data.mark;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
