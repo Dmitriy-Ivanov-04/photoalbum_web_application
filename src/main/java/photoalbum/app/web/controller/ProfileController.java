@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.profile.ProfileStorageDAO;
+import photoalbum.app.domain.mail.MailSender;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.web.form.ProfileRegistrationForm;
@@ -27,6 +28,12 @@ public class ProfileController {
 
 	@Autowired
 	ProfileStorage profileStorage;
+
+	@Autowired
+	Profile existingUser;
+
+	@Autowired
+	private MailSender mailSender;
 
 	@InitBinder("profileForm")
 	private void initBinder(WebDataBinder binder) {
@@ -66,19 +73,12 @@ public class ProfileController {
 	// Receive the address and send an email
 	@RequestMapping(value="/forgot-password", method=RequestMethod.POST)
 	public ModelAndView forgotUserPassword(ModelAndView modelAndView, Profile user) {
-		Profile existingUser = userRepository.findByEmailIdIgnoreCase(user.getEmail());
+		existingUser = profileService.getProfileByEmail(user.getEmail());
 		if (existingUser != null) {
-
-			// Create the email
-			SimpleMailMessage mailMessage = new SimpleMailMessage();
-			mailMessage.setTo(existingUser.getEmail());
-			mailMessage.setSubject("Complete Password Reset!");
-			mailMessage.setFrom("test-email@gmail.com");
-			mailMessage.setText("To complete the password reset process, please click here: "
-					+ "http://localhost:8082/confirm-reset?token=" + user.getToken());
-
+			String messageText = "To complete the password reset process, please click here: "
+					+ "http://localhost:8080/confirm-reset?token=" + user.getToken();
 			// Send the email
-			emailSenderService.sendEmail(mailMessage);
+			mailSender.send(user.getEmail(), "Recovery Password", messageText);
 
 			modelAndView.addObject("message", "Request to reset password received. Check your inbox for the reset link.");
 			modelAndView.setViewName("successForgotPassword");
@@ -95,8 +95,7 @@ public class ProfileController {
 	public ModelAndView resetUserPassword(ModelAndView modelAndView, Profile user) {
 		if (user.getEmail() != null) {
 			// Use email to find user
-			Profile tokenUser = userRepository.findByEmailIdIgnoreCase(user.getEmail());
-			tokenUser.setPassword("NewPassword");
+			user.setPassword("NewPassword");
 			profileStorage.save(user);
 			modelAndView.addObject("message", "Password successfully reset. You can now log in with the new credentials.");
 			modelAndView.setViewName("successResetPassword");
