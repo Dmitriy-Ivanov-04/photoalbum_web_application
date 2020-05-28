@@ -14,7 +14,7 @@ public class Album implements Serializable {
 	private Long profileId;
 	private String albumName;
 	private Long numberOfPhotos;
-	private Set<AccesLevel> accesLevel;
+	private AccesLevel accesLevel;
 	
 	
 	public Long getId() {
@@ -48,36 +48,19 @@ public class Album implements Serializable {
 	public void setNumberOfPhotos(Long numberOfPhotos) {
 		this.numberOfPhotos = numberOfPhotos;
 	}
-	
-	public Set<AccesLevel> getAccesLevel() {
-		if (accesLevel == null) {
-			accesLevel = new HashSet<>();
-		}
+
+	public AccesLevel getAccesLevel() {
 		return accesLevel;
+	}
+
+	public void setAccesLevel(String accesLevel) {
+		this.accesLevel = AccesLevel.valueOf(accesLevel);	
 	}
 
 	@Override
 	public String toString() {
 		return "Album [id=" + id + ", profileId=" + profileId + ", albumName=" + albumName + ", numberOfPhotos="
 				+ numberOfPhotos + ", accesLevel=" + accesLevel + "]";
-	}
-	
-	public String getHighLevelRole() {
-
-	    List<String> allRoles = new ArrayList<>();
-
-	    for (AccesLevel accesLevel : this.getAccesLevel()) {
-            allRoles.add(accesLevel.toString());
-        }
-
-	    if (allRoles.contains(AccesLevel.CLOSE.toString())) {
-	        return AccesLevel.CLOSE.toString();
-	    } else if(allRoles.contains(AccesLevel.FRIENDS.toString())) {
-	        return AccesLevel.FRIENDS.toString();
-	    } else {
-	        return AccesLevel.PUBLIC.toString();
-	    }
-
 	}
 	
 
