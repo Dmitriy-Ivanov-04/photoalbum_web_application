@@ -42,4 +42,8 @@ public class ProfileServiceDomain implements ProfileService {
         profileStorage.save(u);
 	}
 	
+	public Profile getProfileByEmail(String email) {
+		return profileStorage.findByEmailAndEnabledTrue(email);
+	}
+	
 }
