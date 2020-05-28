@@ -5,13 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-	<link rel="shortcut icon" href="@{images/icon.png}" type="image/png">
+	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
     <title>Autorization</title>
-    <link rel="stylesheet" href="@{css/startStyle.css}">
+    <link rel="stylesheet" th:href="@{css/startStyle.css}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
-    <script src="@{js/showPass.js"></script>
-	<script src="@{js/startScript.js}"></script>
+    <script th:src="@{js/showPass.js"></script>
+	<script th:src="@{js/startScript.js}"></script>
 </head>
 <body>
     <div id="container">
@@ -35,7 +35,7 @@
             </div>
             <form action="#" th:action="@{/Login}" th:object="${user}" method="post" class="auto">
                <div id="logo">
-                   <img src="@{images/blueRfln.png}" alt="">
+                   <img th:src="@{images/blueRfln.png}" alt="">
                </div>
                 <div id="field1">
                     <input type="text" class="login" placeholder="Логин" name="login" th:placeholder="#{input.login}">
