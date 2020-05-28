@@ -30,16 +30,16 @@ public class PhotoStorageDAO implements PhotoStorage{
 	}
 	
 	@Override
-	public List<Photo> getPhotosByUser(Long profile_id) {
+	public List<Photo> getPhotosByUser(Long profileId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE profile_id = ? ORDER BY date");
-		List<Photo> photos = (List<Photo>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {profile_id}, new PhotoRowMapper());
+		List<Photo> photos = (List<Photo>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {profileId}, new PhotoRowMapper());
 		return photos;
 	}
 
 	@Override
-	public List<Photo> getPhotosByAlbum(Long album_id) {
+	public List<Photo> getPhotosByAlbum(Long albumId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE album_id = ? ORDER BY date");
-		List<Photo> photos = (List<Photo>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {album_id}, new PhotoRowMapper());
+		List<Photo> photos = (List<Photo>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {albumId}, new PhotoRowMapper());
 		return photos;
 	}
 
@@ -51,9 +51,9 @@ public class PhotoStorageDAO implements PhotoStorage{
 	}
 
 	@Override
-	public void uploadPhoto(Long profile_id, Long album_id, String description, String link_photo) {
+	public void upload(Long profileId, Long albumId, String description, String link) {
 		String insertQuery = "INSERT INTO photos (profile_id, album_id, description, date, link_photo) VALUES (?, ?, ?, now(), ?)";
-		Object[] data = new Object[] {profile_id, album_id, description, link_photo};
+		Object[] data = new Object[] {profileId, albumId, description, link};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		
 		if (rowAffected == 0) {
@@ -63,7 +63,7 @@ public class PhotoStorageDAO implements PhotoStorage{
 	}
 
 	@Override
-	public void deletePhoto(Long id) {
+	public void delete(Long id) {
 		String updateQuery = "DELETE FROM photos WHERE id = ?";
 		Object[] data = new Object[] {id};
 		int rowAffected = jdbcTemplate.update(updateQuery, data);

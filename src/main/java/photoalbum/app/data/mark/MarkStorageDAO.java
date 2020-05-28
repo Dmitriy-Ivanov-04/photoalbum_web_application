@@ -24,16 +24,16 @@ public class MarkStorageDAO implements MarkStorage{
 	}
 
 	@Override
-	public List<Mark> getMarksByPhoto(Long photo_id) {
+	public List<Mark> getMarksByPhoto(Long photoId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM marks WHERE photo_id = ?");
-		List<Mark> marks = (List<Mark>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {photo_id}, new MarkRowMapper());
+		List<Mark> marks = (List<Mark>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {photoId}, new MarkRowMapper());
 		return marks;
 	}
 
 	@Override
-	public void addMark(Long photo_id, Long author_id, int value) {
+	public void add(Long photoId, Long authorId, int value) {
 		String insertQuery = "INSERT INTO marks (photo_id, author_id, value) VALUES (?, ?, ?)";
-		Object[] data = new Object[] {photo_id, author_id, value};
+		Object[] data = new Object[] {photoId, authorId, value};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		
 		if (rowAffected == 0) {
@@ -42,7 +42,7 @@ public class MarkStorageDAO implements MarkStorage{
 	}
 
 	@Override
-	public void deleteMark(Long id) {
+	public void delete(Long id) {
 		String updateQuery = "DELETE FROM marks WHERE id = ?";
 		Object[] data = new Object[] {id};
 		int rowAffected = jdbcTemplate.update(updateQuery, data);

@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import photoalbum.app.data.AlbumStorage;
+import photoalbum.app.data.relationships.RelationshipsRowMapper;
+import photoalbum.app.domain.model.AccesLevel;
 import photoalbum.app.domain.model.Album;
+import photoalbum.app.domain.model.Relationships;
 
 public class AlbumStorageDAO implements AlbumStorage {
 	
@@ -22,44 +25,39 @@ public class AlbumStorageDAO implements AlbumStorage {
 	}
 
 	@Override
-	public List<Album> findAlbumsByUser() {
-		StringBuilder sql = new StringBuilder("SELECT * FROM albums");
-		List<Album> album = jdbcTemplate.query(sql.toString(), new AlbumRowMapper());
-		
+	public List<Album> findAlbumsByUser(Long profile_id) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM albums WHERE profile_id = ?");
+		List<Album> album = jdbcTemplate.query(sql.toString(), new Object[] {profile_id}, new AlbumRowMapper());
 		return album;
 	}
-
-	@Override
-	public void save(Album album) {
-		if (album.getId() == null || album.getId() == 0) {
-			this.insert(album);
-		} else {
-			this.update(album);
-		}
-		
-	}
 	
-	private void update(Album album) {
-		String updateQuery = "UPDATE albums SET profile_id = ?, album_name = ?, number_of_photos = ?, acces_level = ? WHERE id = ?";
-		Object[] data = new Object[] {
-				album.getProfileId(), album.getAlbumName(), album.getNumberOfPhotos(), album.getAccesLevel(), album.getId()
-		};
-		int rowAffected = jdbcTemplate.update(updateQuery, data);
-
+	public void insert(Long profileId, String albumName, int numberOfPhotos, AccesLevel accesLevel) {
+		String insertQuery = "INSERT INTO albums (profile_id, album_name, number_of_photos, acces_level) VALUES (?, ?, ?, ?)";
+		Object[] data = new Object[] {profileId, albumName, numberOfPhotos, accesLevel};
+		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		if (rowAffected == 0) {
 			logger.error("Error during update record for Album");
 		}
 	}
 	
-	private void insert(Album album) {
-		String insertQuery = "INSERT INTO albums (profile_id, album_name, number_of_photos, acces_level) VALUES (?, ?, ?, ?)";
-		Object[] data = new Object[] {
-				album.getProfileId(), album.getAlbumName(), album.getNumberOfPhotos(), album.getAccesLevel()
-		};
-		int rowAffected = jdbcTemplate.update(insertQuery, data);
+	public void update(Long id, Long profileId, String albumName, int numberOfPhotos, AccesLevel accesLevel) {
+		String updateQuery = "UPDATE albums SET profile_id = ?, album_name = ?, number_of_photos = ?, acces_level = ? WHERE id = ?";
+		Object[] data = new Object[] {profileId, albumName, numberOfPhotos, accesLevel, id};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
 		
 		if (rowAffected == 0) {
-			logger.error("Error during insert record for Album");
+			logger.error("Error during update record for Album");
+		}
+	}
+
+	@Override
+	public void delete(Long id) {
+		String updateQuery = "DELETE FROM albums WHERE id = ?";
+		Object[] data = new Object[] {id};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+
+		if (rowAffected == 0) {
+			logger.error("Error during delete record for Album");
 		}
 	}
 

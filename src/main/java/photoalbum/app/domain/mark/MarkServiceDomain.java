@@ -13,18 +13,18 @@ public class MarkServiceDomain implements MarkService{
 	MarkStorage markStorage;
 
 	@Override
-	public List<Mark> getMarkListByPhoto(Long photo_id) {
-		return markStorage.getMarksByPhoto(photo_id);
+	public List<Mark> getMarkListByPhoto(Long photoId) {
+		return markStorage.getMarksByPhoto(photoId);
 	}
 
 	@Override
-	public void addMark(Long photo_id, Long author_id, int value) {
-		markStorage.addMark(photo_id, author_id, value);
+	public void addMark(Long photoId, Long authorId, int value) {
+		markStorage.add(photoId, authorId, value);
 	}
 
 	@Override
 	public void deleteMark(Long id) {
-		markStorage.deleteMark(id);
+		markStorage.delete(id);
 	}
 	
 }

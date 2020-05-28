@@ -19,9 +19,9 @@ public class TagStorageDAO implements TagStorage{
 	}
 
 	@Override
-	public void addTag(Long photo_id, String value) {
+	public void add(Long photoId, String value) {
 		String insertQuery = "INSERT INTO tags (photo_id, value) VALUES (?, ?)";
-		Object[] data = new Object[] {photo_id, value};
+		Object[] data = new Object[] {photoId, value};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		
 		if (rowAffected == 0) {
@@ -30,9 +30,9 @@ public class TagStorageDAO implements TagStorage{
 	}
 
 	@Override
-	public void deleteTags(Long photo_id) {
+	public void delete(Long photoId) {
 		String updateQuery = "DELETE FROM tags WHERE photo_id = ?";
-		Object[] data = new Object[] {photo_id};
+		Object[] data = new Object[] {photoId};
 		int rowAffected = jdbcTemplate.update(updateQuery, data);
 
 		if (rowAffected == 0) {

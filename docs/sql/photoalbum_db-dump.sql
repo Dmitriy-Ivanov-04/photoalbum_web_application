@@ -1,8 +1,8 @@
 CREATE TABLE `albums` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `profile_id` int(11) NOT NULL,
-  `albumName` varchar(64) DEFAULT NULL,
-  `numberOfPhotos` int(11) DEFAULT NULL,
+  `album_name` varchar(64) DEFAULT NULL,
+  `number_of_photos` int(11) DEFAULT NULL,
   `acces_level` tinyint(2) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

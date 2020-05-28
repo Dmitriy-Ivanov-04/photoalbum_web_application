@@ -10,14 +10,14 @@ public class PhotoServiceDomain implements PhotoService{
 	PhotoStorage photoStorage;
 
 	@Override
-	public List<Photo> getPhotoListByUser(Long profile_id) {
-		photoStorage.getPhotosByUser(profile_id);
+	public List<Photo> getPhotoListByUser(Long profileId) {
+		photoStorage.getPhotosByUser(profileId);
 		return null;
 	}
 
 	@Override
-	public List<Photo> getPhotoListByAlbum(Long album_id) {
-		photoStorage.getPhotosByAlbum(album_id);
+	public List<Photo> getPhotoListByAlbum(Long albumId) {
+		photoStorage.getPhotosByAlbum(albumId);
 		return null;
 	}
 
@@ -28,18 +28,18 @@ public class PhotoServiceDomain implements PhotoService{
 	}
 
 	@Override
-	public void uploadPhoto(Long profile_id, Long album_id, String description, String link_photo) {
-		photoStorage.uploadPhoto(profile_id, album_id, description, link_photo);		
+	public void uploadPhoto(Long profileId, Long albumId, String description, String link) {
+		photoStorage.upload(profileId, albumId, description, link);		
 	}
 
 	@Override
 	public void deletePhoto(Long id) {
-		photoStorage.deletePhoto(id);	
+		photoStorage.delete(id);	
 	}
 
 	@Override
-	public void copyPhoto(Long photo_id, Long profile_id, Long album_id) {
-		photoStorage.uploadPhoto(profile_id, album_id, photoStorage.getPhotoById(photo_id).getDescription(), photoStorage.getPhotoById(photo_id).getLink_photo());		
+	public void copyPhoto(Long photoId, Long profileId, Long albumId) {
+		photoStorage.upload(profileId, albumId, photoStorage.getPhotoById(photoId).getDescription(), photoStorage.getPhotoById(photoId).getLink_photo());		
 	}
 
 }

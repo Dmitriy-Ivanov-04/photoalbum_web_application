@@ -9,32 +9,32 @@ public class RelationshipsServiseDomain implements RelationshipsServise{
 	
 	RelationshipsStorage relationshipsStorage;
 	
-	public List<Relationships> getSubscribersList(Long target_id){
-		return relationshipsStorage.findSubscribers(target_id);
+	public List<Relationships> getSubscribersList(Long targetId){
+		return relationshipsStorage.findSubscribers(targetId);
 	}
 	
-	public List<Relationships> getSubscriptionsList(Long profile_id){
-		return relationshipsStorage.findSubscriptions(profile_id);
+	public List<Relationships> getSubscriptionsList(Long profileId){
+		return relationshipsStorage.findSubscriptions(profileId);
 	}
 	
-	public List<Relationships> getFriendsList(Long profile_id){
-		return relationshipsStorage.findFriends(profile_id);
+	public List<Relationships> getFriendsList(Long profileId){
+		return relationshipsStorage.findFriends(profileId);
 	}
 	
-	public void sendInvite(Long profile_id, Long target_id) {
-		relationshipsStorage.sendInvite(profile_id, target_id);
+	public void sendInvite(Long profileId, Long targetId) {
+		relationshipsStorage.sendInvite(profileId, targetId);
 	}
 	
 	public void acceptInvite(Long id) {
 		relationshipsStorage.acceptInvite(id);
 	}
 	
-	public void deleteFriend(Long profile_id, Long target_id, Long id) {
+	public void deleteFriend(Long profileId, Long targetId, Long id) {
 		Relationships relationships = relationshipsStorage.findRelationships(id);
-		if(relationships.getProfile_id() == profile_id)
-			relationshipsStorage.deleteFriend(profile_id, target_id, id);
-		if(relationships.getProfile_id() == target_id)
-			relationshipsStorage.deleteFriend(target_id, profile_id, id);
+		if(relationships.getProfile_id() == profileId)
+			relationshipsStorage.deleteFriend(profileId, targetId, id);
+		if(relationships.getProfile_id() == targetId)
+			relationshipsStorage.deleteFriend(targetId, profileId, id);
 	}
 	
 	public void unsubscribe(Long id) {
