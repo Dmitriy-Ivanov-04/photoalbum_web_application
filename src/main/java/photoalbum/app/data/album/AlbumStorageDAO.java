@@ -40,7 +40,7 @@ public class AlbumStorageDAO implements AlbumStorage {
 	}
 	
 	private void update(Album album) {
-		String updateQuery = "UPDATE profile SET profile_id = ?, album_name = ?, number_of_photos = ?, acces_level = ? WHERE id = ?";
+		String updateQuery = "UPDATE albums SET profile_id = ?, album_name = ?, number_of_photos = ?, acces_level = ? WHERE id = ?";
 		Object[] data = new Object[] {
 				album.getProfileId(), album.getAlbumName(), album.getNumberOfPhotos(), album.getAccesLevel(), album.getId()
 		};
@@ -52,7 +52,7 @@ public class AlbumStorageDAO implements AlbumStorage {
 	}
 	
 	private void insert(Album album) {
-		String insertQuery = "INSERT INTO profile (profile_id, album_name, number_of_photos, acces_level) VALUES (?, ?, ?, ?)";
+		String insertQuery = "INSERT INTO albums (profile_id, album_name, number_of_photos, acces_level) VALUES (?, ?, ?, ?)";
 		Object[] data = new Object[] {
 				album.getProfileId(), album.getAlbumName(), album.getNumberOfPhotos(), album.getAccesLevel()
 		};
