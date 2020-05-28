@@ -72,13 +72,13 @@ public class ProfileController {
 
 	// Receive the address and send an email
 	@RequestMapping(value="/forgot-password", method=RequestMethod.POST)
-	public ModelAndView forgotUserPassword(ModelAndView modelAndView, Profile user) {
-		existingUser = profileService.getProfileByEmail(user.getEmail());
+	public ModelAndView forgotUserPassword(ModelAndView modelAndView, String email) {
+		existingUser = profileService.getProfileByEmail(email);
 		if (existingUser != null) {
 			String messageText = "To complete the password reset process, please click here: "
-					+ "http://localhost:8080/confirm-reset?token=" + user.getToken();
+					+ "http://localhost:8080/confirm-reset?token=" + existingUser.getToken();
 			// Send the email
-			mailSender.send(user.getEmail(), "Recovery Password", messageText);
+			mailSender.send(existingUser.getEmail(), "Recovery Password", messageText);
 
 			modelAndView.addObject("message", "Request to reset password received. Check your inbox for the reset link.");
 			modelAndView.setViewName("successForgotPassword");
@@ -92,11 +92,12 @@ public class ProfileController {
 
 	// Endpoint to update a user's password
 	@RequestMapping(value = "/reset-password", method = RequestMethod.POST)
-	public ModelAndView resetUserPassword(ModelAndView modelAndView, Profile user) {
-		if (user.getEmail() != null) {
+	public ModelAndView resetUserPassword(ModelAndView modelAndView, String email) {
+		existingUser = profileService.getProfileByEmail(email);
+		if (existingUser.getEmail() != null) {
 			// Use email to find user
-			user.setPassword("NewPassword");
-			profileStorage.save(user);
+			existingUser.setPassword("NewPassword");
+			profileStorage.save(existingUser);
 			modelAndView.addObject("message", "Password successfully reset. You can now log in with the new credentials.");
 			modelAndView.setViewName("successResetPassword");
 		} else {
