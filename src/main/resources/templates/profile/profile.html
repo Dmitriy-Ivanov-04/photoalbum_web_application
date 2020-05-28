@@ -5,15 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="@{css/profileStyle.css}">
-	<link rel="stylesheet" href="@{css/imageOverlay.css}">
-	<link rel="shortcut icon" href="@{images/icon.png}" type="image/png">
+    <link rel="stylesheet" th:href="@{css/profileStyle.css}">
+	<link rel="stylesheet" th:href="@{css/imageOverlay.css}">
+	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
     <title>Profile</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="@{js/profileScript.js}"></script>
-	<script defer src="@{js/imageAlign.js}"></script>
-	<script src="@{js/imageOverlay.js}"></script>
-	<script src="@{js/tabScript.js}"></script>
+	<script th:src="@{js/profileScript.js}"></script>
+	<script defer th:src="@{js/imageAlign.js}"></script>
+	<script th:src="@{js/imageOverlay.js}"></script>
+	<script th:src="@{js/tabScript.js}"></script>
 </head>
 <body>
     <div id="container">
@@ -24,11 +24,11 @@
                     <form id="logoutForm" action="#" th:action="@{/logout}" method="post">
                         <a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
                     </form>
-                   <img src="@{@{images/rfln.png}" alt="" class="logo">
-                   <img src="@{images/rating.png}" class="rate" alt="" >
-                   <img src="@{images/date.png}" class="date" alt="" >
+                   <img th:src="@{@{images/rfln.png}" alt="" class="logo">
+                   <img th:src="@{images/rating.png}" class="rate" alt="" >
+                   <img th:src="@{images/date.png}" class="date" alt="" >
                    <input type="text" id="search">
-                   <img src="@{images/loupeBackground.png}" class="loupe" alt="">
+                   <img th:src="@{images/loupeBackground.png}" class="loupe" alt="">
                 </div>
             </div>
             
@@ -98,7 +98,7 @@
 				<div id="image-post">
                     <img src="" id="open-img" alt="">
                     <div class="copy" id="addFriend">
-                        <img class="copy-plus" src="@{images/plus.png}" alt="">
+                        <img class="copy-plus" th:src="@{images/plus.png}" alt="">
                         <span class="copy-text" th:text="#{button.copyImage}">Скопировать себе</span>
                     </div>
                 </div>

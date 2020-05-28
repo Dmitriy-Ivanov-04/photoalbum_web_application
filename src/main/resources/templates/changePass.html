@@ -5,19 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-	<link rel="shortcut icon" href="@{images/icon.png}" type="image/png">
+	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
     <title>Change password</title>
-    <link rel="stylesheet" href="@{css/changePass.css}">
+    <link rel="stylesheet" th:href="@{css/changePass.css}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
-    <script src="@{js/showPass.js}"></script>
+    <script th:src="@{js/showPass.js}"></script>
 </head>
 <body>
     <div id="container">
         <div class="form-wrapper">
             <form action="#" th:action="@{/recoveryPassword}" th:object="${user}" method="post" class="auto">
                <div id="logo">
-                   <img src="@{images/blueRfln.png}" alt="">
+                   <img th:src="@{images/blueRfln.png}" alt="">
                </div>
                 <div id="field1">
                     <input type="password" class="password-input" id="password1" placeholder="Пароль" name="password">

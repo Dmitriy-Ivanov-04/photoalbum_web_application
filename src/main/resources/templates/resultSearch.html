@@ -5,13 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="@{css/resultSearchStyle.css}">
-	<link rel="shortcut icon" href="@{images/icon.png}" type="image/png">
+    <link rel="stylesheet" th:href="@{css/resultSearchStyle.css}">
+	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
     <title>Search</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="@{js/searchScript.js}"></script>
-	<script defer src="@{js/imageAlign.js}"></script>
-	<script src="@{js/tabScript.js}"></script>
+	<script th:src="@{js/searchScript.js}"></script>
+	<script defer th:src="@{js/imageAlign.js}"></script>
+	<script th:src="@{js/tabScript.js}"></script>
 </head>
 <body>
     <div id="container">
@@ -19,15 +19,15 @@
             <div id="polosa">
                 <div id="search-exit">
                   <a href="#" th:href="/logout" th:text="#{button.exit}" class="exit">Выйти</a>
-                   <img src="@{images/rfln.png}" alt="" class="logo">
+                   <img th:src="@{images/rfln.png}" alt="" class="logo">
                    <div id="session">
-                        <img src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px">
+                        <img th:src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px">
                         <a href="#" th:text="${nickname}" class="nick-session">Nickname</a>
                     </div>
-                   <img src="@{images/rating.png}" class="rate" alt="" >
-                   <img src="@{images/date.png}" class="date" alt="" >
+                   <img th:src="@{images/rating.png}" class="rate" alt="" >
+                   <img th:src="@{images/date.png}" class="date" alt="" >
                    <input type="text" id="search">
-                   <img src="@{images/loupeBackground.png}" class="loupe" alt="">
+                   <img th:src="@{images/loupeBackground.png}" class="loupe" alt="">
                 </div>
             </div>
         </div>
