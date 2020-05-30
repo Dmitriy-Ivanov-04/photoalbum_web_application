@@ -13,5 +13,9 @@ public interface ProfileStorage {
 	void save(Profile u);
 	
 	Profile findByEmailAndEnabledTrue(String email);
+	
+	void addAvatar(Profile profile);
+	
+	void addBackground(Profile profile);
 
 }
