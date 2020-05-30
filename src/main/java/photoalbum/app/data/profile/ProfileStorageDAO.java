@@ -87,5 +87,33 @@ public class ProfileStorageDAO implements ProfileStorage {
 			logger.error("Error during insert record for Profile");
 		}
 	}
+	
+	@Override
+	public void addAvatar(Profile profile) {
+		String updateQuery = "UPDATE profile SET linkAvatar = ? WHERE id = ?";
+		Object[] data = new Object[] {
+				profile.getLinkAvatar(), profile.getId()
+		};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+		
+		if (rowAffected == 0) {
+			logger.error("Error during update avatar for Profile");
+		}
+		
+	}
+	
+	@Override
+	public void addBackground(Profile profile) {
+		String updateQuery = "UPDATE profile SET linkBackground = ? WHERE id = ?";
+		Object[] data = new Object[] {
+				profile.getLinkBackground(), profile.getId()
+		};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+		
+		if (rowAffected == 0) {
+			logger.error("Error during update background for Profile");
+		}
+		
+	}
 
 }
