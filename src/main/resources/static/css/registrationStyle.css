@@ -83,7 +83,7 @@ input[type="text"], input[type="password"]{
     background-color: #274b69;
     margin: 0 auto;
 }
-#field3 a{
+#field3 input{
     display: block;
     height: 100%;
 }

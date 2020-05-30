@@ -1,3 +1,3 @@
 document.getElementById("registrationButton").onclick = function() {
-    document.getElementById("registrationButton").submit;
+    document.getElementById("registrationButton").submit();
 }

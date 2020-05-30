@@ -76,11 +76,10 @@ public class ProfileStorageDAO implements ProfileStorage {
 	}
 
 	private void insert(Profile profile) {
-		String insertQuery = "INSERT INTO profile (email, firstName, lastName, nickname, password, enabled, token, roles, linkAvatar, linkBackground) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertQuery = "INSERT INTO profile (email, firstName, lastName, nickname, password, enabled, token, roles) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] data = new Object[] {
 			profile.getEmail(), profile.getFirstName(), profile.getLastName(), profile.getNickname(), profile.getPassword(), 
-			profile.isEnabled(), profile.getToken(), String.join(",", profile.getRolesList()), profile.getLinkAvatar(), 
-			profile.getLinkBackground()
+			profile.isEnabled(), profile.getToken(), String.join(",", profile.getRolesList())
 		};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		
