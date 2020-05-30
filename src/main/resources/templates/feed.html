@@ -8,15 +8,15 @@
 	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
     <title>Feed</title>
     <link rel="stylesheet" th:href="@{css/feedStyle.css}">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script th:src="@{js/feedScript.js}"></script>
+	<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+	<script th:src="@{/js/feedScript.js}"></script>
 </head>
 <body>
 	<div id="container">
 		<div id="header-wrapper">
 			<div id="polosa">
 				<div id="search-exit">
-					<a href="#" th:href="/logout" th:text="#{button.exit}" class="exit">Выйти</a>
+					<!--<a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>-->
 					<a href=""><img th:src="@{images/rfln.png}" alt="" class="logo"></a>
 					<div id="session">
 						<img th:src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px">
@@ -47,7 +47,7 @@
 						<p>description</p>
 					</div>
 					<div><!--удалил id дива-->
-						<img class="post-image" src="https://dummyimage.com/1980x1080/ff5050/fff" alt="">
+						<img class="post-image" th:src="@{https://dummyimage.com/1980x1080/ff5050/fff}" alt="">
 					</div>
 					<div id="post-rating">
 						<div id="rating-circle"></div>
@@ -127,7 +127,7 @@
 						<p>description</p>
 					</div>
 					<div><!--удалил id дива-->
-						<img class="post-image" src="https://dummyimage.com/1980x1080/ff5050/fff" alt="">
+						<img class="post-image" th:src="@{https://dummyimage.com/1980x1080/ff5050/fff}" alt="">
 					</div>
 					<div id="post-rating">
 						<div id="rating-circle"></div>
@@ -187,7 +187,7 @@
 						<p>description</p>
 					</div>
 					<div><!--удалил id дива-->
-						<img class="post-image" src="https://dummyimage.com/1980x1080/ff5050/fff" alt="">
+						<img class="post-image" th:src="@{https://dummyimage.com/1980x1080/ff5050/fff}" alt="">
 					</div>
 					<div id="post-rating">
 						<div id="rating-circle"></div>

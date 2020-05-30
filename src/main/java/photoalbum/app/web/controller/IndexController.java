@@ -18,9 +18,9 @@ public class IndexController {
 	@GetMapping("/")
 	public String index(Model model, Locale locale) {
 		
-		model.addAttribute("title", messageSource.getMessage("home.title",null, locale));
+		/*model.addAttribute("title", messageSource.getMessage("home.title",null, locale));*/
 		
-		return "index";
+		return "feed";
 	}
 
 }

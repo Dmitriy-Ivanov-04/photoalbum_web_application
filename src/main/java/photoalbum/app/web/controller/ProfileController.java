@@ -63,7 +63,7 @@ public class ProfileController {
 
 		profileService.createUserFromRegistrationForm(profileForm);
 
-		return "redirect:/feed";
+		return "redirect:/";
 	}
 /*
 	// Display the form
