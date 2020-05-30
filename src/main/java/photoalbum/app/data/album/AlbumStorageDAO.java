@@ -8,12 +8,13 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import org.springframework.stereotype.Repository;
 import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.data.relationships.RelationshipsRowMapper;
 import photoalbum.app.domain.model.AccesLevel;
 import photoalbum.app.domain.model.Album;
 import photoalbum.app.domain.model.Relationships;
-
+@Repository
 public class AlbumStorageDAO implements AlbumStorage {
 	
 	private Logger logger = Logger.getLogger(this.getClass().getName());

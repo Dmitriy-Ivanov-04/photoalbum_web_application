@@ -2,9 +2,11 @@ package photoalbum.app.domain.photo;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.domain.model.Photo;
 
+@Service
 public class PhotoServiceDomain implements PhotoService{
 	
 	PhotoStorage photoStorage;

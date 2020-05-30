@@ -8,11 +8,12 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import org.springframework.stereotype.Repository;
 import photoalbum.app.data.MarkStorage;
 import photoalbum.app.data.photos.PhotoRowMapper;
 import photoalbum.app.domain.model.Mark;
 import photoalbum.app.domain.model.Photo;
-
+@Repository
 public class MarkStorageDAO implements MarkStorage{
 	
 	private Logger logger = Logger.getLogger(this.getClass().getName());

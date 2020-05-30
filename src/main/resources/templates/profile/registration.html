@@ -7,38 +7,38 @@
     <meta name="viewport" content="width=device-width">
 	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
     <title>Registration</title>
-    <link rel="stylesheet" th:href="@{css/registrationStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/registrationStyle.css}"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
-    <script th:src="@{js/showPass.js}"></script>
+    <script th:src="@{https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js}"></script>
+    <script th:src="@{/js/showPass.js}"></script>
 </head>
 <body>
     <div id="container">
         <div class="form-wrapper">
-            <form action="#" th:action="@{/profile/registration}" th:object="${user}" method="post" class="auto">
+            <form action="#" th:action="@{/profile/registration}" th:object="${profileForm}" method="post" class="auto">
                <div id="logo">
-                   <img src="@{images/blueRfln.png}" alt="">
+                   <img th:src="@{/images/blueRfln.png}" alt="">
                </div>
                <div id="input-wrapper">
                    <div id="input-left">
-                       <input type="text" placeholder="Имя" th:placeholder="#{placeholder.name}">
-                       <input type="text" placeholder="Фамилия" th:placeholder="#{placeholder.NAME}">
-                       <input type="text" placeholder="Псевдоним" th:placeholder="#{placeholder.nickname}">
+                       <input type="text" placeholder="Имя" th:field="*{firstName}" th:placeholder="#{placeholder.name}">
+                       <input type="text" placeholder="Фамилия" th:field="*{lastName}" th:placeholder="#{placeholder.NAME}">
+                       <input type="text" placeholder="Псевдоним" th:field="*{nickname}" th:placeholder="#{placeholder.nickname}">
                    </div>
                    <div id="input-right">
-                        <input type="text" placeholder="Логин" th:placeholder="#{placeholder.login}">
+                        <input type="text" placeholder="Email" th:field="*{email}">
                         <div id="pass-wrapper">
-                            <input type="password" id="password1" placeholder="Пароль" name="password" th:placeholder="#{placeholder.password}">
-                            <a href="#" class="password-control" id="eye1" onclick="showPassword('#password1', '#eye1')"></a>
+                            <input type="password" id="password1" placeholder="Пароль" name="password" th:field="*{password}" th:placeholder="#{placeholder.password}">
+                            <a href="#" class="password-control" id="eye1"  onclick="showPassword('#password1', '#eye1')"></a>
                         </div>
                         <div id="pass-wrapper">
-                            <input type="password" id="password2" placeholder="Повторите пароль" name="password" th:placeholder="#{placeholder.againPassword}">
+                            <input type="password" id="password2" placeholder="Повторите пароль" name="password" th:field="*{passwordConfirm}" th:placeholder="#{placeholder.againPassword}">
                             <a href="#" class="password-control" id="eye2" onclick="showPassword('#password2', '#eye2')"></a>
                         </div>
                    </div> 
                </div>
                 <div id="field3">
-                   <a href="#" th:href="/endRegistration"><p th:text="#{registration}" class="enter">Зарегестрироваться</p></a>
+                   <a href="#" type="submit"><p th:text="#{registration}" class="enter">Зарегестрироваться</p></a>
                 </div>
             </form>
         </div>

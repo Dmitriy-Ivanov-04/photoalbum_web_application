@@ -5,9 +5,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import org.springframework.stereotype.Service;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.domain.model.Profile;
 
+@Service
 public class ProfileDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired

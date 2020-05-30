@@ -7,9 +7,10 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import org.springframework.stereotype.Repository;
 import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.domain.model.Relationships;
-
+@Repository
 public class RelationshipsStorageDAO implements RelationshipsStorage{
 	
 	private Logger logger = Logger.getLogger(this.getClass().getName());

@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
 import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.domain.model.AccesLevel;
 import photoalbum.app.domain.model.Album;
-
+@Service
 public class AlbumServiceDomain implements AlbumService {
 	
 	@Autowired

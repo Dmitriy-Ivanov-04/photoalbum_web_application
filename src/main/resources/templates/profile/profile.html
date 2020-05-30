@@ -5,15 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" th:href="@{css/profileStyle.css}">
-	<link rel="stylesheet" th:href="@{css/imageOverlay.css}">
+    <link rel="stylesheet" th:href="@{/css/profileStyle.css}">
+	<link rel="stylesheet" th:href="@{/css/imageOverlay.css}">
 	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
     <title>Profile</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script th:src="@{js/profileScript.js}"></script>
-	<script defer th:src="@{js/imageAlign.js}"></script>
-	<script th:src="@{js/imageOverlay.js}"></script>
-	<script th:src="@{js/tabScript.js}"></script>
+	<script th:src="@{/js/profileScript.js}"></script>
+	<script defer th:src="@{/js/imageAlign.js}"></script>
+	<script th:src="@{/js/imageOverlay.js}"></script>
+	<script th:src="@{/js/tabScript.js}"></script>
 </head>
 <body>
     <div id="container">
@@ -37,7 +37,7 @@
                 <div id="profile-info">
                     <div id="avatar">
 						<!--<div id="blackout"><a class="upload-ref" href="#">0 Публикации</a></div>-->
-                        <img src="@{images/avatar.png}" alt="">
+                        <img th:src="@{/images/avatar.png}" alt="">
                     </div>
                     <div id="text-profile">
                         <div id="nickPlus">

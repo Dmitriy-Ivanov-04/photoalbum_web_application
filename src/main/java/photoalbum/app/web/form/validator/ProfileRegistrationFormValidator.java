@@ -1,12 +1,14 @@
 package photoalbum.app.web.form.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 
+@Component
 public class ProfileRegistrationFormValidator implements Validator {
 	
 	@Autowired

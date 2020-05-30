@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
+import org.springframework.stereotype.Service;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.model.Role;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 
+@Service
 public class ProfileServiceDomain implements ProfileService {
 	
 	@Autowired

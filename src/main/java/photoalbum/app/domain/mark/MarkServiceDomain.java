@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
 import photoalbum.app.data.MarkStorage;
 import photoalbum.app.domain.model.Mark;
-
+@Service
 public class MarkServiceDomain implements MarkService{
 	
 	@Autowired

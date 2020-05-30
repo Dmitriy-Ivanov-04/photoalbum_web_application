@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
 import photoalbum.app.data.CommentStorage;
 import photoalbum.app.domain.model.Comment;
-
+@Service
 public class CommentServiceDomain implements CommentService {
 	
 	@Autowired

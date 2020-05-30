@@ -1,7 +1,8 @@
 package photoalbum.app.domain.tag;
 
+import org.springframework.stereotype.Service;
 import photoalbum.app.data.TagStorage;
-
+@Service
 public class TagServiceDomain implements TagService{
 	
 	TagStorage tagStorage;

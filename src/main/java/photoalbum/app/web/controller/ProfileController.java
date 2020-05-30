@@ -3,7 +3,9 @@ package photoalbum.app.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -18,8 +20,10 @@ import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 import photoalbum.app.web.form.validator.ProfileRegistrationFormValidator;
 
+
+@Controller
 public class ProfileController {
-	
+
 	@Autowired
 	ProfileService profileService;
 
@@ -29,8 +33,8 @@ public class ProfileController {
 	@Autowired
 	ProfileStorage profileStorage;
 
-	@Autowired
-	Profile existingUser;
+	/*@Autowired
+	Profile existingUser;*/
 
 	@Autowired
 	private MailSender mailSender;
@@ -61,7 +65,7 @@ public class ProfileController {
 
 		return "redirect:/";
 	}
-/***************/
+/*
 	// Display the form
 	@RequestMapping(value="/forgot-password", method=RequestMethod.GET)
 	public ModelAndView displayResetPassword(ModelAndView modelAndView, Profile user) {
@@ -106,5 +110,5 @@ public class ProfileController {
 		}
 		return modelAndView;
 	}
-	/**********************/
+	*/
 }

@@ -2,10 +2,11 @@ package photoalbum.app.domain.relationships;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.domain.model.Relationships;
-
-public class RelationshipsServiseDomain implements RelationshipsServise{
+@Service
+public class RelationshipsServiceDomain implements RelationshipsServise{
 	
 	RelationshipsStorage relationshipsStorage;
 	
