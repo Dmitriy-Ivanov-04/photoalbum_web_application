@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script th:src="@{https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js}"></script>
     <script th:src="@{/js/showPass.js}"></script>
+    <script defer th:src="@{/js/registrationScript.js}"></script>
 </head>
 <body>
     <div id="container">
@@ -38,7 +39,7 @@
                    </div> 
                </div>
                 <div id="field3">
-                   <a href="#" type="submit"><p th:text="#{registration}" class="enter">Зарегестрироваться</p></a>
+                   <a th:href="@{/profile/profile}" id="registrationButton"><p th:text="#{registration}" class="enter">Зарегестрироваться</p></a>
                 </div>
             </form>
         </div>
