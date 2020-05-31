@@ -18,10 +18,9 @@ public class IndexController {
 	@Autowired
 	ProfileService profileService;
 	
-	@GetMapping("/")
-	public String index(Model model, Locale locale) {
+	@GetMapping("/feed")
+	public String index() {
 		
-		/*model.addAttribute("title", messageSource.getMessage("home.title",null, locale));*/
 		
 		return "feed";
 	}

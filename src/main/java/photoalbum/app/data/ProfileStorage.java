@@ -17,5 +17,9 @@ public interface ProfileStorage {
 	void addAvatar(Profile profile);
 	
 	void addBackground(Profile profile);
+	
+	Profile getProfileByNickname(String nickname);
+	
+	//Long getIdByNickname(String nickname);
 
 }

@@ -65,6 +65,7 @@ public class ProfileController {
 
 		return "redirect:/";
 	}
+
 /*
 	// Display the form
 	@RequestMapping(value="/forgot-password", method=RequestMethod.GET)
