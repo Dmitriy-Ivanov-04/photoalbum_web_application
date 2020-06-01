@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" 
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	  
 <head>
 	<meta charset="utf-8" />
     <title>Autorization</title>
@@ -11,6 +13,7 @@
     <script th:src="@{js/showPass.js}"></script>
 	<script th:src="@{js/startScript.js}"></script>
 </head>
+
 <body>
     <div id="container">
        <div id="overlay">
@@ -22,37 +25,55 @@
                    <a href="#"><p class="close" th:text="#{button.close}">Закрыть</p></a>
                 </div>
            </div>
-       </div>
+		</div>
+       
         <div class="form-wrapper">
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">Invalid username or password.
-                </div>
-            </div>
-            <div th:if="${param.logout}">
-                <div class="alert alert-info">You have been logged out.</div>
-            </div>
-            <form th:action="@{/login}" method="post" class="auto">
-               <div>
-                   <img th:src="@{/images/blueRfln.png}"/>
-               </div>
-                <div id="field1" class="form-group">
-                    <input type="text" class="login" placeholder="Логин" name="login" th:placeholder="#{input.login}">
-                </div>
-                <div id="field2" class="form-group">
-                    <input type="password" id="password-input" placeholder="Пароль" name="password" th:placeholder="#{input.password}">
-                    <a href="#" class="password-control" id="eye1" onclick="showPassword('#password-input', '#eye1')"></a>
-                </div>
-                <div id="field3" class="form-group">
-                   <a href="#"><p class="enter" th:text="#{button.enter}">Войти</p></a>
-                </div>
-                <div id="restore-wrapper">
-                    <a href="#"><span class="goReg" id="restorePassword" th:text="#{password.recovery}">Восстановить пароль</span></a>
-                </div>
-                <div id="field5">
-                    <a href="#" th:href="@{/profile/registration}"><span class="goReg" th:text="#{registration}">Зарегистрироваться</span></a>
-                </div>
+        	<form th:action="@{/login}" method="post" class="auto">
+	            <div th:if="${param.error}">
+	                <div class="alert alert-danger">Invalid username or password.
+	                </div>
+	            </div>
+	            
+	            <div th:if="${param.logout}">
+	                <div class="alert alert-info">You have been logged out.</div>
+	            </div>
+	            
+	               <div>
+	                   <img th:src="@{/images/blueRfln.png}"/>
+	               </div>
+	               
+	                <div id="field1" class="form-group">
+	                    <input type="text"
+						id="username" name="username" class="login"
+						autofocus="autofocus" placeholder="Username" th:placeholder="#{input.login}">
+	                </div>
+	                
+	                <div id="field2" class="form-group">
+	                    <input type="password"
+						id="password-input" name="password" class="form-control"
+						placeholder="Password" th:placeholder="#{input.password}">
+	                    <a href="#" class="password-control" id="eye1" onclick="showPassword('#password-input', '#eye1')"></a>
+	                </div>
+	                
+	                <div id="field3" class="form-group">
+	                   <input type="submit" class="enter" value="Войти" th:value="#{button.enter}">
+	                </div>
+	                
+	                <div class="form-group">
+		        	<label for="remember-me" th:text="#{form.label.rememberme}"></label><input type="checkbox" name="remember-me" id="remember-me">
+		        	</div>
+		        	
+	                <div id="restore-wrapper">
+	                    <a href="#"><span class="goReg" id="restorePassword" th:text="#{password.recovery}">Восстановить пароль</span></a>
+	                </div>
+	                
+	                <div id="field5">
+	                    <a href="#" th:href="@{/profile/registration}"><span class="goReg" th:text="#{registration}">Зарегистрироваться</span></a>
+	                </div>
+	                
             </form>
         </div>
     </div>
 </body>
+
 </html>

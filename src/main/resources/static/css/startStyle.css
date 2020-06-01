@@ -106,24 +106,19 @@ input[type="text"], input[type="password"]{
 .password-control.view {
 	background: url(../images/eyeOn.png) 0 0 no-repeat;
 }
+
 #field3{
-    border: solid #c7c7c7 1px;
-    border-radius: 10px;
     width: 300px;
-    height: 67px;
-    background-color: #274b69;
-    margin: 26px auto 0 auto;
-}
-#field3 a{
-    display: block;
-    height: 100%;
+    margin: 0 auto;
 }
 .enter{
-    margin: 0;
-    padding-top: 20px;
+    width: 300px;
+    border: solid #c7c7c7 1px;
+    border-radius: 10px;
     color: #FFF;
     font-size: 24px;
     font-family: 'Roboto', sans-serif;
+    background-color: #274b69;
 }
 #restore-wrapper{
     margin-top:25px;

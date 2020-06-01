@@ -12,6 +12,20 @@
 	<script th:src="@{/js/feedScript.js}"></script>
 </head>
 <body>
+	<div class="menu">
+        <div class="rightMenu">
+            <div sec:authorize="isAuthenticated()">
+				<form id="logoutForm" action="#" th:action="@{/logout}" method="post">
+                    <a class="logout" href="#" th:href="@{/logout}">Logout</a>
+                </form>
+            </div>
+            <div sec:authorize="isAnonymous()">
+            	<a class="logout" href="#" th:href="@{/profile/registration}">Registration</a>&nbsp;<a class="logout" href="#" th:href="@{/login}">Login</a> 
+            </div>
+        </div>
+        <div class="sep"></div>
+    </div>
+	
 	<div id="container">
 		<div id="header-wrapper">
 			<div id="polosa">
