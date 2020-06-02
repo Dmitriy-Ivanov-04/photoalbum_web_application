@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
+	<link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
     <title>Feed</title>
     <link rel="stylesheet" th:href="@{css/feedStyle.css}">
 	<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
@@ -14,13 +14,10 @@
 <body>
 	<div class="menu">
         <div class="rightMenu">
-            <div sec:authorize="isAuthenticated()">
+            <div sec:authorize="isAuthenticated()"> <!-- нахуя -->
 				<form id="logoutForm" action="#" th:action="@{/logout}" method="post">
                     <a class="logout" href="#" th:href="@{/logout}">Logout</a>
                 </form>
-            </div>
-            <div sec:authorize="isAnonymous()">
-            	<a class="logout" href="#" th:href="@{/profile/registration}">Registration</a>&nbsp;<a class="logout" href="#" th:href="@{/login}">Login</a> 
             </div>
         </div>
         <div class="sep"></div>
@@ -30,7 +27,7 @@
 		<div id="header-wrapper">
 			<div id="polosa">
 				<div id="search-exit">
-					<!--<a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>-->
+					<a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
 					<a href=""><img th:src="@{images/rfln.png}" alt="" class="logo"></a>
 					<div id="session">
 						<img th:src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px">

@@ -106,10 +106,12 @@ input[type="text"], input[type="password"]{
 .password-control.view {
 	background: url(../images/eyeOn.png) 0 0 no-repeat;
 }
-
+#field3 input{
+    height: 67px;
+}
 #field3{
     width: 300px;
-    margin: 0 auto;
+    margin: 26px auto;
 }
 .enter{
     width: 300px;

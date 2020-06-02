@@ -10,6 +10,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import photoalbum.app.data.ProfileStorage;
+import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 import photoalbum.app.web.form.validator.ProfileRegistrationFormValidator;
@@ -52,6 +53,15 @@ public class ProfileController {
 		profileService.createUserFromRegistrationForm(profileForm);
 
 		return "redirect:/";
+	}
+	
+	@GetMapping("/user/{nickname}")
+	public String profile(@PathVariable String nickname, Model model) {
+		System.out.println(nickname);
+		Profile profile = new Profile();
+		profile = profileStorage.getProfileByNickname(nickname);
+		model.addAttribute("nickname", profile.getNickname());
+		return "profile/profile";
 	}
 
 }

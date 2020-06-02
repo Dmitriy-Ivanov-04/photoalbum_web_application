@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" th:href="@{/css/profileStyle.css}">
 	<link rel="stylesheet" th:href="@{/css/imageOverlay.css}">
-	<link rel="shortcut icon" th:href="@{images/icon.png}" type="image/png">
+	<link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
     <title>Profile</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/js/profileScript.js}"></script>
@@ -24,11 +24,11 @@
                     <form id="logoutForm" action="#" th:action="@{/logout}" method="post">
                         <a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
                     </form>
-                   <img th:src="@{images/rfln.png}" alt="" class="logo">
-                   <img th:src="@{images/rating.png}" class="rate" alt="" >
-                   <img th:src="@{images/date.png}" class="date" alt="" >
+                   <img th:src="@{/images/rfln.png}" alt="" class="logo">
+                   <img th:src="@{/images/rating.png}" class="rate" alt="" >
+                   <img th:src="@{/images/date.png}" class="date" alt="" >
                    <input type="text" id="search">
-                   <img th:src="@{images/loupeBackground.png}" class="loupe" alt="">
+                   <img th:src="@{/images/loupeBackground.png}" class="loupe" alt="">
                 </div>
             </div>
             
@@ -46,7 +46,7 @@
                             </div>
                             
                             <div class="add-friend" id="addFriend">
-                               <img class="add-friend-plus" th:src="@{images/plus.png}" alt="">
+                               <img class="add-friend-plus" th:src="@{/images/plus.png}" alt="">
                                <span class="add-friend-text" th:text="#{addFriend}">Добавить в друзья</span>
                            </div>
                         </div>
@@ -69,7 +69,7 @@
             <label class="tab" id="albums-tab" th:text="#{button.albums}">Альбомы</label>
 			<label class='tab' id="one-album-tab" th:text="#{button.albuuuumssss}">Альбооооооооооом картинкиии</label>
 			<div class="add-photo">
-                <img class="add-photo-camera" th:src="@{images/camera.png}">
+                <img class="add-photo-camera" th:src="@{/images/camera.png}">
                 <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>
             </div>
         </div>
