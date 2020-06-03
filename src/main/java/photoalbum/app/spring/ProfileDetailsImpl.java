@@ -62,4 +62,7 @@ public class ProfileDetailsImpl implements UserDetails {
 		return profile.isEnabled();
 	}
 
+	public String getNickname() {
+		return this.profile.getNickname();
+	}
 }

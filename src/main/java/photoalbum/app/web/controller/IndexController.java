@@ -4,9 +4,14 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import photoalbum.app.domain.model.Profile;
+import photoalbum.app.spring.ProfileDetailsImpl;
 
 @Controller
 public class IndexController {
@@ -17,9 +22,10 @@ public class IndexController {
 	
 	@GetMapping("/")
 	public String index(Model model, Locale locale) {
-		
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("title", messageSource.getMessage("home.title",null, locale));
-		
+		model.addAttribute("nickname", profileDetails.getNickname());
+		//System.out.println();
 		return "feed";
 	}
 

@@ -52,10 +52,10 @@
                         </div>
                         <div id="menu">
                             <ul class="user-menu">
-                                <li><a href="#" th:text="#{user.publications}">0 Публикации</a></li>
-                                <li><a href="#" th:text="#{user.subscribes}">0 подписок</a></li>
-                                <li><a href="#" th:text="#{user.friends}">0 друзей</a></li>
-                                <li><a href="#" th:text="#{user.followers}">0 подписчиков</a></li>
+                                <li><a href="#" th:text="${publications} + ' ' + #{user.publications}">0 Публикации</a></li>
+                                <li><a href="#" th:text="${subscribes} + ' ' + #{user.subscribes}">0 подписок</a></li>
+                                <li><a href="#" th:text="${friends} + ' ' + #{user.friends}">0 друзей</a></li>
+                                <li><a href="#" th:text="${followers} + ' ' + #{user.followers}">0 подписчиков</a></li>
                             </ul>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
         <div id="content-menu-wrapper">
             <label class="tab active" id="publications-tab" th:text="#{button.publications}">Публикации</label>
             <label class="tab" id="albums-tab" th:text="#{button.albums}">Альбомы</label>
-			<label class='tab' id="one-album-tab" th:text="#{button.albuuuumssss}">Альбооооооооооом картинкиии</label>
+			<label class='tab' id="one-album-tab" th:text="#{button.album}">Альбооооооооооом картинкиии</label>
 			<div class="add-photo">
                 <img class="add-photo-camera" th:src="@{/images/camera.png}">
                 <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>

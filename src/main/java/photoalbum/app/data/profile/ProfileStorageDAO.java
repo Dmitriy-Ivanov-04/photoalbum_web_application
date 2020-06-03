@@ -123,13 +123,11 @@ public class ProfileStorageDAO implements ProfileStorage {
 		return profile;
 	}
 	
-	/*@Override
+	@Override
 	public Long getIdByNickname(String nickname) {
 		StringBuilder sql = new StringBuilder("SELECT id FROM profile WHERE nickname = ?");
-		Long id = jdbcTemplate.queryForObject(sql.toString(), new Object[] {nickname});
+		Long id = jdbcTemplate.queryForObject(sql.toString(), new Object[] {nickname}, Long.class);
 		return id;
-	}*/
-	
-	
+	}
 
 }

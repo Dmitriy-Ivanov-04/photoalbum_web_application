@@ -11,7 +11,7 @@ public class RelationshipsServiceDomain implements RelationshipsServise{
 	RelationshipsStorage relationshipsStorage;
 	
 	public List<Relationships> getSubscribersList(Long targetId){
-		return relationshipsStorage.findSubscribers(targetId);
+		return relationshipsStorage.findFollowers(targetId);
 	}
 	
 	public List<Relationships> getSubscriptionsList(Long profileId){

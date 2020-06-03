@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and().exceptionHandling().accessDeniedPage("/access-denied")			
 			.and().formLogin().loginPage("/login").permitAll()
 			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").invalidateHttpSession(true)
+				.logoutSuccessUrl("/login").invalidateHttpSession(true)
 			.and().rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository());
 	}
 	

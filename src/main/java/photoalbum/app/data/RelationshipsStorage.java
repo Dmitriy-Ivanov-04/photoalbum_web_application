@@ -7,7 +7,7 @@ import photoalbum.app.domain.model.Relationships;
 
 public interface RelationshipsStorage {
 	
-	List<Relationships> findSubscribers(Long targetId);
+	List<Relationships> findFollowers(Long targetId);
 	List<Relationships> findSubscriptions(Long profileId);
 	List<Relationships> findFriends(Long profileId);
 	Relationships findRelationships(Long id);

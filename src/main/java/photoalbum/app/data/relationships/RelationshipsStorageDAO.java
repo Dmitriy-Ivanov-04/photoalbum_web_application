@@ -21,24 +21,25 @@ public class RelationshipsStorageDAO implements RelationshipsStorage{
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	public List<Relationships> findSubscribers(Long targetId) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM relationships WHERE target_id = ? AND status = subscriber");
+	public List<Relationships> findFollowers(Long targetId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM relationships WHERE target_id = ? AND status = 1"); // subscriber = 1
 		List<Relationships> relationships = jdbcTemplate.query(sql.toString(), new Object[] {targetId}, new RelationshipsRowMapper());
 		return relationships;
 	}
 	
 	public List<Relationships> findSubscriptions(Long profileId) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM relationships WHERE profile_id = ? AND status = subscriber");
+		StringBuilder sql = new StringBuilder("SELECT * FROM relationships WHERE profile_id = ? AND status = 1");
 		List<Relationships> relationships = jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new RelationshipsRowMapper());
 		return relationships;
 	}
 	
 	public List<Relationships> findFriends(Long profileId) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM relationships WHERE target_id = ? AND status = frined");
-		List<Relationships> relationships = jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new RelationshipsRowMapper());
-		sql = new StringBuilder("SELECT * FROM relationships WHERE profile_id = ? AND status = frined");
-		relationships = jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new RelationshipsRowMapper());
-		return relationships;
+		StringBuilder sql = new StringBuilder("SELECT * FROM relationships WHERE target_id = ? AND status = 2");// friend = 2
+        List<Relationships> relationships = jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new RelationshipsRowMapper());
+        sql = new StringBuilder("SELECT * FROM relationships WHERE profile_id = ? AND status = 2");
+        List<Relationships> relationships1 = jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new RelationshipsRowMapper());
+        relationships.addAll(relationships1);
+        return relationships;
 	}
 	
 	public Relationships findRelationships(Long id) {
@@ -48,7 +49,7 @@ public class RelationshipsStorageDAO implements RelationshipsStorage{
 	}
 	
 	public void sendInvite(Long profileId, Long targetId) {
-		String insertQuery = "INSERT INTO relationships (profile_id, target_id, status) VALUES (?, ?, subscriber)";
+		String insertQuery = "INSERT INTO relationships (profile_id, target_id, status) VALUES (?, ?, 1)";
 		Object[] data = new Object[] {profileId, targetId};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		
@@ -58,7 +59,7 @@ public class RelationshipsStorageDAO implements RelationshipsStorage{
 	}
 	
 	public void acceptInvite(Long id) {
-		String updateQuery = "UPDATE relationships SET status = friend WHERE id = ?";
+		String updateQuery = "UPDATE relationships SET status = 2 WHERE id = ?";
 		Object[] data = new Object[] {id};
 		int rowAffected = jdbcTemplate.update(updateQuery, data);
 
@@ -68,7 +69,7 @@ public class RelationshipsStorageDAO implements RelationshipsStorage{
 	}
 	
 	public void deleteFriend(Long profileId, Long targetId, Long id) {
-		String updateQuery = "UPDATE relationships SET profile_id = ?, target_id = ?, status = subscriber WHERE id = ?";
+		String updateQuery = "UPDATE relationships SET profile_id = ?, target_id = ?, status = 1 WHERE id = ?";
 		Object[] data = new Object[] {profileId, targetId, id};
 		int rowAffected = jdbcTemplate.update(updateQuery, data);
 

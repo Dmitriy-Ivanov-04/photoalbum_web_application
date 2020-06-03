@@ -20,6 +20,5 @@ public interface ProfileStorage {
 	
 	Profile getProfileByNickname(String nickname);
 	
-	//Long getIdByNickname(String nickname);
-
+	Long getIdByNickname(String nickname);
 }

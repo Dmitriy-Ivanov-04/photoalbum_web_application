@@ -3,15 +3,19 @@ package photoalbum.app.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
+import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.profile.ProfileService;
+import photoalbum.app.spring.ProfileDetailsImpl;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 import photoalbum.app.web.form.validator.ProfileRegistrationFormValidator;
 
@@ -27,6 +31,12 @@ public class ProfileController {
 
 	@Autowired
 	ProfileStorage profileStorage;
+	
+	@Autowired
+	PhotoStorage photoStorage;
+	
+	@Autowired
+	RelationshipsStorage relationshipsStorage;
 
 	@InitBinder("profileForm")
 	private void initBinder(WebDataBinder binder) {
@@ -56,11 +66,15 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/user/{nickname}")
-	public String profile(@PathVariable String nickname, Model model) {
-		System.out.println(nickname);
-		Profile profile = new Profile();
-		profile = profileStorage.getProfileByNickname(nickname);
-		model.addAttribute("nickname", profile.getNickname());
+	public String profile(Model model) { //@PathVariable String nickname1, 
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String nickname = profileDetails.getNickname();
+		Long profileId = profileStorage.getIdByNickname(nickname);
+		model.addAttribute("nickname", nickname);
+		model.addAttribute("publications", photoStorage.countPublicationsByUser(profileId));
+		model.addAttribute("subscribes", relationshipsStorage.findSubscriptions(profileId).size());
+		//model.addAttribute("friends", relationshipsStorage.findFriends(profileId).size()); //переименовать people в target в sql
+		model.addAttribute("followers", relationshipsStorage.findSubscriptions(profileId).size());
 		return "profile/profile";
 	}
 

@@ -73,4 +73,11 @@ public class PhotoStorageDAO implements PhotoStorage{
 			logger.error("Error during delete record for Photos");
 		}
 	}
+	
+	@Override
+	public int countPublicationsByUser(Long profileId) {
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM photos WHERE profile_id = ?");
+		
+		return jdbcTemplate.queryForObject(sql.toString(), new Object[] {profileId}, Integer.class);
+	}
 }

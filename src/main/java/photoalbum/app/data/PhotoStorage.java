@@ -14,4 +14,5 @@ public interface PhotoStorage {
 	void upload(Long profileId, Long albumId, String description, String link);
 	void delete(Long id);
 	//void copyPhoto();
+	int countPublicationsByUser(Long profileId);
 }
