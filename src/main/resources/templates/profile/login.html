@@ -12,22 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script th:src="@{https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js}"></script>
     <script th:src="@{js/showPass.js}"></script>
-	<script th:src="@{js/startScript.js}"></script>
 </head>
 
 <body>
-    <div id="container">
-       <div id="overlay">
-           <div id="notification">
-               <div id="text">
-                   <p th:text="#{password.recoveryMessage}">На вашу почту было отправлено письмо со ссылкой на форму востановления пароля</p>
-               </div>
-               <div id="close-button">
-                   <a href="#"><p class="close" th:text="#{button.close}">Закрыть</p></a>
-                </div>
-           </div>
-		</div>
-       
+    <div id="container">      
         <div class="form-wrapper">
         	<form th:action="@{/login}" method="post" class="auto">
 	            <div th:if="${param.error}">
@@ -65,7 +53,7 @@
 		        	</div> -->
 		        	
 	                <div id="restore-wrapper">
-	                    <a href="#"><span class="goReg" id="restorePassword" th:text="#{password.recovery}">Восстановить пароль</span></a>
+	                    <a href="#" th:href="@{/recovery}"><span class="goReg" id="restorePassword" th:text="#{password.recovery}">Восстановить пароль</span></a>
 	                </div>
 	                
 	                <div id="field5">

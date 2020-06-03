@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#restorePassword").click(function(){
+	$("#field3").click(function(){
 		$("#overlay").show();
 	});
 	$("#close-button").click(function(){

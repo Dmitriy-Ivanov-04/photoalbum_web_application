@@ -77,5 +77,9 @@ public class ProfileController {
 		model.addAttribute("followers", relationshipsStorage.findSubscriptions(profileId).size());
 		return "profile/profile";
 	}
-
+	
+	@GetMapping("/recovery")
+	public String recovery() {
+		return "/passwordRecovery";
+	}
 }
