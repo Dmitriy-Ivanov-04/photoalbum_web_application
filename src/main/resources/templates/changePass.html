@@ -15,16 +15,19 @@
 <body>
     <div id="container">
         <div class="form-wrapper">
-            <form action="#" th:action="@{/recoveryPassword}" th:object="${user}" method="post" class="auto">
+            <form action="#" th:action="@{/recoveryPassword}" method="post" class="auto">
                <div id="logo">
                    <img th:src="@{images/blueRfln.png}" alt="">
                </div>
                 <div id="field1">
+                    <input type="text" placeholder="Code" th:placeholder="#{input.code}">
+                </div>
+                <div id="field2">
                     <input type="password" class="password-input" id="password1" placeholder="Пароль" name="password">
                     <a href="#" class="password-control" id="eye1" onclick="showPassword('#password1', '#eye1')"></a>
                 </div>
-                <div id="field2">
-                    <input type="password" class="password-input" id="password2" placeholder="Пароль" name="password">
+                <div id="field3">
+                    <input type="password" class="password-input" id="password2" placeholder="Повторите Пароль" name="password">
                     <a href="#" class="password-control" id="eye2" onclick="showPassword('#password2', '#eye2')"></a>
                 </div>
                 <div id="enter-wrapper">

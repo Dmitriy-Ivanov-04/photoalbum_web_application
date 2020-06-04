@@ -82,4 +82,11 @@ public class ProfileController {
 	public String recovery() {
 		return "/passwordRecovery";
 	}
+
+	@GetMapping("/change_password")
+	public String changePassword(){
+		return "/changePass";
+	}
 }
+
+

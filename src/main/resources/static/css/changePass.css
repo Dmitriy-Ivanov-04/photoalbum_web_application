@@ -23,7 +23,7 @@ input[type="text"], input[type="password"]{
 
 .form-wrapper{
     max-width: 400px;
-    height: 434px;
+    height: 528px;
     margin: 5.4% auto 0 auto;
     background-color: #FFF;
     border-radius: 30px;
@@ -37,7 +37,7 @@ input[type="text"], input[type="password"]{
 #field1{
     margin-top: 10px;
 }
-.password-input{
+input{
     border: solid #c7c7c7 1px;
     border-radius: 10px;
     height: 67px;
@@ -50,7 +50,7 @@ input[type="text"], input[type="password"]{
 	margin-top:26px;
 }
 
-#field1, #field2{
+#field2, #field3{
     position: relative;
 }
 .password-control{

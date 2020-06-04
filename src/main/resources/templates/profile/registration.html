@@ -12,9 +12,20 @@
     <script th:src="@{https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js}"></script>
     <script th:src="@{/js/showPass.js}"></script>
     <script defer th:src="@{/js/registrationScript.js}"></script>
+    <script defer th:src="@{/js/notification.js}"></script>
 </head>
 <body>
     <div id="container">
+        <div id="overlay">
+            <div id="notification">
+                <div id="text">
+                    <p th:text="#{registrationMessage}">На вашу почту было отправлено письмо с подтверждением регистрации вашего профиля</p>
+                </div>
+                <div id="close-button">
+                    <a href="#"><p class="close" th:text="#{button.close}">Закрыть</p></a>
+                </div>
+            </div>
+        </div>
         <div class="form-wrapper">
             <form action="#" th:action="@{/profile/registration}" th:object="${profileForm}" method="post" class="auto">
                <div id="logo">
