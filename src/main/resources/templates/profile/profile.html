@@ -14,6 +14,11 @@
 	<script defer th:src="@{/js/imageAlign.js}"></script>
 	<script th:src="@{/js/imageOverlay.js}"></script>
 	<script th:src="@{/js/tabScript.js}"></script>
+	<script th:src="@{/js/addFriendScript.js}"></script>
+	<script th:src="@{/js/addFriendAJAX.js}"></script>
+	
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 <body>
     <div id="container">
@@ -44,13 +49,19 @@
                             <div id="nickText">
                                <h1 id="nick" th:text="${nickname}">Nickname</h1>
                             </div>
+							
+                            <div class="add-friend" id="addFriend">
+                               <img class="add-friend-plus" th:src="@{/images/plus.png}" alt="">
+                               <span class="add-friend-text" th:text="#{addFriend}">Добавить в друзья</span>
+                           </div>
+							
                         </div>
                         <div id="menu">
                             <ul class="user-menu">
                                 <li><a href="#" th:text="${publications} + ' ' + #{user.publications}">0 Публикации</a></li>
-                                <li><a href="#" th:text="${subscribes} + ' ' + #{user.subscribes}">0 подписок</a></li>
                                 <li><a href="#" th:text="${friends} + ' ' + #{user.friends}">0 друзей</a></li>
                                 <li><a href="#" th:text="${followers} + ' ' + #{user.followers}">0 подписчиков</a></li>
+								<li><a href="#" th:text="${subscribes} + ' ' + #{user.subscribes}">0 подписок</a></li>
                             </ul>
                         </div>
                     </div>
