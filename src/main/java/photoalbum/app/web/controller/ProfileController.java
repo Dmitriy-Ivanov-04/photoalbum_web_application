@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
+import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.spring.ProfileDetailsImpl;
@@ -37,6 +38,11 @@ public class ProfileController {
 	
 	@Autowired
 	RelationshipsStorage relationshipsStorage;
+	
+	@Autowired
+	MailClient mailClient;
+	
+	Profile profile;
 
 	@InitBinder("profileForm")
 	private void initBinder(WebDataBinder binder) {
@@ -61,6 +67,8 @@ public class ProfileController {
 		}
 
 		profileService.createUserFromRegistrationForm(profileForm);
+		mailClient.sendMail("rfln.support@gmail.com", profileForm.getEmail(), "Registration", "Hello! Registration completed!");
+
 
 		return "redirect:/login";
 	}
