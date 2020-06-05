@@ -8,8 +8,10 @@
 	<link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
     <title>Feed</title>
     <link rel="stylesheet" th:href="@{css/feedStyle.css}">
+	<link rel="stylesheet" th:href="@{css/tcal.css}">
 	<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
 	<script th:src="@{/js/feedScript.js}"></script>
+	<script th:src="@{/js/tcal.js}"></script>
 </head>
 <body>
 <div id="container">
@@ -23,8 +25,12 @@
 						<a class="nick-session" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
 					</div>
 					<img th:src="@{images/rating.png}" class="rate" alt="" >
-					<img th:src="@{images/date.png}" class="date" alt="" >
-					<input type="text" id="search">
+					<!--<input type="date" class="date" alt="">-->
+					<input type="text" name="date" class="tcal" value="" />
+
+					<form action="#" method="post">
+						<input type="text" id="search">
+					</form>
 					<img th:src="@{images/loupeBackground.png}" class="loupe" alt="">
 				</div>
 			</div>

@@ -42,12 +42,15 @@ a{
     margin-left: 10px;
     padding-top: 25px;
 }
-#search, .exit, .date, .rate, .loupe{
+#search, .exit, .tcal, .rate, .loupe{
     float: right;
     margin-top: 15px;
 } 
-.exit, .date, .rate{
+.exit, .tcal, .rate{
     margin-left: 10px;
+}
+.tcal{
+    outline: none;
 }
 .loupe{
     pointer-events: none;
@@ -73,6 +76,8 @@ a{
     border: 1px solid #dfdfdf;
     border-left: 0;
     background-color: #f8f8f8;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
 }
 /*//////////////////////////*/
 #content-wrapper{
@@ -90,7 +95,7 @@ a{
 #post-wrapper{
     margin: 30px auto;
     width: 800px;
-	border: solid red 5px;/*потом убрать*/
+	border: solid #ff0000 5px;/*потом убрать*/
 }
 #header-post{
     display: flex;
