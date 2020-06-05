@@ -62,7 +62,7 @@ CREATE TABLE `profile` (
 CREATE TABLE `relationships` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `profile_id` int(11) NOT NULL,
-  `people_id` int(11) NOT NULL,
+  `target_id` int(11) NOT NULL,
   `status` tinyint(2) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

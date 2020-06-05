@@ -66,16 +66,19 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/user/{nickname}")
-	public String profile(Model model) { //@PathVariable String nickname1, 
+	public String profile(Model model, @PathVariable String nickname) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String nickname = profileDetails.getNickname();
 		Long profileId = profileStorage.getIdByNickname(nickname);
 		model.addAttribute("nickname", nickname);
 		model.addAttribute("publications", photoStorage.countPublicationsByUser(profileId));
 		model.addAttribute("subscribes", relationshipsStorage.findSubscriptions(profileId).size());
 		//model.addAttribute("friends", relationshipsStorage.findFriends(profileId).size()); //переименовать people в target в sql
 		model.addAttribute("followers", relationshipsStorage.findSubscriptions(profileId).size());
-		return "profile/profile";
+		if(nickname.equals(profileDetails.getNickname())) {
+			return "profile/profile";
+		} else {
+			return "profile/profile1";
+		}
 	}
 	
 	@GetMapping("/recovery")
