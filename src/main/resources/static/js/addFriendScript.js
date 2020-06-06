@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	$("#addFriend").hide();
 	let flag = 0;
 	$(".add-friend").click(function() {
 		$(".add-friend-plus").queue('fx', []);

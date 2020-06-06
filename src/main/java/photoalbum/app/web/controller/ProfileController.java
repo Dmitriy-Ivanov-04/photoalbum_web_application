@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
+import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.spring.ProfileDetailsImpl;
@@ -37,6 +38,11 @@ public class ProfileController {
 	
 	@Autowired
 	RelationshipsStorage relationshipsStorage;
+	
+	@Autowired
+	MailClient mailClient;
+	
+	Profile profile;
 
 	@InitBinder("profileForm")
 	private void initBinder(WebDataBinder binder) {
@@ -61,24 +67,22 @@ public class ProfileController {
 		}
 
 		profileService.createUserFromRegistrationForm(profileForm);
+		mailClient.sendMail("rfln.support@gmail.com", profileForm.getEmail(), "Registration", "Hello! Registration completed!");
 
-		return "redirect:/";
+
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/user/{nickname}")
 	public String profile(Model model, @PathVariable String nickname) {
-		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long profileId = profileStorage.getIdByNickname(nickname);
 		model.addAttribute("nickname", nickname);
 		model.addAttribute("publications", photoStorage.countPublicationsByUser(profileId));
+		model.addAttribute("friends", relationshipsStorage.findFriends(profileId).size());
+		model.addAttribute("followers", relationshipsStorage.findFollowers(profileId).size());
 		model.addAttribute("subscribes", relationshipsStorage.findSubscriptions(profileId).size());
-		//model.addAttribute("friends", relationshipsStorage.findFriends(profileId).size()); //переименовать people в target в sql
-		model.addAttribute("followers", relationshipsStorage.findSubscriptions(profileId).size());
-		if(nickname.equals(profileDetails.getNickname())) {
-			return "profile/profile";
-		} else {
-			return "profile/profile1";
-		}
+		return "profile/profile";
 	}
 	@GetMapping("/friend_list")
 	public String friendList(Model model){

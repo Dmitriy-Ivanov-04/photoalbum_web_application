@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.HtmlUtils;
 
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
@@ -21,13 +22,18 @@ public class AjaxController {
 	ProfileStorage profileStorage;
 	
 	@RequestMapping(value = "/add-friend")
-	public void addFriend(@RequestParam("n") String nick) { //@RequestParam("u") String user
+	public void addFriend(@RequestParam("n") String nick) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		relationshipsStorage.sendInvite(profileStorage.getIdByNickname(profileDetails.getNickname()), profileStorage.getIdByNickname(nick));
-		
-		System.out.print(nick);
 	}
 	
-	//System.out.print("ajax");
+	@RequestMapping(value = "/add-friend-button") //, produces = MediaType.APPLICATION_JSON_VALUE
+	public boolean showAddFriendButton(@RequestParam("n") String nick) {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(profileDetails.getNickname().equals(nick))	
+			return false;
+		else
+			return true;
+	}
 }
