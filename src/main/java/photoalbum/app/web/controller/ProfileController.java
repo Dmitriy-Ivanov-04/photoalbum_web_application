@@ -101,6 +101,11 @@ public class ProfileController {
 	public String changePassword(){
 		return "/changePass";
 	}
+
+	@GetMapping("/confirm")
+	public String confirm(){
+		return "confirm";
+	}
 }
 
 
