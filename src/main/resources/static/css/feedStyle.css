@@ -101,6 +101,7 @@ a{
     display: flex;
 }
 #nickDate-align{
+    float: left;
     margin: auto 20px;
 }
 .nick-post{

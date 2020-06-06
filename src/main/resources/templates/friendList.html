@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/png">
+    <title>Feed</title>
+    <link rel="stylesheet" href="css/friendListStyle.css">
+    <link rel="stylesheet" href="css/tcal.css">
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/js/feedScript.js}"></script>
+    <script th:src="@{/js/tcal.js}"></script>
+</head>
+<body>
+<div id="container">
+    <div id="header-wrapper">
+        <div id="polosa">
+            <div id="search-exit">
+                <a href="#" class="exit">Выйти</a>
+                <a href="#"><img src="images/rfln.png" alt="" class="logo"></a>
+                <div id="session">
+                    <img th:src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px">
+                    <a href="#" class="nick-session">Nickname</a>
+                </div>
+                <img th:src="@{images/rating.png}" class="rate" alt="" >
+                <input type="text" name="date" class="tcal" value="" />
+
+                <form action="#" method="post">
+                    <input type="text" id="search">
+                </form>
+                <img th:src="@{images/loupeBackground.png}" class="loupe" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div id="content-wrapper">
+        <div id="content">
+            <div id="list-wrapper">
+                <div id="friends">
+                    <h1>Friends</h1>
+                   <hr>
+                    <div id="profile-block">
+                          <div id="f-avatar">
+                               <img th:src="@{images/avatar.png}" alt="" width="100px" height="100px">
+                            </div>
+                               <div id="nick-name">
+                                    <a href="#" class="nick-post"><p>Nickname</p></a>
+                                    <a href="#" class="name-people">Surname Name</a>
+                              </div>
+                        <div id="actions">
+                            <img th:src="@{images/cross.png}" alt="">
+                        </div>
+                    </div>
+                     <hr>
+                    <div id="profile-block">
+                          <div id="f-avatar">
+                               <img th:src="@{images/avatar.png}" alt="" width="100px" height="100px">
+                            </div>
+                               <div id="nick-name">
+                                    <a href="#" class="nick-post"><p>Nickname</p></a>
+                                    <a href="#" class="name-people">Surname Name</a>
+                              </div>
+                        <div id="actions">
+                            <img th:src="@{images/cross.png}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div id="followers">
+                    <hr>
+                    <h1>Followers</h1>
+                   <hr>
+                    <div id="profile-block">
+                          <div id="f-avatar">
+                               <img th:src="@{images/avatar.png}" alt="" width="100px" height="100px">
+                            </div>
+                               <div id="nick-name">
+                                    <a href="#" class="nick-post"><p>Nickname</p></a>
+                                    <a href="#" class="name-people">Surname Name</a>
+                              </div>
+                        <div id="actions">
+                            <img th:src="@{images/check.png}" alt="">
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="profile-block">
+                          <div id="f-avatar">
+                               <img src="images/avatar.png" alt="" width="100px" height="100px">
+                            </div>
+                               <div id="nick-name">
+                                    <a href="#" class="nick-post"><p>Nickname</p></a>
+                                    <a href="#" class="name-people">Surname Name</a>
+                              </div>
+                        <div id="actions">
+                            <img th:src="@{images/check.png}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div id="subscriptions">
+                    <hr>
+                    <h1>Subscriptions</h1>
+                   <hr>
+                    <div id="profile-block">
+                          <div id="f-avatar">
+                               <img src="images/avatar.png" alt="" width="100px" height="100px">
+                            </div>
+                               <div id="nick-name">
+                                    <a href="#" class="nick-post"><p>Nickname</p></a>
+                                    <a href="#" class="name-people">Surname Name</a>
+                              </div>
+                        <div id="actions">
+                            <img th:src="@{images/cross.png}" alt="">
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="profile-block">
+                          <div id="f-avatar">
+                               <img th:src="@{images/avatar.png}" alt="" width="100px" height="100px">
+                            </div>
+                               <div id="nick-name">
+                                    <a href="#" class="nick-post"><p>Nickname</p></a>
+                                    <a href="#" class="name-people">Surname Name</a>
+                              </div>
+                        <div id="actions">
+                            <img th:src="@{images/cross.png}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

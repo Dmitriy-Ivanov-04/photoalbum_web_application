@@ -80,6 +80,13 @@ public class ProfileController {
 			return "profile/profile1";
 		}
 	}
+	@GetMapping("/friend_list")
+	public String friendList(Model model){
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//Long profileId = profileStorage.getIdByNickname(nickname);
+		model.addAttribute("nickname", profileDetails.getNickname());
+		return "friendList";
+	}
 	
 	@GetMapping("/recovery")
 	public String recovery() {
