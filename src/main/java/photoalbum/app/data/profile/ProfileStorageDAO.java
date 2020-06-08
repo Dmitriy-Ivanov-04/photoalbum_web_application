@@ -130,4 +130,28 @@ public class ProfileStorageDAO implements ProfileStorage {
 		return id;
 	}
 
+	@Override
+	public List<Profile> findFriends(Long profileId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM profile INNER JOIN relationships ON profile.id = relationships.target_id WHERE profile_id = ? AND relationships.status = 2");
+		List<Profile> profiles = jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new ProfileRowMapper());
+		sql = new StringBuilder("SELECT * FROM profile INNER JOIN relationships ON profile.id = relationships.profile_id WHERE target_id = ? AND relationships.status = 2");
+		profiles.addAll(jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new ProfileRowMapper()));
+		
+		return profiles;
+	}
+
+	@Override
+	public List<Profile> findFollowers(Long profileId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM profile INNER JOIN relationships ON profile.id = relationships.profile_id WHERE target_id = ? AND relationships.status = 1");
+		List<Profile> profiles = jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new ProfileRowMapper());
+		return profiles;
+	}
+
+	@Override
+	public List<Profile> findSubscriptions(Long profileId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM profile INNER JOIN relationships ON profile.id = relationships.target_id WHERE profile_id = ? AND relationships.status = 1");
+		List<Profile> profiles = jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new ProfileRowMapper());
+		return profiles;
+	}
+
 }

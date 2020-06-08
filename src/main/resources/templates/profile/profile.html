@@ -59,9 +59,9 @@
                         <div id="menu">
                             <ul class="user-menu">
                                 <li><a href="#" th:text="${publications} + ' ' + #{user.publications}">0 Публикации</a></li>
-                                <li><a href="#" th:text="${friends} + ' ' + #{user.friends}">0 друзей</a></li>
-                                <li><a href="#" th:text="${followers} + ' ' + #{user.followers}">0 подписчиков</a></li>
-								<li><a href="#" th:text="${subscribes} + ' ' + #{user.subscribes}">0 подписок</a></li>
+                                <li><a href="#" th:text="${friends} + ' ' + #{user.friends}" th:href = "@{'/user/' + ${nickname} + '/friend_list'}">0 друзей</a></li>
+                                <li><a href="#" th:text="${followers} + ' ' + #{user.followers}" th:href = "@{'/user/' + ${nickname} + '/friend_list'}">0 подписчиков</a></li>
+								<li><a href="#" th:text="${subscribes} + ' ' + #{user.subscribes}" th:href = "@{'/user/' + ${nickname} + '/friend_list'}">0 подписок</a></li>
                             </ul>
                         </div>
                     </div>

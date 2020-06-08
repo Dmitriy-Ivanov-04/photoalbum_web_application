@@ -1,5 +1,6 @@
 package photoalbum.app.domain.profile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -9,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
 import photoalbum.app.data.ProfileStorage;
+import photoalbum.app.data.RelationshipsStorage;
+import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.model.Role;
 import photoalbum.app.web.form.ProfileRegistrationForm;
@@ -46,6 +49,39 @@ public class ProfileServiceDomain implements ProfileService {
 	
 	public Profile getProfileByEmail(String email) {
 		return profileStorage.findByEmailAndEnabledTrue(email);
+	}
+
+	@Override
+	public List<ProfileJsonDTO> usersByUserAsJson(Long profileId, String divId) { // переименовать метод?
+		List<Profile> profiles = null;
+		List<ProfileJsonDTO> profilesJson = null;
+		
+		switch(divId) {
+		case "friends":
+			profiles = profileStorage.findFriends(profileId);
+			break;
+		case "followers":
+			profiles = profileStorage.findFollowers(profileId);
+			break;
+		case "subscriptions":
+			profiles = profileStorage.findSubscriptions(profileId);
+			break;
+		}
+		
+		if (profiles != null && profiles.size() > 0) {
+			profilesJson = new ArrayList<>(profiles.size());
+			for(Profile profile : profiles) {
+				ProfileJsonDTO profileDTO = new ProfileJsonDTO();
+				
+				profileDTO.setNickname(profile.getNickname());
+				profileDTO.setFullName(profile.getFullName());
+				profileDTO.setLinkAvatar(profile.getLinkAvatar());
+				
+				profilesJson.add(profileDTO);
+			}
+		}
+		
+		return profilesJson;
 	}
 	
 }
