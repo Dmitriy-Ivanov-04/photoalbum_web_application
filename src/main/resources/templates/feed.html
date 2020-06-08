@@ -20,9 +20,9 @@
 			<div id="polosa">
 				<div id="search-exit">
 					<a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
-					<a href=""><img th:src="@{images/rfln.png}" alt="" class="logo"></a>
+					<a th:href="@{/}"><img th:src="@{images/rfln.png}" alt="" class="logo"></a>
 					<div id="session">
-						<img th:src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px">
+						<a th:href = "@{'/user/' + ${nickname}}"><img th:src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
 						<a class="nick-session" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
 					</div>
 					<img th:src="@{images/rating.png}" class="rate" alt="" >

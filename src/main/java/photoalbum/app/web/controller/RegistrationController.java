@@ -52,7 +52,12 @@ public class RegistrationController {
 		
 
 
-		return "redirect:/login";
+		return "redirect:/registration_notification";
+	}
+
+	@GetMapping("/registration_notification")
+	public String regNot(){
+		return "registrationNotification";
 	}
 	
 
