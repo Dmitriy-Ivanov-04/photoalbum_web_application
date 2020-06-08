@@ -1,31 +1,3 @@
-html, body{
-    margin: 0;
-    padding: 0;
-}
-a{
-    text-decoration: none;
-}
-#container{
-    width: 100%;
-}
-#header-wrapper{
-    overflow: hidden;
-}
-#polosa{
-    width: 100%;
-    height: 70px;
-    background-color: #274b69;
-    position: fixed;
-}
-#search-exit{
-    margin: 0 auto;
-    max-width: 1420px;
-    height: 70px;
-}
-.logo{
-    float: left;
-    padding-top: 15px;
-}
 #session{
     display: flex;
     float: left;
@@ -42,14 +14,10 @@ a{
     margin-left: 10px;
     padding-top: 25px;
 }
-#search, .exit, .tcal, .rate, .loupe{
+.tcal{
     float: right;
     margin-top: 15px;
-} 
-.exit, .tcal, .rate{
     margin-left: 10px;
-}
-.tcal{
     outline: none;
 }
 .loupe{

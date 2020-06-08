@@ -87,4 +87,10 @@ public class RelationshipsStorageDAO implements RelationshipsStorage{
 			logger.error("Error during delete record for Relationships");
 		}
 	}
+	
+	public Relationships findRelationshipsByUsers(Long profileId, Long targetId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM relationships WHERE profile_id = ? AND target_id = ?");
+		Relationships relationships = jdbcTemplate.queryForObject(sql.toString(), new Object[] {profileId, targetId}, new RelationshipsRowMapper());
+		return relationships;
+	}
 }

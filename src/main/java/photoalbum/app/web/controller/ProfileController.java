@@ -3,6 +3,7 @@ package photoalbum.app.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
+import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.model.Profile;
+import photoalbum.app.domain.model.Status;
 import photoalbum.app.domain.profile.ProfileService;
+import photoalbum.app.domain.relationships.RelationshipsServise;
 import photoalbum.app.spring.ProfileDetailsImpl;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 import photoalbum.app.web.form.validator.ProfileRegistrationFormValidator;
-
 
 @Controller
 public class ProfileController {
@@ -37,6 +40,12 @@ public class ProfileController {
 	
 	@Autowired
 	RelationshipsStorage relationshipsStorage;
+	
+	@Autowired
+	RelationshipsServise relationshipsServise;
+	
+	@Autowired
+	MailClient mailClient;
 	
 	Profile profile;
 
@@ -71,13 +80,30 @@ public class ProfileController {
 	
 	@GetMapping("/user/{nickname}")
 	public String profile(Model model, @PathVariable String nickname) {
-		//ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long profileId = profileStorage.getIdByNickname(nickname);
 		model.addAttribute("nickname", nickname);
 		model.addAttribute("publications", photoStorage.countPublicationsByUser(profileId));
 		model.addAttribute("friends", relationshipsStorage.findFriends(profileId).size());
 		model.addAttribute("followers", relationshipsStorage.findFollowers(profileId).size());
 		model.addAttribute("subscribes", relationshipsStorage.findSubscriptions(profileId).size());
+		
+		model.addAttribute("deleteFriend", "Delete friend");
+		//relationshipsServise.buttonText(profileStorage.getIdByNickname(profileDetails.getNickname()), profileId);
+		
+		Long loginProfileId = profileStorage.getIdByNickname(profileDetails.getNickname());
+		if(loginProfileId != profileId) {
+			try {
+				Status status = relationshipsStorage.findRelationshipsByUsers(loginProfileId, profileId).getStatus();
+				if(status == Status.SUBSCRIBER)
+					System.out.println("Unsubscribe");
+				if (status == Status.FRIEND)
+					System.out.println("Remove friend");	
+			} catch(EmptyResultDataAccessException e) {
+				System.out.println("Add frined");
+			}
+		}
+		
 		return "profile/profile";
 	}
 	
@@ -97,9 +123,15 @@ public class ProfileController {
 	
 	@GetMapping("/friend_list")
 	public String friendList(Model model){
+		return "friend_list";
+	}
+
+	@GetMapping("/user/{nickname}/friend_list")
+	public String friendList(Model model, @PathVariable String nickname){
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//Long profileId = profileStorage.getIdByNickname(nickname);
 		model.addAttribute("nickname", profileDetails.getNickname());
+		model.addAttribute("nicknameView", nickname);
 		return "friendList";
 	}
 	
