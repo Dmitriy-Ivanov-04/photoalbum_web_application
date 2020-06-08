@@ -107,7 +107,7 @@ public class ProfileController {
 		
 		return "profile/profile";
 	}
-	
+
 	@GetMapping("/user/{nickname}/friend_list")
 	public String friendList(Model model, @PathVariable String nickname){
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
