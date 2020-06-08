@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
-import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.spring.ProfileDetailsImpl;
@@ -38,9 +37,6 @@ public class ProfileController {
 	
 	@Autowired
 	RelationshipsStorage relationshipsStorage;
-	
-	@Autowired
-	MailClient mailClient;
 	
 	Profile profile;
 
@@ -67,7 +63,7 @@ public class ProfileController {
 		}
 
 		profileService.createUserFromRegistrationForm(profileForm);
-		mailClient.sendMail("rfln.support@gmail.com", profileForm.getEmail(), "Registration", "Hello! Registration completed!");
+		
 
 
 		return "redirect:/login";
@@ -84,6 +80,21 @@ public class ProfileController {
 		model.addAttribute("subscribes", relationshipsStorage.findSubscriptions(profileId).size());
 		return "profile/profile";
 	}
+	
+	@GetMapping("/activate/{code}")
+    public String activate(Model model, @PathVariable String code) {
+		boolean isActivated = profileService.activateProfile(code);
+
+        if (isActivated) {
+            model.addAttribute("message", "User successfully activated");
+            return "confirm";
+        } else {
+            model.addAttribute("message", "Activation code is not found!");
+            return "profile/registration";
+        }
+
+    }
+	
 	@GetMapping("/friend_list")
 	public String friendList(Model model){
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -106,6 +117,5 @@ public class ProfileController {
 	public String confirm(){
 		return "confirm";
 	}
+	
 }
-
-

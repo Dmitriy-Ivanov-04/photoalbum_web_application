@@ -21,4 +21,7 @@ public interface ProfileStorage {
 	Profile getProfileByNickname(String nickname);
 	
 	Long getIdByNickname(String nickname);
+
+	Profile findByActivationCode(String code);
+	
 }

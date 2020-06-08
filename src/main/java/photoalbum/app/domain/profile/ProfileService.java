@@ -11,7 +11,10 @@ public interface ProfileService {
 
 	boolean isUserWithEmailExist(String email);
 
-	void createUserFromRegistrationForm(ProfileRegistrationForm userForm);
+	boolean createUserFromRegistrationForm(ProfileRegistrationForm userForm);
 	
 	Profile getProfileByEmail(String email);
+	
+	boolean activateProfile(String code);
+	
 }

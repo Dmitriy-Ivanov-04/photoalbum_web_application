@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+
 public class Profile implements Serializable {
 
 	private static final long serialVersionUID = -630962474388642916L;
@@ -20,6 +21,7 @@ public class Profile implements Serializable {
 	private boolean enabled;
 	private String token;
 	private Set<Role> profileRoles;
+    private String activationCode;
 	private String linkAvatar;
 	private String linkBackground;
 	
@@ -171,5 +173,13 @@ public class Profile implements Serializable {
             return true;
 
         return false;
+    }
+
+	public void setActivationCode(String activationCode) {
+		this.activationCode = activationCode;
+	}
+	
+	public String getActivationCode() {
+        return activationCode;
     }
 }
