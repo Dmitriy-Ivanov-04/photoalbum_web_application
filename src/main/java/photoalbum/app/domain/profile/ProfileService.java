@@ -2,6 +2,7 @@ package photoalbum.app.domain.profile;
 
 import java.util.List;
 
+import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 
@@ -14,4 +15,6 @@ public interface ProfileService {
 	void createUserFromRegistrationForm(ProfileRegistrationForm userForm);
 	
 	Profile getProfileByEmail(String email);
+	
+	public List<ProfileJsonDTO> usersByUserAsJson(Long profileId, String divId);
 }

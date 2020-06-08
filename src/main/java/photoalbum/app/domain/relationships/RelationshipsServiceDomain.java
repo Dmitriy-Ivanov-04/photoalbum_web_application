@@ -2,9 +2,11 @@ package photoalbum.app.domain.relationships;
 
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.domain.model.Relationships;
+import photoalbum.app.domain.model.Status;
 @Service
 public class RelationshipsServiceDomain implements RelationshipsServise{
 	
@@ -40,5 +42,21 @@ public class RelationshipsServiceDomain implements RelationshipsServise{
 	
 	public void unsubscribe(Long id) {
 		relationshipsStorage.unsubscribe(id);
+	}
+
+	@Override
+	public String buttonText(Long profileId, Long targetId) {
+		if(profileId != targetId) {
+			try {
+				Status status = relationshipsStorage.findRelationshipsByUsers(profileId, targetId).getStatus();
+				if(status == Status.SUBSCRIBER)
+					return "Unsubscribe";
+				if (status == Status.FRIEND)
+					return "Remove friend";	
+			} catch(EmptyResultDataAccessException e) {
+				return "Add frined";
+			}
+		}
+		return null;
 	}
 }
