@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width">
 	<link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
     <title>Change password</title>
-    <link rel="stylesheet" th:href="@{css/changePass.css}">
+    <link rel="stylesheet" th:href="@{/css/changePass.css}">
+    <link rel="stylesheet" th:href="@{/css/formStyle.css}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
-    <script th:src="@{js/showPass.js}"></script>
+    <script th:src="@{https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js}"></script>
+    <script th:src="@{/js/showPass.js}"></script>
 </head>
 <body>
     <div id="container">
@@ -30,9 +31,7 @@
                     <input type="password" class="password-input" id="password2" placeholder="Повторите Пароль" name="password">
                     <a href="#" class="password-control" id="eye2" onclick="showPassword('#password2', '#eye2')"></a>
                 </div>
-                <div id="enter-wrapper">
-                   <a href="#"><p class="enter" th:text="#{button.enter}">Войти</p></a>
-                </div>
+                <input type="submit" class="enter" value="Войти" th:value="#{button.enter}">
             </form>
         </div>
     </div>

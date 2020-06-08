@@ -84,7 +84,7 @@ public class ProfileController {
 		model.addAttribute("subscribes", relationshipsStorage.findSubscriptions(profileId).size());
 		return "profile/profile";
 	}
-	@GetMapping("/friend_list")
+	@GetMapping("/user/{nickname}/friend_list")
 	public String friendList(Model model){
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//Long profileId = profileStorage.getIdByNickname(nickname);
