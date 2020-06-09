@@ -62,13 +62,13 @@ public class AjaxController {
 		}
 	}
 	
-	@RequestMapping(value = "/add-friend-button") //, produces = MediaType.APPLICATION_JSON_VALUE
+	@RequestMapping(value = "/my-profile") //, produces = MediaType.APPLICATION_JSON_VALUE
 	public boolean showAddFriendButton(@RequestParam("n") String nick) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(profileDetails.getNickname().equals(nick))	
-			return false;
-		else
 			return true;
+		else
+			return false;
 	}
 	
 	@RequestMapping(value = "/friend-list/{divId}", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -3,7 +3,7 @@ $(document).ready(function () {
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/ajax/add-friend-button', true);
+	xhr.open('POST', '/ajax/my-profile', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.setRequestHeader(header, token);
     
@@ -14,7 +14,7 @@ $(document).ready(function () {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		//if(xhr.responseText.localeCompare("true") == 0)
-    		if(xhr.responseText == "true")
+    		if(xhr.responseText == "false")
     			$("#addFriend").show();	    			
     	}
     }
@@ -28,6 +28,7 @@ $(document).ready(function () {
 		xhr.open('POST', '/ajax/add-friend', true);
 	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	    xhr.setRequestHeader(header, token);
+	    console.log(nick);
 	    xhr.send("n=" + nick);
 	});
 });
