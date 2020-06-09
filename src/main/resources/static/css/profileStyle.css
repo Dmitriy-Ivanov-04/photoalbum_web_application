@@ -19,6 +19,22 @@
     }
 }
 
+#session{
+    display: flex;
+    float: left;
+}
+.avatar-session{
+    margin-left: 130px;
+    margin-top: 10px;
+    vertical-align: middle;
+}
+.nick-session{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #FFF;
+    margin-left: 10px;
+    padding-top: 25px;
+}
 
 #profile-back{
     width: 100%;

@@ -30,7 +30,11 @@
                     <form id="logoutForm" action="#" th:action="@{/logout}" method="post">
                         <a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
                     </form>
-                   <img th:src="@{/images/rfln.png}" alt="" class="logo">
+                    <a th:href="@{/}"><img th:src="@{/images/rfln.png}" alt="" class="logo"></a>
+                    <div id="session">
+                        <a th:href = "@{'/user/' + ${nickname}}"><img th:src="@{/images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
+                        <a class="nick-session" id="nickname" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
+                    </div>
                    <img th:src="@{/images/rating.png}" class="rate" alt="" >
                    <img th:src="@{/images/date.png}" class="date" alt="" >
                    <input type="text" id="search">
