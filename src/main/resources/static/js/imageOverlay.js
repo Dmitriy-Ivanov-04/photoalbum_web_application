@@ -1,19 +1,19 @@
-$(document).ready(function () {
-	let index = 0;
+//$(document).ready(function () {
+	//let index = 0;
 
-    $(".content-img").click(function() {
-        index = $(this).index();
+    function openImage (src) {
+        //index = $(this).index();
 		//console.log(index);
-		let currentImage = $("#overlay").find("#open-img");
-        $(currentImage).attr("src", $(this).attr("src"));
-		if($(currentImage).width() > 600)
-			$("#image-post").css("width", $(currentImage).width());
-		if($(currentImage).height() > 450)
-			$("#image-post").css("height", $(currentImage).height());
-        $("#overlay").fadeIn(100);
-    });
-    $("#overlay").click(function() {
-        $("#overlay").fadeOut(100);
+		let currentImage = $("#lightbox").find(".lightboxImage");
+        $(currentImage).attr("src", src);
+        $("#lightbox").fadeIn(100);
+    }
+    
+$(document).ready(function () {
+	$("#lightbox").hide(); //перенести в стили или нет
+    $("#overlay").click(function () {
+    	console.log(666);
+        $("#lightbox").fadeOut(100);
     });
 });
 /*	$(".next").click(function(){

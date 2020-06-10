@@ -35,13 +35,14 @@ $(document).ready(function () {
     		let img = document.createElement("img");
     		publications.appendChild(img);
     	    $(img).attr("class", "content-img");
-    	    $(img).attr("src", "/images/" + jsonArr[i].link + ".jpg");
+    	    let src = "/images/" + jsonArr[i].link + ".jpg";
+    	    $(img).attr("src", src);
     	    
     	    //imgArr.push(img);
     		
-    	    //$(actions).click(function (){
-
-    	    //});
+    	    $(img).click(function (){
+    	    	openImage(src);
+    	    });
     	}
     	//return imgArr;
     }
