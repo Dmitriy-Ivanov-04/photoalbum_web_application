@@ -5,37 +5,55 @@ html, body{
 a{
     text-decoration: none;
 }
-#overlay{
-	display: none;
+#lightbox{
+	/*display: none;*/
     position: fixed;
     width: 100%;
     height: 100%;
 	top: 0;
     left: 0;
-    background-color: rgba(0,0,0, 0.8);
 	z-index: 2;
+}
+#overlay{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0.8);
 }
 #image-window{
     display: flex;
-    max-width: 1780px;
-    max-height: 720px;
+    width: 1810px;
+    height: 720px;
     margin: 100px auto;
 }
 #image-post{
     position: relative;
-    max-width: 1280px;
-	min-width: 600px;
-	min-height: 450px;
+    width: 1280px;
+    height: 720px;
 	background: #404040;
-}/*
-#open-img{
-	max-width: 100%;
-}*/
-
+}
+ .lightboxImage{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-width: 1280px;
+    min-width: 100px;
+    max-height: 720px;
+    min-height: 100px;
+    vertical-align: middle;
+}
 .copy{
-    position: relative;
-    top: -60px;
-    left: 1060px;
+    position: absolute;
+    left: 82%;
+    top: 93%;
+    right: 0;
+    bottom: 0;
     width: 207px;
     height: 40px;
     background-color: #dfdfdf;
