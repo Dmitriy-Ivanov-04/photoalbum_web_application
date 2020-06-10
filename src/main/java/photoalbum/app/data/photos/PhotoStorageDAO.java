@@ -32,22 +32,23 @@ public class PhotoStorageDAO implements PhotoStorage{
 	
 	@Override
 	public List<Photo> getPhotosByUser(Long profileId) {
+		System.out.println("id: " + profileId);
 		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE profile_id = ? ORDER BY date");
-		List<Photo> photos = (List<Photo>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {profileId}, new PhotoRowMapper());
+		List<Photo> photos = (List<Photo>) jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new PhotoRowMapper());
 		return photos;
 	}
 
 	@Override
 	public List<Photo> getPhotosByAlbum(Long albumId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE album_id = ? ORDER BY date");
-		List<Photo> photos = (List<Photo>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {albumId}, new PhotoRowMapper());
+		List<Photo> photos = (List<Photo>) jdbcTemplate.query(sql.toString(), new Object[] {albumId}, new PhotoRowMapper());
 		return photos;
 	}
 
 	@Override
 	public List<Photo> getPhotosByRating(float rating) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE rating = ? ORDER BY date");
-		List<Photo> photos = (List<Photo>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {rating}, new PhotoRowMapper());
+		List<Photo> photos = (List<Photo>) jdbcTemplate.query(sql.toString(), new Object[] {rating}, new PhotoRowMapper());
 		return photos;
 	}
 

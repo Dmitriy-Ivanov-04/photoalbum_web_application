@@ -1,5 +1,6 @@
 package photoalbum.app.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
+import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
+import photoalbum.app.domain.dto.PhotoJsonDTO;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
+import photoalbum.app.domain.model.Photo;
 import photoalbum.app.domain.model.Relationships;
 import photoalbum.app.domain.model.Status;
+import photoalbum.app.domain.photo.PhotoService;
 import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.spring.ProfileDetailsImpl;
 
@@ -31,6 +36,12 @@ public class AjaxController {
 	
 	@Autowired
 	ProfileService profileService;
+	
+	@Autowired
+	PhotoService photoService;
+	
+	@Autowired
+	PhotoStorage photoStorage;
 	
 	@RequestMapping(value = "/add-friend")
 	public void addFriend(@RequestParam("n") String nickname) {
@@ -74,5 +85,11 @@ public class AjaxController {
 	@RequestMapping(value = "/friend-list/{divId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProfileJsonDTO> friendList(@RequestParam("n") String nick, @PathVariable String divId) {
 		return profileService.usersByUserAsJson(profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick)), HtmlUtils.htmlEscape(divId));
+	}
+	
+	@RequestMapping(value = "/photos", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<PhotoJsonDTO> photoList(@RequestParam("n") String nick) {
+		//return photoService.photosByUserAsJson(profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick)));
+		return photoService.photosByUserAsJson(photoStorage.getPhotosByUser(profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick))));
 	}
 }

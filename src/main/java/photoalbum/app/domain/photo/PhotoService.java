@@ -2,6 +2,7 @@ package photoalbum.app.domain.photo;
 
 import java.util.List;
 
+import photoalbum.app.domain.dto.PhotoJsonDTO;
 import photoalbum.app.domain.model.Photo;
 
 public interface PhotoService {
@@ -11,4 +12,6 @@ public interface PhotoService {
 	void uploadPhoto(Long profileId, Long albumId, String description, String link);
 	void deletePhoto(Long id);
 	void copyPhoto(Long photoId, Long profileId, Long albumId);
+	//public List<PhotoJsonDTO> photosByUserAsJson(Long profileId);
+	public List<PhotoJsonDTO> photosByUserAsJson(List<Photo> photos);
 }

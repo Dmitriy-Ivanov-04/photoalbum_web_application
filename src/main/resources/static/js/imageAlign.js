@@ -13,9 +13,6 @@ function imageAlign(imageList, maxWidth, number){
 				generalWidth += $(imageList).eq(i+j).width();
 			if(generalWidth/divider <= maxWidth)
 				number1++;
-			//console.log(number1);
-			//console.log(maxWidth);
-			//console.log(generalWidth);
 			let ratio = [];
 			let generalRatio = 0;
 			for(let j = 0; j < number1; j++){
