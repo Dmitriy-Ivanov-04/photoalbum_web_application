@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -70,6 +71,9 @@ public class AjaxController {
 	@Autowired
 	MarkStorage markStorage;
 	
+	@Value("${project.manager.photo.dir.path}")
+    private String photoDirPath;
+	
 	@RequestMapping(value = "/add-friend")
 	public void addFriend(@RequestParam("n") String nickname) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -134,5 +138,10 @@ public class AjaxController {
 	@RequestMapping(value = "/marks", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<MarkJsonDTO> markList(@RequestParam("id") Long photoId) {
 		return markService.marksByPhotoAsJson(markStorage.getMarksByPhoto(photoId));
+	}
+	
+	@RequestMapping(value = "/path")
+	public String getPath() {
+		return photoDirPath;
 	}
 }

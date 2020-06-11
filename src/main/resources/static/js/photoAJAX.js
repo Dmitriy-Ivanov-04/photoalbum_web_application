@@ -22,24 +22,23 @@ $(document).ready(function () {
     
     function fillPublications(jsonArr){
     	let publications = document.getElementById("content");
-    	
     	let postLine = document.createElement("div");
-		publications.appendChild(postLine);
-		$(postLine).attr("id", "post-line");
+    	publications.appendChild(postLine);
+    	$(postLine).attr("id", "post-line");
     	for(let i = 0; i < jsonArr.length; i++){
-    		let imageWrapper = document.createElement("div");
-    		postLine.appendChild(imageWrapper);
-    		$(imageWrapper).attr("id", "image-wrapper");
-    		
-    		let img = document.createElement("img");
-    		imageWrapper.appendChild(img);
-    	    $(img).attr("class", "content-img");
-    	    let src = "/images/" + jsonArr[i].link + ".jpg";
-    	    $(img).attr("src", src);
-    		
-    	    $(img).click(function (){
-    	    	openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id);
-    	    });
+	    	let imageWrapper = document.createElement("div");
+	    	postLine.appendChild(imageWrapper);
+	    	$(imageWrapper).attr("id", "image-wrapper");
+	    		
+	    	let img = document.createElement("img");
+	    	imageWrapper.appendChild(img);
+	    	$(img).attr("class", "content-img");
+	    	let src = "/img/" + jsonArr[i].id;
+	    	$(img).attr("src", "/img/" + jsonArr[i].id);
+	    		
+	    	$(img).click(function (){
+	    		openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id);
+	    	});
     	}
     }
 });

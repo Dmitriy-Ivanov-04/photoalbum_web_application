@@ -11,8 +11,9 @@ public interface PhotoStorage {
 	//List<Photo> getPhotosByDate(Date date);
 	List<Photo> getPhotosByRating(float rating);
 	//List<Photo> getPhotosByTag(String id);
-	void upload(Long profileId, Long albumId, String description);
+	void upload(Long profileId, Long albumId, String description, String link);
 	void delete(Long id);
 	//void copyPhoto();
 	int countPublicationsByUser(Long profileId);
+	Long getProfileIdByPhoto(Long photoId);
 }

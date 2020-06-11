@@ -46,7 +46,6 @@ public class ProfileController {
 		
 		model.addAttribute("deleteFriend", "Delete friend");
 		//relationshipsServise.buttonText(profileStorage.getIdByNickname(profileDetails.getNickname()), profileId);
-		
 		Long loginProfileId = profileStorage.getIdByNickname(profileDetails.getNickname());
 		if(loginProfileId != profileId) {
 			try {

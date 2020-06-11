@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -22,6 +23,7 @@ public class PhotoServiceDomain implements PhotoService{
 	
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	
+	@Autowired
 	PhotoStorage photoStorage;
 
 	@Override
@@ -43,8 +45,8 @@ public class PhotoServiceDomain implements PhotoService{
 	}
 
 	@Override
-	public void uploadPhoto(Long profileId, Long albumId, String description) {
-		photoStorage.upload(profileId, albumId, description);		
+	public void uploadPhoto(Long profileId, Long albumId, String description, String link) {
+		photoStorage.upload(profileId, albumId, description, link);		
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class PhotoServiceDomain implements PhotoService{
 
 	@Override
 	public void copyPhoto(Long photoId, Long profileId, Long albumId) {
-		photoStorage.upload(profileId, albumId, photoStorage.getPhotoById(photoId).getDescription());		
+		//photoStorage.upload(profileId, albumId, photoStorage.getPhotoById(photoId).getDescription());		
 	}
 
 	@Override
@@ -84,24 +86,12 @@ public class PhotoServiceDomain implements PhotoService{
 	@Value("${project.manager.photo.dir.path}")
 	private String photoDirPath;
 
-	public FileSystemResource getImage(Long id, String postfix) {
-		String photoFileName = photoDirPath + File.separator + id + File.separator + id + postfix;
+	public FileSystemResource getImage(Long photoId) {
+		String photoPath = photoDirPath + File.separator + photoStorage.getProfileIdByPhoto(photoId) + File.separator + photoStorage.getPhotoById(photoId).getLink_photo();
 
-		File f = new File(photoFileName);
-		if (f.exists() && !f.isDirectory()) {
-			return new FileSystemResource(f);
-		} else {
-			try {
-				f = new ClassPathResource("/static/img" + postfix).getFile();
-				if (f.exists() && !f.isDirectory()) {
-					return new FileSystemResource(f);
-				}
-			} catch (IOException e) {
-				logger.severe(e.getMessage());
-			}
-		}
+		File f = new File(photoPath);
+		return new FileSystemResource(f);
 
-		return null;
 	}
 	
 	public boolean savePhoto(MultipartFile multipartFile, Long profileId) {
@@ -119,7 +109,7 @@ public class PhotoServiceDomain implements PhotoService{
 			String fullFilePath = filePath + orgName;
 
 			File dest = new File(fullFilePath);
-			uploadPhoto(profileId, null, "desc");
+			uploadPhoto(profileId, (long) 1, "description", orgName);
 			multipartFile.transferTo(dest);
 			
 

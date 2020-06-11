@@ -25,7 +25,7 @@ public class PhotoStorageDAO implements PhotoStorage{
 
 	@Override
 	public Photo getPhotoById(Long id) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE id = ? ORDER BY date");
+		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE id = ?");
 		Photo photo = jdbcTemplate.queryForObject(sql.toString(), new Object[] {id}, new PhotoRowMapper());
 		return photo;
 	}
@@ -52,9 +52,9 @@ public class PhotoStorageDAO implements PhotoStorage{
 	}
 
 	@Override
-	public void upload(Long profileId, Long albumId, String description) {
-		String insertQuery = "INSERT INTO photos (profile_id, album_id, description, date, link_photo) VALUES (?, ?, ?, now())";
-		Object[] data = new Object[] {profileId, albumId, description};
+	public void upload(Long profileId, Long albumId, String description, String link) {
+		String insertQuery = "INSERT INTO photos (profile_id, album_id, description, date, link_photo) VALUES (?, ?, ?, now(), ?)";
+		Object[] data = new Object[] {profileId, albumId, description, link};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		
 		if (rowAffected == 0) {
@@ -79,5 +79,12 @@ public class PhotoStorageDAO implements PhotoStorage{
 		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM photos WHERE profile_id = ?");
 		
 		return jdbcTemplate.queryForObject(sql.toString(), new Object[] {profileId}, Integer.class);
+	}
+
+	@Override
+	public Long getProfileIdByPhoto(Long photoId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE id = ?");
+		Photo photo = jdbcTemplate.queryForObject(sql.toString(), new Object[] {photoId}, new PhotoRowMapper());
+		return photo.getProfile_id();
 	}
 }
