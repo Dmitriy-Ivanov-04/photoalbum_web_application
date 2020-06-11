@@ -19,4 +19,6 @@ public interface ProfileService {
 	boolean activateProfile(String code);
 	
 	public List<ProfileJsonDTO> usersByUserAsJson(Long profileId, String divId);
+	
+	Profile findById(Long profileId);
 }

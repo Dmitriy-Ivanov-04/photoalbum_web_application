@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="https://www.thymeleaf.org" 
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<body>
+	<th:block layout:fragment="content">
+		<h1 th:text="#{page.car.image.upload.title}">Car Image Upload</h1>
+
+		<form action="" th:action="@{/photo/img-upload}" method="post" enctype="multipart/form-data">
+			<input type="hidden" th:value="${profileId}" name="profileId">
+            <table>
+                <tr>
+                    <td th:text="#{form.label.file}"></td>
+                    <td><input type="file" name="files" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" class="stdBtn" th:value="#{form.label.upload.submit}" /></td>
+                </tr>
+            </table>
+        </form>
+
+
+	</th:block>
+
+</body>
+
+</html> 

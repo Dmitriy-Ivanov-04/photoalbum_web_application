@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+  <meta charset="utf-8" />
+  <title th:text="${title}">Spring Web Demo</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+
+<body id="body">
+
+   <div class="menu">
+        <div class="rightMenu">
+            <div sec:authorize="isAuthenticated()">
+				<form id="logoutForm" action="#" th:action="@{/logout}" method="post">
+                    <a class="logout" href="#" th:href="@{/logout}">Logout</a>
+                </form>
+            </div>
+            <div sec:authorize="isAnonymous()">
+            	<a class="logout" href="#" th:href="@{/user/registration}">Registration</a>&nbsp;<a class="logout" href="#" th:href="@{/login}">Login</a> 
+            </div>
+        </div>
+        <div class="sep"></div>
+    </div>
+
+    <header class="site-header">
+        <div class="header-content">
+            <h2><a th:href="@{/}" >Spring Web Demo</a></h2>
+        </div>
+    </header>
+    
+	<div class="content">
+		<th:block layout:fragment="content" />
+	</div>
+	
+	<th:block layout:fragment="jsscript" />
+</body>
+
+</html>

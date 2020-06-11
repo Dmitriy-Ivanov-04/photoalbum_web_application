@@ -167,6 +167,13 @@ public class ProfileStorageDAO implements ProfileStorage {
 		StringBuilder sql = new StringBuilder("SELECT nickname FROM profile WHERE id = ?");
 		String nickname = jdbcTemplate.queryForObject(sql.toString(), new Object[] {profileId}, String.class);
 		return nickname;
+	}	
+	
+	@Override
+	public Profile loadById(Long profileId) {
+		StringBuilder sqlQuery = new StringBuilder("SELECT * FROM profile WHERE id = ?");
+
+		return jdbcTemplate.queryForObject(sqlQuery.toString(), new Object[] {profileId}, new ProfileRowMapper());
 	}
 
 }

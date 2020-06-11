@@ -31,5 +31,6 @@ public interface ProfileStorage {
 	List<Profile> findSubscriptions(Long profileId);
 	
 	String getNicknameById(Long profileId);
-
+	
+	Profile loadById(Long profileId);
 }
