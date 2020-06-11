@@ -140,8 +140,29 @@ public class AjaxController {
 		return markService.marksByPhotoAsJson(markStorage.getMarksByPhoto(photoId));
 	}
 	
-	@RequestMapping(value = "/path")
-	public String getPath() {
-		return photoDirPath;
+	@RequestMapping(value = "/marks/rate", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<MarkJsonDTO> rate(@RequestParam("m") int mark, @RequestParam("id") Long photoId) {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long authorId = profileStorage.getIdByNickname(profileDetails.getNickname());
+		try {
+			markStorage.getMarkByPhotoAndUser(photoId, authorId);
+			markStorage.change(photoId, authorId, mark);
+		}catch(EmptyResultDataAccessException e) {
+			markStorage.add(photoId, authorId, mark);
+		}
+		return markService.marksByPhotoAsJson(markStorage.getMarksByPhoto(photoId));
 	}
+	
+	@RequestMapping(value = "/comments/add", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<CommentJsonDTO> addComment(@RequestParam("id") Long photoId, @RequestParam("t") String text) {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		commentStorage.add(photoId, profileStorage.getIdByNickname(profileDetails.getNickname()), text);
+		return commentService.commentsByPhotoAsJson(commentStorage.getCommentsByPhoto(photoId));
+	}
+	
+	/*@RequestMapping(value = "/photos/copy")
+	public void copyPhoto(@RequestParam("id") Long photoId) {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		commentStorage.add(photoId, profileStorage.getIdByNickname(profileDetails.getNickname()), text);
+	}*/
 }

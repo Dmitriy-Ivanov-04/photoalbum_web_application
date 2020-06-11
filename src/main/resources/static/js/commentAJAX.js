@@ -27,7 +27,7 @@ function getCommentsByPhoto(photoId) {
 
 function fillComments(jsonArr){
 	let commentNumber = document.getElementById("commentNumber");
-	commentNumber.innerHTML = ""; //не лишний ли код
+	commentNumber.innerHTML = "";
 	console.log(jsonArr.length);
 	let number = document.createTextNode(jsonArr.length);
 	commentNumber.appendChild(number);
@@ -71,4 +71,31 @@ function fillComments(jsonArr){
    		let text = document.createTextNode(jsonArr[i].text);
    		textP.appendChild(text);
    	}
+}
+
+function addComment(photoId, text){
+	var token = document.head.querySelector("meta[name='_csrf']").content;
+	var header = document.head.querySelector("meta[name='_csrf_header']").content;
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/ajax/comments/add', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader(header, token);
+    
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState != 4)
+    		return;
+    	if (xhr.status != 200) {
+    		alert(xhr.status + ': ' + xhr.statusText);
+    	} else {
+    		if(xhr.responseText != 0)
+    			fillComments(JSON.parse(xhr.responseText));
+    		else{
+	    		let commentNumber = document.getElementById("commentNumber");
+				commentNumber.innerHTML = "0";
+				let commentsPost = document.getElementById("comments-post");
+				commentsPost.innerHTML = "";
+    		}
+    	}
+    }
+    xhr.send("id=" + photoId + "&t=" + text);
 }

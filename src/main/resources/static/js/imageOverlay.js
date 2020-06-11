@@ -6,12 +6,27 @@ function openImage (src, description, date, id) {
 	getTagsByPhoto(id);
 	getCommentsByPhoto(id);
 	getMarksByPhoto(id);
+	$("#commentButton").click(function() {
+		console.log($("#commentInput").val());
+		addComment(id, $("#commentInput").val());
+	});
+	$("#copyButton").click(function(){
+    	//copyPhoto(id);
+    	$(this).fadeOut(100);
+    });
 	$("#lightbox").fadeIn(100);
 }
     
 $(document).ready(function () {
-	$("#lightbox").hide(); //перенести в стили или нет
+	$("#lightbox").hide();
+	//$("#copyButton").hide();
     $("#overlay").click(function () {
         $("#lightbox").fadeOut(100);
     });
+    /*$("image-window").mouseenter(function(){
+    	$("#copyButton").fadeIn(100);
+    });
+    $("image-window").mouseleave(function(){
+    	$("#copyButton").fadeOut(100);
+    });*/
 });

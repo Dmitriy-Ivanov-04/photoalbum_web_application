@@ -32,9 +32,9 @@ public class CommentStorageDAO implements CommentStorage {
 	}
 
 	@Override
-	public void add(Long photoId, Long authorId, String text, Date date) {
+	public void add(Long photoId, Long authorId, String text) {
 		String insertQuery = "INSERT INTO comments (photo_id, author_id, text, date) VALUES (?, ?, ?, now())";
-		Object[] data = new Object[] {photoId, authorId, text, date};
+		Object[] data = new Object[] {photoId, authorId, text};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		
 		if (rowAffected == 0) {

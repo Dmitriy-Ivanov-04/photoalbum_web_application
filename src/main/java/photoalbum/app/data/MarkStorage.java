@@ -5,7 +5,9 @@ import java.util.List;
 import photoalbum.app.domain.model.Mark;
 
 public interface MarkStorage {
-	List<Mark> getMarksByPhoto(Long photo_id);
+	List<Mark> getMarksByPhoto(Long photoId);
 	void add(Long photoId, Long authorId, int value);
 	void delete(Long id);
+	Mark getMarkByPhotoAndUser(Long photoId, Long profileId);
+	void change(Long photoId, Long authorId, int value);
 }

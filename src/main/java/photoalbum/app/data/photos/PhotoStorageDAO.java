@@ -60,7 +60,6 @@ public class PhotoStorageDAO implements PhotoStorage{
 		if (rowAffected == 0) {
 			logger.error("Error during insert record for Photos");
 		}
-		
 	}
 
 	@Override

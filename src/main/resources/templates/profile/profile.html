@@ -21,7 +21,6 @@
 	<script th:src="@{/js/tagAJAX.js}"></script>
 	<script th:src="@{/js/commentAJAX.js}"></script>
 	<script th:src="@{/js/markAJAX.js}"></script>
-	<script th:src="@{/js/pathAJAX.js}"></script>
 	
 	<meta name="_csrf" th:content="${_csrf.token}" />
 	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
@@ -33,7 +32,7 @@
            <div id="image-window">
                 <div id="image-post">
                     <img src="https://dummyimage.com/200x200/99ff33/000" class="lightboxImage" alt="">
-                    <div class="copy">
+                    <div class="copy" id="copyButton">
                         <img class="copy-plus" th:src="@{/images/plus.png}" alt="">
                         <span class="copy-text">Скопировать себе</span>
                     </div>
@@ -79,8 +78,8 @@
                     </div>
                     <div id="addComment">
                             <img th:src="@{/images/avatar.png}" class="avatar-comment1" alt="" width="50px" height="50px">
-                            <input type="text" class="user-comment">
-                            <a href="#"><img th:src="@{/images/images/addComment.png}" class="addComment-sign" alt=""></a>
+                            <input type="text" class="user-comment" id="commentInput">
+                            <a href="#"><img th:src="@{/images/addComment.png}" class="addComment-sign" id="commentButton" alt=""></a>
                     </div>
                     </div>
                 </div>

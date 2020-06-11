@@ -27,7 +27,7 @@ public class MarkStorageDAO implements MarkStorage{
 	@Override
 	public List<Mark> getMarksByPhoto(Long photoId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM marks WHERE photo_id = ?");
-		List<Mark> marks = (List<Mark>) jdbcTemplate.query(sql.toString(), new Object[] {photoId}, new MarkRowMapper());
+		List<Mark> marks = jdbcTemplate.query(sql.toString(), new Object[] {photoId}, new MarkRowMapper());
 		return marks;
 	}
 
@@ -50,6 +50,24 @@ public class MarkStorageDAO implements MarkStorage{
 
 		if (rowAffected == 0) {
 			logger.error("Error during delete record for Marks");
+		}
+	}
+
+	@Override
+	public Mark getMarkByPhotoAndUser(Long photoId, Long profileId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM marks WHERE photo_id = ? AND author_id = ?");
+		Mark mark = jdbcTemplate.queryForObject(sql.toString(), new Object[] {photoId, profileId}, new MarkRowMapper());
+		return mark;
+	}
+
+	@Override
+	public void change(Long photoId, Long authorId, int value) {
+		String updateQuery = "UPDATE marks SET value = ? WHERE photo_id = ? AND author_id = ?";
+		Object[] data = new Object[] {value, photoId, authorId};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+
+		if (rowAffected == 0) {
+			logger.error("Error during update record for Marks");
 		}
 	}
 	
