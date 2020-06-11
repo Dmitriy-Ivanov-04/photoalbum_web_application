@@ -53,9 +53,9 @@ public class PhotoStorageDAO implements PhotoStorage{
 	}
 
 	@Override
-	public void upload(Long profileId, Long albumId, String description, String link) {
-		String insertQuery = "INSERT INTO photos (profile_id, album_id, description, date, link_photo) VALUES (?, ?, ?, now(), ?)";
-		Object[] data = new Object[] {profileId, albumId, description, link};
+	public void upload(Long profileId, Long albumId, String description) {
+		String insertQuery = "INSERT INTO photos (profile_id, album_id, description, date, link_photo) VALUES (?, ?, ?, now())";
+		Object[] data = new Object[] {profileId, albumId, description};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		
 		if (rowAffected == 0) {

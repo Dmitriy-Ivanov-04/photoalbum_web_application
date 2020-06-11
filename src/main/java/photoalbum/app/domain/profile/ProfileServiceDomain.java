@@ -15,7 +15,6 @@ import org.springframework.util.StringUtils;
 
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.domain.mail.MailClient;
-import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.model.Role;
@@ -120,6 +119,11 @@ public class ProfileServiceDomain implements ProfileService {
 		}
 		
 		return profilesJson;
+	}
+
+	@Override
+	public Profile findById(Long profileId) {
+		return (profileId != null) ? profileStorage.loadById(profileId) : null;
 	}
 	
 }

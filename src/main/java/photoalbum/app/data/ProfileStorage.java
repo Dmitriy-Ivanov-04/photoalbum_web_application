@@ -29,5 +29,7 @@ public interface ProfileStorage {
 	List<Profile> findFollowers(Long profileId);
 	
 	List<Profile> findSubscriptions(Long profileId);
+	
+	Profile loadById(Long profileId);
 
 }
