@@ -1,7 +1,12 @@
 package photoalbum.app.domain.tag;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import photoalbum.app.data.TagStorage;
+import photoalbum.app.domain.dto.TagJsonDTO;
+import photoalbum.app.domain.model.Tag;
 @Service
 public class TagServiceDomain implements TagService{
 	
@@ -20,6 +25,26 @@ public class TagServiceDomain implements TagService{
 	@Override
 	public void deleteTagsByPhoto(Long photoId) {
 		tagStorage.delete(photoId);
+	}
+
+	@Override
+	//public List<TagJsonDTO> tagsByPhotoAsJson(Long photoId) {
+	public List<TagJsonDTO> tagsByPhotoAsJson(List<Tag> tags1) {
+		//List<Tag> tags = tagStorage.getTagsByPhoto(photoId);
+		List<Tag> tags = tags1;
+		List<TagJsonDTO> tagsJson = null;
+		
+		if(tags != null && tags.size() > 0) {
+			tagsJson = new ArrayList<>(tags.size());
+			for(Tag tag : tags) {
+				TagJsonDTO tagDTO = new TagJsonDTO();
+				
+				tagDTO.setTag(tag.getValue());
+				
+				tagsJson.add(tagDTO);
+			}
+		}
+		return tagsJson;
 	}
 	
 }

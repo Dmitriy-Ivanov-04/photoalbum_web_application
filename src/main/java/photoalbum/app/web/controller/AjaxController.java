@@ -13,16 +13,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
+import photoalbum.app.data.CommentStorage;
+import photoalbum.app.data.MarkStorage;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
+import photoalbum.app.data.TagStorage;
+import photoalbum.app.domain.comment.CommentService;
+import photoalbum.app.domain.dto.CommentJsonDTO;
+import photoalbum.app.domain.dto.MarkJsonDTO;
 import photoalbum.app.domain.dto.PhotoJsonDTO;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
+import photoalbum.app.domain.dto.TagJsonDTO;
+import photoalbum.app.domain.mark.MarkService;
 import photoalbum.app.domain.model.Photo;
 import photoalbum.app.domain.model.Relationships;
 import photoalbum.app.domain.model.Status;
 import photoalbum.app.domain.photo.PhotoService;
 import photoalbum.app.domain.profile.ProfileService;
+import photoalbum.app.domain.tag.TagService;
 import photoalbum.app.spring.ProfileDetailsImpl;
 
 @RestController
@@ -42,6 +51,24 @@ public class AjaxController {
 	
 	@Autowired
 	PhotoStorage photoStorage;
+	
+	@Autowired
+	TagStorage tagStorage;
+	
+	@Autowired
+	TagService tagService;
+	
+	@Autowired
+	CommentStorage commentStorage;
+	
+	@Autowired
+	CommentService commentService;
+	
+	@Autowired
+	MarkService markService;
+	
+	@Autowired
+	MarkStorage markStorage;
 	
 	@RequestMapping(value = "/add-friend")
 	public void addFriend(@RequestParam("n") String nickname) {
@@ -73,7 +100,7 @@ public class AjaxController {
 		}
 	}
 	
-	@RequestMapping(value = "/my-profile") //, produces = MediaType.APPLICATION_JSON_VALUE
+	@RequestMapping(value = "/my-profile")
 	public boolean showAddFriendButton(@RequestParam("n") String nick) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(profileDetails.getNickname().equals(nick))	
@@ -91,5 +118,21 @@ public class AjaxController {
 	public List<PhotoJsonDTO> photoList(@RequestParam("n") String nick) {
 		//return photoService.photosByUserAsJson(profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick)));
 		return photoService.photosByUserAsJson(photoStorage.getPhotosByUser(profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick))));
+	}
+	
+	@RequestMapping(value = "/tags", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<TagJsonDTO> tagList(@RequestParam("id") Long photoId) {
+		//return tagService.tagsByUserAsJson(tagStorage.getTagsByPhoto(photoId));
+		return tagService.tagsByPhotoAsJson(tagStorage.getTagsByPhoto(photoId));
+	}
+	
+	@RequestMapping(value = "/comments", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<CommentJsonDTO> commentList(@RequestParam("id") Long photoId) {
+		return commentService.commentsByPhotoAsJson(commentStorage.getCommentsByPhoto(photoId));
+	}
+	
+	@RequestMapping(value = "/marks", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<MarkJsonDTO> markList(@RequestParam("id") Long photoId) {
+		return markService.marksByPhotoAsJson(markStorage.getMarksByPhoto(photoId));
 	}
 }

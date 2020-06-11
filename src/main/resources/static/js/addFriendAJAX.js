@@ -14,8 +14,8 @@ $(document).ready(function () {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		//if(xhr.responseText.localeCompare("true") == 0)
-    		if(xhr.responseText == "false")
-    			$("#addFriend").show();	    			
+    		if(xhr.responseText == "true")
+    			$("#addFriend").hide();	
     	}
     }
     xhr.send("n=" + nick);

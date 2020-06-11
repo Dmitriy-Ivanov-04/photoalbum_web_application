@@ -58,6 +58,10 @@ public class PhotoServiceDomain implements PhotoService{
 			for(Photo photo : photos) {
 				PhotoJsonDTO photoDTO = new PhotoJsonDTO();
 				
+				photoDTO.setId(photo.getId());
+				photoDTO.setAlbum_id(photo.getAlbum_id());
+				photoDTO.setDescription(photo.getDescription());
+				photoDTO.setDate(photo.getDate());
 				photoDTO.setLink(photo.getLink_photo());
 				
 				photosJson.add(photoDTO);

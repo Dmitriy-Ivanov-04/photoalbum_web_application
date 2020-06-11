@@ -27,7 +27,7 @@ public class MarkStorageDAO implements MarkStorage{
 	@Override
 	public List<Mark> getMarksByPhoto(Long photoId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM marks WHERE photo_id = ?");
-		List<Mark> marks = (List<Mark>) jdbcTemplate.queryForObject(sql.toString(), new Object[] {photoId}, new MarkRowMapper());
+		List<Mark> marks = (List<Mark>) jdbcTemplate.query(sql.toString(), new Object[] {photoId}, new MarkRowMapper());
 		return marks;
 	}
 

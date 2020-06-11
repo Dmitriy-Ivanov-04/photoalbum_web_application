@@ -74,11 +74,17 @@ a{
 }
 
 #info-post{
+    position: relative;
     width: 500px;
     background-color: #FFF;
     padding-left: 15px;
     padding-top: 15px;
     padding-right: 15px;
+}
+
+#scroll-block{
+    height: 624px;
+    overflow-y: scroll;
 }
 
 #header-post{
@@ -156,17 +162,20 @@ a{
 .user-comment{
     margin-left: 10px;
 }
-#addComment{
-    margin-top: 10px;
-}
 
+#addComment{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 15px;
+}
 .addComment-sign{
     margin-top: 10px;
     float: right;
+    margin-left: 10px;
 }
 .user-comment{
     outline: none;
-    max-width: 350px;
+    width: 400px;
     height: 50px;
     border: 1px solid #dfdfdf;
     border-radius: 10px 10px 10px 10px;

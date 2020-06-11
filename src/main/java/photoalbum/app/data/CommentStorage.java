@@ -9,4 +9,5 @@ public interface CommentStorage {
 	
 	List<Comment> findAllComments(Long profileId);
 	void add(Long photoId, Long authorId, String text, Date date);
+	List<Comment> getCommentsByPhoto(Long photoId);
 }

@@ -12,12 +12,15 @@
     <title>Profile</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/js/profileScript.js}"></script>
-	<script th:src="@{/js/imageAlign.js}"></script>
+	<script th:src="@{/js/imageAlign.js}"></script><!-- убрать? -->
 	<script th:src="@{/js/imageOverlay.js}"></script>
 	<script th:src="@{/js/tabScript.js}"></script>
 	<script th:src="@{/js/addFriendScript.js}"></script>
 	<script th:src="@{/js/addFriendAJAX.js}"></script>
-	<!--<script th:src="@{/js/photoAJAX.js}"></script>-->
+	<script th:src="@{/js/photoAJAX.js}"></script>
+	<script th:src="@{/js/tagAJAX.js}"></script>
+	<script th:src="@{/js/commentAJAX.js}"></script>
+	<script th:src="@{/js/markAJAX.js}"></script>
 	
 	<meta name="_csrf" th:content="${_csrf.token}" />
 	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
@@ -29,35 +32,31 @@
            <div id="image-window">
                 <div id="image-post">
                     <img src="https://dummyimage.com/200x200/99ff33/000" class="lightboxImage" alt="">
-                    <div class="copy" id="addFriend">
+                    <div class="copy">
                         <img class="copy-plus" th:src="@{/images/plus.png}" alt="">
                         <span class="copy-text">Скопировать себе</span>
                     </div>
                 </div>
                 <div id="info-post">
+                <div id="scroll-block">
                     <div id="header-post">
                         <img th:src="@{/images/avatar.png}" alt="" width="60px" height="60px">
                         <div id="nickDate-align">
-                            <a href="#" class="nick-post">Nickname</a>
-                            <span class="date-post">dd.mm.yyyy   00:00</span>
+                            <a href="#" class="nick-post" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
+                            <span class="date-post" id="postDate"></span>
                         </div>
                     </div>
-                    <div id="hashtags-post">
-                        <p>#hashtag #hashtag #hashtag #hashtag #hashtag #hashtag #hashtag</p>
-                    </div>
-                    <div id="description-post">
-                        <p>Description</p>
-                        <p>description</p>
-                    </div>
+                    <div id="hashtags-post"><p id = "hashtagsP"></p></div>
+                    <div id="description-post"><p id = "descriptionP"></p></div>
                     <div id="rating-post">
                         <div id="rating-circle"></div>
                         <div id="rating-circle"></div>
                         <div id="rating-circle"></div>
                         <div id="rating-circle"></div>
                         <div id="rating-circle"></div>
-                        <span class="rating">5</span>
+                        <span class="rating" id="rating"></span>
                         <a href=""><img th:src="@{/images/comment-sign.png}" class="comment-sign"alt=""></a>
-                        <span class="number-comment">5</span>
+                        <span class="number-comment" id="commentNumber"></span>
                     </div>
                     <div id="hr-wrapper">
                         <hr>
@@ -76,24 +75,12 @@
                                  Comment Comment Comment
                             </div>
                         </div>
-                    
-                        <div id="comment">
-                            <div id="avatar-comment">
-                                <img th:src="@{/images/avatar.png}" alt="" width="50px" height="50px">
-                            </div>
-                            <div id="nickDate-comment">
-                                <span class="nick-post">Nickname</span>
-                                <span class="date-post">dd.mm.yyyy   00:00</span>
-                            </div>
-                            <div id="comment-text">
-                                 Comment Comment Comment
-                            </div>
-                        </div>
                     </div>
                     <div id="addComment">
                             <img th:src="@{/images/avatar.png}" class="avatar-comment1" alt="" width="50px" height="50px">
                             <input type="text" class="user-comment">
                             <a href="#"><img th:src="@{/images/images/addComment.png}" class="addComment-sign" alt=""></a>
+                    </div>
                     </div>
                 </div>
            </div>

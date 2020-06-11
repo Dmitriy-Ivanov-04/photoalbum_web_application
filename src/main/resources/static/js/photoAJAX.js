@@ -14,36 +14,32 @@ $(document).ready(function () {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		if(xhr.responseText != 0){
-    			//let jsonArr = JSON.parse(xhr.responseText)
-	    		//console.log(fillPublications(JSON.parse(xhr.responseText)));
-	    		//imageAlign(fillPublications(JSON.parse(xhr.responseText)), $(".publications").width(), 2);
     			fillPublications(JSON.parse(xhr.responseText));
     		}
     	}
     }
     xhr.send("n=" + nick);
     
-    //console.log($("#content").find("> img"));
-    
     function fillPublications(jsonArr){
-    	//let imgArr = [];
     	let publications = document.getElementById("content");
+    	
+    	let postLine = document.createElement("div");
+		publications.appendChild(postLine);
+		$(postLine).attr("id", "post-line");
     	for(let i = 0; i < jsonArr.length; i++){
-    		//let div = document.createElement("div");
-    		//publications.appendChild(div);
-    		//$(div).attr("class", "image");
+    		let imageWrapper = document.createElement("div");
+    		postLine.appendChild(imageWrapper);
+    		$(imageWrapper).attr("id", "image-wrapper");
+    		
     		let img = document.createElement("img");
-    		publications.appendChild(img);
+    		imageWrapper.appendChild(img);
     	    $(img).attr("class", "content-img");
     	    let src = "/images/" + jsonArr[i].link + ".jpg";
     	    $(img).attr("src", src);
-    	    
-    	    //imgArr.push(img);
     		
     	    $(img).click(function (){
-    	    	openImage(src);
+    	    	openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id);
     	    });
     	}
-    	//return imgArr;
     }
 });

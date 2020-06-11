@@ -1,0 +1,13 @@
+package photoalbum.app.domain.dto;
+
+public class MarkJsonDTO {
+	private int value;
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+}

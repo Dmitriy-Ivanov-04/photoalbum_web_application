@@ -71,6 +71,6 @@ CREATE TABLE `relationships` (
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `photo_id` int(11) NOT NULL,
-  `tag` varchar(32) NOT NULL,
+  `value` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
