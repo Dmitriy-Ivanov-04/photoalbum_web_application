@@ -21,7 +21,7 @@ $(document).ready(function () {
     xhr.send("n=" + nick);
     
     function fillPublications(jsonArr){
-    	let publications = document.getElementById("content");
+    	let publications = document.getElementById("content-publications");
     	let postLine;
     	for(let i = 0; i < jsonArr.length; i++){
     		if(i%3 == 0){

@@ -221,7 +221,7 @@ label.tab.active{
     justify-content: space-between;
     padding: 15px;
 }
-.image-wrapper{
+#image-wrapper{
     width: 444px;
     height: 444px;
 }
