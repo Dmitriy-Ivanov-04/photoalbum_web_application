@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/profileStyle.css}">
 	<link rel="stylesheet" th:href="@{/css/imageOverlay.css}">
     <link rel="stylesheet" th:href="@{/css/polosaStyle.css}"/>
+    <link rel="stylesheet" th:href="@{/css/tcal.css}">
 	<link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
     <title>Profile</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -23,6 +24,8 @@
 	<script th:src="@{/js/markAJAX.js}"></script>
 	<script th:src="@{/js/albumAJAX.js}"></script>
 	<script th:src="@{/js/copyAJAX.js}"></script>
+    <script th:src="@{/js/tcal.js}"></script>
+
 	
 	<meta name="_csrf" th:content="${_csrf.token}" />
 	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
@@ -80,7 +83,7 @@
                     </div>
                     <div id="addComment">
                             <img th:src="@{/images/avatar.png}" class="avatar-comment1" alt="" width="50px" height="50px">
-                            <input type="text" class="user-comment" id="commentInput">
+                            <input type="text" class="user-comment" id="commentInput" maxlength="200">
                             <a href="#"><img th:src="@{/images/addComment.png}" class="addComment-sign" id="commentButton" alt=""></a>
                     </div>
                     </div>
@@ -100,7 +103,9 @@
                         <a class="nick-session" id="nickname" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
                     </div>
                    <img th:src="@{/images/rating.png}" class="rate" alt="" >
-                   <img th:src="@{/images/date.png}" class="date" alt="" >
+
+                    <input type="text" name="date" class="tcal" value="" />
+
                    <input type="text" id="search">
                    <img th:src="@{/images/loupeBackground.png}" class="loupe" alt="">
                 </div>

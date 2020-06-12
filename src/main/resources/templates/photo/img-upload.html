@@ -41,10 +41,12 @@
     <div class="publications" id="content-publications">
         <div id="postUpload-wrapper">
             <h1>Добавление новой фотографии</h1>
-            <form action="" th:action="@{/photo/img-upload}" method="post" enctype="multipart/form-data">
+            <form action="" th:action="@{/photo/img-upload}" method="post" enctype="multipart/form-data" th:object="${uploadForm}">
                 <input type="hidden" th:value="${profileId}" name="profileId">
-                <p><div class="divText" data-text="Tags" contenteditable="true" id="postText"></div></p>
-                <p><div class="divText" data-text="Description" contenteditable="true" id="postText"></div></p>
+                <p><input type="text" th:field="*{tags}" class="divText" placeholder="Теги"></p>
+                <p><input type="text" th:field="*{description}" class="divText" placeholder="Описание"></p>
+                <p><input type="text" th:field="*{albumId}" class="divText" placeholder="Альбом"></p>
+
                 <p>
                <div class="dropdown">
                    <input type="button" value="Выберите альбом" onclick="myFunction()" class="dropbtn">
@@ -54,6 +56,7 @@
                    </div>
                </div>
                </p>
+
                  <p><input type="button" class="enter" value="Добавить альбом"></p>
                 <p>
                  <div id="new-album">

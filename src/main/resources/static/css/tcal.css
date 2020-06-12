@@ -1,6 +1,6 @@
 /* input box in default state */
 .tcalInput {
-	background: url('../images/cal.gif') 100% 50% no-repeat;
+	background: url('../images/testCalendarOn.png') 100% 100% no-repeat;
 	padding-right: 20px;
 	cursor: pointer;
 	height: 37px;
@@ -13,7 +13,7 @@
 
 /* additional properties for input boxe in activated state, above still applies unless in conflict */
 .tcalActive {
-	background-image: url('../images/no_cal.gif');
+	background-image: url('../images/testCalendarOff.png');
 }
 /* container of calendar's pop-up */
 #tcal {

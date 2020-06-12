@@ -20,33 +20,6 @@
     margin-left: 10px;
     outline: none;
 }
-.loupe{
-    pointer-events: none;
-}
-.exit{
-    width: 100px;
-    height: 30px;
-    background-color: #f8f8f8;
-    border-radius: 10px 10px 10px 10px;
-    border: 1px solid #dfdfdf;
-    text-align: center;
-    padding-top: 8px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    color: #838383;
-}
-#search{
-    border: none;
-    outline: none;
-    width: 190px;
-    height: 36px;
-    border-radius: 0px 10px 10px 0px;
-    border: 1px solid #dfdfdf;
-    border-left: 0;
-    background-color: #f8f8f8;
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-}
 /*//////////////////////////*/
 #content-wrapper{
     margin-top: 70px;

@@ -35,6 +35,12 @@
     margin-left: 10px;
     padding-top: 25px;
 }
+.tcal{
+    float: right;
+    margin-top: 15px;
+    margin-left: 10px;
+    outline: none;
+}
 
 #profile-back{
     width: 100%;
