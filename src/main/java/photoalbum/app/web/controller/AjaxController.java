@@ -1,5 +1,6 @@
 package photoalbum.app.web.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,9 @@ import photoalbum.app.domain.model.Photo;
 import photoalbum.app.domain.model.Relationships;
 import photoalbum.app.domain.model.Status;
 import photoalbum.app.domain.photo.PhotoService;
+import photoalbum.app.domain.photo.PhotoServiceDomain;
 import photoalbum.app.domain.profile.ProfileService;
+import photoalbum.app.domain.profile.ProfileServiceDomain;
 import photoalbum.app.domain.relationships.RelationshipsService;
 import photoalbum.app.domain.tag.TagService;
 import photoalbum.app.spring.ProfileDetailsImpl;
@@ -83,6 +86,9 @@ public class AjaxController {
 	
 	@Autowired
 	AlbumStorage albumStorage;
+	
+	@Autowired
+	PhotoServiceDomain photoServiceDomain;
 	
 	@Value("${project.manager.photo.dir.path}")
     private String photoDirPath;
@@ -176,11 +182,11 @@ public class AjaxController {
 		return commentService.commentsByPhotoAsJson(commentStorage.getCommentsByPhoto(photoId));
 	}
 	
-	/*@RequestMapping(value = "/photos/copy")
-	public void copyPhoto(@RequestParam("id") Long photoId) {
-		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		commentStorage.add(photoId, profileStorage.getIdByNickname(profileDetails.getNickname()), text);
-	}*/
+	@RequestMapping(value = "/photos/copy")
+    public void copyPhoto(@RequestParam("id") Long photoId) throws IOException {
+        ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        photoServiceDomain.copyPhoto(profileStorage.getIdByNickname(profileDetails.getNickname()), photoId);
+    }
 	
 	@RequestMapping(value = "/albums", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<AlbumJsonDTO> albumList(@RequestParam("n") String nick) {

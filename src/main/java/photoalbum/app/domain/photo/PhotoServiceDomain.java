@@ -2,6 +2,9 @@ package photoalbum.app.domain.photo;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -9,7 +12,6 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -111,13 +113,54 @@ public class PhotoServiceDomain implements PhotoService{
 			File dest = new File(fullFilePath);
 			uploadPhoto(profileId, (long) 1, "description", orgName);
 			multipartFile.transferTo(dest);
-			
-
 
 		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());
 			result = false;
 		} catch (IOException e) {
+			logger.severe(e.getMessage());
+			result = false;
+		}
+
+		return result;
+	}
+	
+	private static void copyFile(String src, String dest) {
+		Path result = null;
+		
+		try {
+			result =  Files.copy(Paths.get(src), Paths.get(dest));
+		} catch (IOException e) {
+			System.out.println("Exception while moving file: " + e.getMessage());
+		}
+		
+		if(result != null) {
+			System.out.println("File moved successfully.");
+		} else {
+			System.out.println("File movement failed.");
+		} 
+		
+	}
+	
+	public boolean copyPhoto(Long profileId, Long photoId) throws IOException {
+		boolean result = true;
+		String randomName = UUID.randomUUID().toString();
+		String filePath = photoDirPath + File.separator + profileId + File.separator;
+		String photoPath = photoDirPath + File.separator + photoStorage.getProfileIdByPhoto(photoId) + File.separator + photoStorage.getPhotoById(photoId).getLink_photo();
+		
+		if (!(new File(filePath).exists())) {
+			new File(filePath).mkdirs();
+		}
+
+		try {
+			
+			String orgName = randomName + photoStorage.getPhotoById(photoId).getLink_photo().substring(36);
+			String fullFilePath = filePath + orgName;
+
+			copyFile(photoPath, fullFilePath);
+			uploadPhoto(profileId, (long) 1, "description", orgName);
+
+		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());
 			result = false;
 		}
