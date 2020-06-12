@@ -65,10 +65,10 @@ function fillComments(jsonArr){
    		let commentText = document.createElement("div");
    		comment.appendChild(commentText);
    		$(commentText).attr("id", "comment-text");
-   		let textP = document.createElement("p"); //p не помогает
-   		commentText.appendChild(textP);
+   		/*let textP = document.createElement("p"); //p не помогает
+   		commentText.appendChild(textP);*/
    		let text = document.createTextNode(jsonArr[i].text);
-   		textP.appendChild(text);
+   		commentText.appendChild(text);
    	}
 }
 
