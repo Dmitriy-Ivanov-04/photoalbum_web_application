@@ -14,35 +14,35 @@ $(document).ready(function () {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		if(xhr.responseText != 0){
-    			fillPublications(JSON.parse(xhr.responseText));
+    			fillContentDiv(JSON.parse(xhr.responseText), "content-publications");
     		}
     	}
     }
     xhr.send("n=" + nick);
-    
-    function fillPublications(jsonArr){
-    	let publications = document.getElementById("content-publications");
-    	let postLine;
-    	for(let i = 0; i < jsonArr.length; i++){
-    		if(i%3 == 0){
-    	    	postLine = document.createElement("div");
-    			publications.appendChild(postLine);
-    	    	$(postLine).attr("id", "post-line");
-    	    	console.log(i);
-    		}
-	    	let imageWrapper = document.createElement("div");
-	    	postLine.appendChild(imageWrapper);
-	    	$(imageWrapper).attr("id", "image-wrapper");
-	    		
-	    	let img = document.createElement("img");
-	    	imageWrapper.appendChild(img);
-	    	$(img).attr("class", "content-img");
-	    	let src = "/img/" + jsonArr[i].id;
-	    	$(img).attr("src", "/img/" + jsonArr[i].id);
-	    		
-	    	$(img).click(function (){
-	    		openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id);
-	    	});
-    	}
-    }
 });
+
+function fillContentDiv(jsonArr, divToFill){
+	let contentDiv = document.getElementById(divToFill);
+	contentDiv.innerHTML = "";
+	let postLine;
+	for(let i = 0; i < jsonArr.length; i++){
+		if(i%3 == 0){
+	    	postLine = document.createElement("div");
+	    	contentDiv.appendChild(postLine);
+	    	$(postLine).attr("id", "post-line");
+		}
+    	let imageWrapper = document.createElement("div");
+    	postLine.appendChild(imageWrapper);
+    	$(imageWrapper).attr("id", "image-wrapper");
+    		
+    	let img = document.createElement("img");
+    	imageWrapper.appendChild(img);
+    	$(img).attr("class", "content-img");
+    	let src = "/img/" + jsonArr[i].id;
+    	$(img).attr("src", "/img/" + jsonArr[i].id);
+    		
+    	$(img).click(function (){
+    		openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id);
+    	});
+	}
+}

@@ -21,6 +21,8 @@
 	<script th:src="@{/js/tagAJAX.js}"></script>
 	<script th:src="@{/js/commentAJAX.js}"></script>
 	<script th:src="@{/js/markAJAX.js}"></script>
+	<script th:src="@{/js/albumAJAX.js}"></script>
+	<script th:src="@{/js/copyAJAX.js}"></script>
 	
 	<meta name="_csrf" th:content="${_csrf.token}" />
 	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
@@ -146,30 +148,9 @@
                 <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>
             </div>
         </div>
-            <div class="publications" id="content-publications">
-
-            </div>
-            <div class="albums" id="content-album">
-                <div id="post-line">
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 1</span></div>
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 2</span></div>
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 3</span></div>
-                </div>
-                <div id="post-line">
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 4</span></div>
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 5</span></div>
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 6</span></div>
-                </div>
-                <div id="post-line">
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 7</span></div>
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 8</span></div>
-                    <div class="album-wrapper" id="album-block"><span class="album-name">Альбом 9</span></div>
-                </div>
-            </div>
-            <div class="one-album" id="content-one-album">
-                <img src="https://dummyimage.com/500x333/ff3399/fff" class="content-img" alt="">
-                <img src="https://dummyimage.com/250x666/99ff33/fff" class="content-img" alt="">
-            </div>
+            <div class="publications" id="content-publications"></div>
+            <div class="albums" id="content-album"> </div>
+            <div class="one-album" id="content-one-album"></div>
     </div>
 </body>
 </html>
