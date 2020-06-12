@@ -14,13 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
+import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.data.CommentStorage;
 import photoalbum.app.data.MarkStorage;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.data.TagStorage;
+import photoalbum.app.domain.album.AlbumService;
 import photoalbum.app.domain.comment.CommentService;
+import photoalbum.app.domain.dto.AlbumJsonDTO;
 import photoalbum.app.domain.dto.CommentJsonDTO;
 import photoalbum.app.domain.dto.MarkJsonDTO;
 import photoalbum.app.domain.dto.PhotoJsonDTO;
@@ -32,6 +35,7 @@ import photoalbum.app.domain.model.Relationships;
 import photoalbum.app.domain.model.Status;
 import photoalbum.app.domain.photo.PhotoService;
 import photoalbum.app.domain.profile.ProfileService;
+import photoalbum.app.domain.relationships.RelationshipsService;
 import photoalbum.app.domain.tag.TagService;
 import photoalbum.app.spring.ProfileDetailsImpl;
 
@@ -40,6 +44,9 @@ import photoalbum.app.spring.ProfileDetailsImpl;
 public class AjaxController {
 	@Autowired
 	RelationshipsStorage relationshipsStorage;
+	
+	@Autowired
+	RelationshipsService relationshipsService;
 	
 	@Autowired
 	ProfileStorage profileStorage;
@@ -70,6 +77,12 @@ public class AjaxController {
 	
 	@Autowired
 	MarkStorage markStorage;
+	
+	@Autowired
+	AlbumService albumService;
+	
+	@Autowired
+	AlbumStorage albumStorage;
 	
 	@Value("${project.manager.photo.dir.path}")
     private String photoDirPath;
@@ -121,7 +134,10 @@ public class AjaxController {
 	@RequestMapping(value = "/photos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PhotoJsonDTO> photoList(@RequestParam("n") String nick) {
 		//return photoService.photosByUserAsJson(profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick)));
-		return photoService.photosByUserAsJson(photoStorage.getPhotosByUser(profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick))));
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long profileId = profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick));
+		Long loginProfileId = profileStorage.getIdByNickname(profileDetails.getNickname());
+		return photoService.photosByUserAsJson(photoStorage.getPhotosByUser(profileId, relationshipsService.getAccesLevel(profileId, loginProfileId)));
 	}
 	
 	@RequestMapping(value = "/tags", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -165,4 +181,17 @@ public class AjaxController {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		commentStorage.add(photoId, profileStorage.getIdByNickname(profileDetails.getNickname()), text);
 	}*/
+	
+	@RequestMapping(value = "/albums", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AlbumJsonDTO> albumList(@RequestParam("n") String nick) {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long profileId = profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick));
+		Long loginProfileId = profileStorage.getIdByNickname(profileDetails.getNickname());
+		return albumService.albumsByUserAsJson(albumStorage.findAlbumsByUser(profileId, relationshipsService.getAccesLevel(profileId, loginProfileId)));
+	}
+	
+	@RequestMapping(value = "/photos/{albumId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<PhotoJsonDTO> photoListByAlbum(@PathVariable Long albumId) {
+		return photoService.photosByUserAsJson(photoStorage.getPhotosByAlbum(albumId));
+	}
 }

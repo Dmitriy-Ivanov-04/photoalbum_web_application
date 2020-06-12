@@ -6,7 +6,7 @@ import photoalbum.app.domain.model.Relationships;
 import photoalbum.app.domain.model.Status;
 
 
-public interface RelationshipsServise {
+public interface RelationshipsService {
 
 	List<Relationships> getSubscribersList(Long targetId);
 	List<Relationships> getSubscriptionsList(Long profileId);
@@ -16,4 +16,5 @@ public interface RelationshipsServise {
 	void deleteFriend(Long profileId, Long targetId, Long id);
 	void unsubscribe(Long id);
 	String buttonText(Long profileId, Long targetId);
+	int getAccesLevel(Long profileId, Long targetId);
 }

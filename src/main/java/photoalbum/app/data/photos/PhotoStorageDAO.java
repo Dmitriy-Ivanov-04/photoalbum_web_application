@@ -31,9 +31,10 @@ public class PhotoStorageDAO implements PhotoStorage{
 	}
 	
 	@Override
-	public List<Photo> getPhotosByUser(Long profileId) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE profile_id = ? ORDER BY date");
-		List<Photo> photos = (List<Photo>) jdbcTemplate.query(sql.toString(), new Object[] {profileId}, new PhotoRowMapper());
+	public List<Photo> getPhotosByUser(Long profileId, int accesLevel) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM photos INNER JOIN albums ON photos.album_id=albums.id "
+				+ "WHERE photos.profile_id = ? AND albums.acces_level <= ? ORDER BY date");
+		List<Photo> photos = (List<Photo>) jdbcTemplate.query(sql.toString(), new Object[] {profileId, accesLevel}, new PhotoRowMapper());
 		return photos;
 	}
 

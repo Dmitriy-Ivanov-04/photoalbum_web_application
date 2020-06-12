@@ -26,9 +26,9 @@ public class AlbumStorageDAO implements AlbumStorage {
 	}
 
 	@Override
-	public List<Album> findAlbumsByUser(Long profile_id) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM albums WHERE profile_id = ?");
-		List<Album> album = jdbcTemplate.query(sql.toString(), new Object[] {profile_id}, new AlbumRowMapper());
+	public List<Album> findAlbumsByUser(Long profile_id, int accesLevel) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM albums WHERE profile_id = ? AND acces_level = ?");
+		List<Album> album = jdbcTemplate.query(sql.toString(), new Object[] {profile_id, accesLevel}, new AlbumRowMapper());
 		return album;
 	}
 	
@@ -61,5 +61,4 @@ public class AlbumStorageDAO implements AlbumStorage {
 			logger.error("Error during delete record for Album");
 		}
 	}
-
 }

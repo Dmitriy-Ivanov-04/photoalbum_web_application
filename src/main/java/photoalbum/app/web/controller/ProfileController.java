@@ -12,7 +12,7 @@ import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.domain.model.Status;
 import photoalbum.app.domain.profile.ProfileService;
-import photoalbum.app.domain.relationships.RelationshipsServise;
+import photoalbum.app.domain.relationships.RelationshipsService;
 import photoalbum.app.spring.ProfileDetailsImpl;
 
 @Controller
@@ -31,7 +31,7 @@ public class ProfileController {
 	RelationshipsStorage relationshipsStorage;
 	
 	@Autowired
-	RelationshipsServise relationshipsServise;
+	RelationshipsService relationshipsServise;
 
 	
 	@GetMapping("/user/{nickname}")

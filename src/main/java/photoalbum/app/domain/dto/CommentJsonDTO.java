@@ -2,6 +2,9 @@ package photoalbum.app.domain.dto;
 
 import java.sql.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class CommentJsonDTO {
 	private String authorNickname;
 	private String text;

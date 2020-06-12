@@ -2,7 +2,6 @@ CREATE TABLE `albums` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `profile_id` int(11) NOT NULL,
   `album_name` varchar(64) DEFAULT NULL,
-  `number_of_photos` int(11) DEFAULT NULL,
   `acces_level` tinyint(2) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -36,10 +35,8 @@ CREATE TABLE `photos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `profile_id` int(11) NOT NULL,
   `album_id` int(11) NOT NULL,
-  `rating` float DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `date` date NOT NULL,
-  `mark_counter` int(32) DEFAULT NULL,
   `link_photo` varchar(320) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

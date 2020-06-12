@@ -1,5 +1,8 @@
 package photoalbum.app.domain.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class TagJsonDTO {
 	private String tag;
 

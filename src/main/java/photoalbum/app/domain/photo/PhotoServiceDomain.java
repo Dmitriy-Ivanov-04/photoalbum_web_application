@@ -28,7 +28,7 @@ public class PhotoServiceDomain implements PhotoService{
 
 	@Override
 	public List<Photo> getPhotoListByUser(Long profileId) {
-		photoStorage.getPhotosByUser(profileId);
+		//photoStorage.getPhotosByUser(profileId);
 		return null;
 	}
 

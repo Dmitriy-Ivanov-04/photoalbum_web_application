@@ -28,7 +28,6 @@ function getCommentsByPhoto(photoId) {
 function fillComments(jsonArr){
 	let commentNumber = document.getElementById("commentNumber");
 	commentNumber.innerHTML = "";
-	console.log(jsonArr.length);
 	let number = document.createTextNode(jsonArr.length);
 	commentNumber.appendChild(number);
 	let commentsPost = document.getElementById("comments-post");

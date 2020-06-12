@@ -3,7 +3,7 @@ $(document).ready(function () {
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/ajax/photos', true);
+	xhr.open('POST', '/ajax/albums', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.setRequestHeader(header, token);
     
@@ -14,22 +14,18 @@ $(document).ready(function () {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		if(xhr.responseText != 0){
-    			fillPublications(JSON.parse(xhr.responseText));
+    			fillAlbums(JSON.parse(xhr.responseText));
     		}
     	}
     }
     xhr.send("n=" + nick);
     
-    function fillPublications(jsonArr){
+    function fillAlbums(jsonArr){
     	let publications = document.getElementById("content");
-    	let postLine;
+    	let postLine = document.createElement("div");
+    	publications.appendChild(postLine);
+    	$(postLine).attr("id", "post-line");
     	for(let i = 0; i < jsonArr.length; i++){
-    		if(i%3 == 0){
-    	    	postLine = document.createElement("div");
-    			publications.appendChild(postLine);
-    	    	$(postLine).attr("id", "post-line");
-    	    	console.log(i);
-    		}
 	    	let imageWrapper = document.createElement("div");
 	    	postLine.appendChild(imageWrapper);
 	    	$(imageWrapper).attr("id", "image-wrapper");
