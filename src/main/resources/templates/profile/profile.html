@@ -143,10 +143,14 @@
             <label class="tab active" id="publications-tab" th:text="#{button.publications}">Публикации</label>
             <label class="tab" id="albums-tab" th:text="#{button.albums}">Альбомы</label>
 			<label class='tab' id="one-album-tab" th:text="#{button.album}">Альбооооооооооом картинкиии</label>
-			<div class="add-photo">
-                <img class="add-photo-camera" th:src="@{/images/camera.png}">
-                <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>
-            </div>
+
+            <a href="#"> <!-- th:href="@{/photo/img-upload(profileId=${profile.id})}" -->
+			    <div class="add-photo">
+                    <img class="add-photo-camera" th:src="@{/images/camera.png}">
+                    <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>
+                </div>
+            </a>
+
         </div>
             <div class="publications" id="content-publications"></div>
             <div class="albums" id="content-album"> </div>
