@@ -1,30 +1,77 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:th="https://www.thymeleaf.org" 
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" th:href="@{/css/profileStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/formStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/imageOverlay.css}">
+    <link rel="stylesheet" th:href="@{/css/polosaStyle.css}"/>
+    <link rel="stylesheet" th:href="@{/css/addPhoto.css}"/>
+    <link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
+    <title>Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer th:src="@{/js/image-preview.js}"></script>
+    <script th:src="@{/js/vertical-menu.js}"></script>
+    <!--<script th:src="@{/js/photoAJAX.js}"></script>-->
 
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>
 <body>
-	<th:block layout:fragment="content">
-		<h1 th:text="#{page.car.image.upload.title}">Car Image Upload</h1>
-
-		<form action="" th:action="@{/photo/img-upload}" method="post" enctype="multipart/form-data">
-			<input type="hidden" th:value="${profileId}" name="profileId">
-            <table>
-                <tr>
-                    <td th:text="#{form.label.file}"></td>
-                    <td><input type="file" name="files" /></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" class="stdBtn" th:value="#{form.label.upload.submit}" /></td>
-                </tr>
-            </table>
-        </form>
-
-
-	</th:block>
-
+<div id="container">
+    <div id="header-wrapper">
+        <div id="polosa">
+            <div id="search-exit">
+                <form id="logoutForm" action="#" th:action="@{/logout}" method="post">
+                    <a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
+                </form>
+                <a th:href="@{/}"><img th:src="@{/images/rfln.png}" alt="" class="logo"></a>
+                <div id="session">
+                    <a th:href = "@{'/user/' + ${nickname}}"><img th:src="@{/images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
+                    <a class="nick-session" id="nickname" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
+                </div>
+                <img th:src="@{/images/rating.png}" class="rate" alt="" >
+                <img th:src="@{/images/date.png}" class="date" alt="" >
+                <input type="text" id="search">
+                <img th:src="@{/images/loupeBackground.png}" class="loupe" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="publications" id="content-publications">
+        <div id="postUpload-wrapper">
+            <h1>Добавление новой фотографии</h1>
+            <form action="" th:action="@{/photo/img-upload}" method="post" enctype="multipart/form-data">
+                <input type="hidden" th:value="${profileId}" name="profileId">
+                <p><div class="divText" data-text="Tags" contenteditable="true" id="postText"></div></p>
+                <p><div class="divText" data-text="Description" contenteditable="true" id="postText"></div></p>
+                <p>
+               <div class="dropdown">
+                   <input type="button" value="Выберите альбом" onclick="myFunction()" class="dropbtn">
+                   <div id="myDropdown" class="dropdown-content">
+                       <a href="#">Ссылка 1</a>
+                       <a href="#">Ссылка 2</a>
+                   </div>
+               </div>
+               </p>
+                 <p><input type="button" class="enter" value="Добавить альбом"></p>
+                <p>
+                 <div id="new-album">
+                    <p><input type="text" placeholder="Имя альбома"></p>
+                    <p><input type="radio" name="album-type"><label>Открытый</label></p>
+                    <p><input type="radio" name="album-type"><label>Для друзей</label></p>
+                    <p><input type="radio" name="album-type"><label>Закрытый</label></p>
+                    <p><input type="button" class="enter" value="Добавить aльбом"></p>
+                 </div>
+                 </p>
+                <p><input type="file" name="files"></p>
+                <div id="image-preview">
+                    <img th:src="@{/images/imagePreviewDefault.jpg}" id="prev" />
+                </div>
+                <input type="submit" class="enter" value="Добавить">
+            </form>
+        </div>
+    </div>
+</div>
 </body>
-
-</html> 
+</html>
