@@ -39,7 +39,6 @@ function fillMarks(jsonArr, photoId){
 }
 
 function paintRatingCircles(avgRating, photoId){
-	console.log(avgRating);
 	circleList = $("#rating-post").find("> #rating-circle");
    	for(let i = 0; i < circleList.length; i++){
    		if(i+1 <= avgRating)

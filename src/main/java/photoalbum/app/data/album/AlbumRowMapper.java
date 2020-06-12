@@ -18,9 +18,14 @@ public class AlbumRowMapper implements RowMapper<Album> {
 		album.setId(rs.getLong("id"));
 		album.setProfileId(rs.getLong("profile_id"));
 		album.setAlbumName(rs.getString("album_name"));
-		album.setNumberOfPhotos(rs.getLong("number_of_photos"));
-		album.setAccesLevel(rs.getString("acces_level"));
-        
+		int accesLevel = rs.getInt("acces_level");
+		if(accesLevel == 0)
+			album.setAccesLevel(AccesLevel.PUBLIC);
+		if(accesLevel == 1)
+			album.setAccesLevel(AccesLevel.FRIENDS);
+		if(accesLevel == 2)
+			album.setAccesLevel(AccesLevel.CLOSE);
+
         return album;
 
 	}

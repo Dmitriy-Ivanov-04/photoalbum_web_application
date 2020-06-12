@@ -27,7 +27,7 @@ public class AlbumStorageDAO implements AlbumStorage {
 
 	@Override
 	public List<Album> findAlbumsByUser(Long profile_id, int accesLevel) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM albums WHERE profile_id = ? AND acces_level = ?");
+		StringBuilder sql = new StringBuilder("SELECT * FROM albums WHERE profile_id = ? AND acces_level <= ?");
 		List<Album> album = jdbcTemplate.query(sql.toString(), new Object[] {profile_id, accesLevel}, new AlbumRowMapper());
 		return album;
 	}
