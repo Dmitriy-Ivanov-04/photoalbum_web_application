@@ -11,8 +11,8 @@ function openImage (src, description, date, id) {
 		addComment(id, $("#commentInput").val());
 	});
 	$("#copyButton").click(function(){
-    	//copyPhoto(id);
-    	$(this).fadeOut(100);
+        copyPhoto(id);
+        $(this).fadeOut(100);
     });
 	$("#lightbox").fadeIn(100);
 }
