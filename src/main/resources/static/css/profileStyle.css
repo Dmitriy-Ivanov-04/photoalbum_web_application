@@ -178,7 +178,7 @@
     font-size: 18px;
     padding-top: 10px;
 }
-#content{
+#content-publications, #content-album, #content-one-album{
     background-color: #f8f8f8;
     margin: 0 auto;
     max-width: 1420px;
@@ -221,9 +221,26 @@ label.tab.active{
     justify-content: space-between;
     padding: 15px;
 }
-#image-wrapper{
+.image-wrapper{
     width: 444px;
     height: 444px;
+}
+.album-wrapper{
+    width: 444px;
+    height: 444px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#album-block{
+    background-color: #c7c7c7;
+}
+.album-name{
+    font-family: 'Roboto', sans-serif;
+    color: #838383;
+    font-size: 24px;
+    text-align: center;
+    vertical-align: middle;
 }
 #image-wrapper img{
     width: 100%;
