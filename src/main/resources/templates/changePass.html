@@ -29,14 +29,9 @@
                 </div>
                 <div id="field3">
                     <input type="password" class="password-input" id="password2" placeholder="Повторите Пароль" name="password" th:field="*{passwordConfirm}">
-                    <input type="password" class="password-input" id="password1" placeholder="Пароль" name="password" th:placeholder="#{placeholder.password}">
                     <a href="#" class="password-control" id="eye1" onclick="showPassword('#password1', '#eye1')"></a>
                 </div>
-                <div id="field3">
-                    <input type="password" class="password-input" id="password2" placeholder="Повторите Пароль" name="password" th:placeholder="#{placeholder.againPassword}">
-                    <a href="#" class="password-control" id="eye2" onclick="showPassword('#password2', '#eye2')"></a>
-                </div>
-                <input type="submit" class="enter" value="Изменить пароль" th:value="#{button.changePass}">
+                <input type="submit" class="enter" value="Изменить пароль" th:value="#{button.changePass}" th:href="@{/login}"> 
             </form>
         </div>
     </div>
