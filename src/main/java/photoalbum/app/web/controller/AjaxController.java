@@ -206,4 +206,9 @@ public class AjaxController {
         ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         albumStorage.insert(profileStorage.getIdByNickname(profileDetails.getNickname()), name, accesLevel);
     }
+	
+	@RequestMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<PhotoJsonDTO> searchByParametrs(@RequestParam("q") String query, @RequestParam("r") int rating, @RequestParam("d") String date) {
+		return photoService.photosByUserAsJson(photoService.searchByParametrs(query, rating, date));
+	}
 }

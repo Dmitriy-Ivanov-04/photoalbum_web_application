@@ -1,4 +1,12 @@
+$(document).ready(function () {
+	circleList = $("#rating-post").find("> #rating-circle");
+	$(circleList).click(function() {
+		rate($(this).index()+1, Number.parseInt(document.getElementById("photo-id").innerHTML));
+	});
+});
+
 function getMarksByPhoto(photoId) {
+	$("#photo-id").innerHTML = photoId;
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;
 	var xhr = new XMLHttpRequest();
@@ -17,9 +25,8 @@ function getMarksByPhoto(photoId) {
     		else{
 	    		let rating = document.getElementById("rating");
 	    		rating.innerHTML = "";
-	    		paintRatingCircles(0, photoId);
+	    		paintRatingCircles(0);
     		}
-    		addClickEvent(photoId);
     	}
     }
     xhr.send("id=" + photoId);
@@ -38,7 +45,7 @@ function fillMarks(jsonArr, photoId){
    	paintRatingCircles(avgRating, photoId);
 }
 
-function paintRatingCircles(avgRating, photoId){
+function paintRatingCircles(avgRating){
 	circleList = $("#rating-post").find("> #rating-circle");
    	for(let i = 0; i < circleList.length; i++){
    		if(i+1 <= avgRating)
@@ -46,19 +53,6 @@ function paintRatingCircles(avgRating, photoId){
    		else
 			$(circleList).eq(i).css("background", "#838383");
    	}
-}
-
-function addClickEvent(photoId){
-	$(circleList).click(function(){
-		let index = $(this).index();
-		/*for(let i = 0; i < $(circleList).length; i++){
-			if($(circleList).eq(i).index() <= index)
-				$(circleList).eq(i).css("background", "#274b69");
-			else
-				$(circleList).eq(i).css("background", "#838383");
-		}*/
-		rate(index+1, photoId);
-	});
 }
 
 function rate(mark, photoId){

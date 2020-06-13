@@ -11,5 +11,6 @@ public interface PhotoService {
 	void deletePhoto(Long id);
 	boolean copyPhoto(Long profileId, Long photoId)  throws IOException;
 	//public List<PhotoJsonDTO> photosByUserAsJson(Long profileId);
-	public List<PhotoJsonDTO> photosByUserAsJson(List<Photo> photos);
+	List<PhotoJsonDTO> photosByUserAsJson(List<Photo> photos);
+	List<Photo> searchByParametrs(String query, int rating, String date);
 }
