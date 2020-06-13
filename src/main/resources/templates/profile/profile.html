@@ -13,7 +13,6 @@
     <title>Profile</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/js/profileScript.js}"></script>
-	<script th:src="@{/js/imageAlign.js}"></script><!-- убрать? -->
 	<script th:src="@{/js/imageOverlay.js}"></script>
 	<script th:src="@{/js/tabScript.js}"></script>
 	<script th:src="@{/js/addFriendScript.js}"></script>
@@ -25,6 +24,7 @@
 	<script th:src="@{/js/albumAJAX.js}"></script>
 	<script th:src="@{/js/copyAJAX.js}"></script>
     <script th:src="@{/js/tcal.js}"></script>
+    <script th:src="@{/js/profileAJAX.js}"></script>
 
 	
 	<meta name="_csrf" th:content="${_csrf.token}" />
@@ -130,7 +130,7 @@
                     <div id="text-profile">
                         <div id="nickPlus">
                             <div id="nickText">
-                               <h1 id="nick" th:text="${nickname}">Nickname</h1>
+                               <h1 id="nick" th:text="${nicknameView}">Nickname</h1>
                             </div>
 							
                             <div class="add-friend" id="addFriend">
@@ -158,7 +158,7 @@
             <label class="tab" id="albums-tab" th:text="#{button.albums}">Альбомы</label>
 			<label class='tab' id="one-album-tab" th:text="#{button.album}">Альбооооооооооом картинкиии</label>
 
-            <a href="#"> <!-- th:href="@{/photo/img-upload(profileId=${profile.id})}" -->
+            <a th:href = "@{'/photo/img-upload?profileId=' + ${profileId}}"> <!-- th:href="@{/photo/img-upload(profileId=${profile.id})}" -->
 			    <div class="add-photo">
                     <img class="add-photo-camera" th:src="@{/images/camera.png}">
                     <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>

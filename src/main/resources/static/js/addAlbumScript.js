@@ -6,6 +6,7 @@ $(document).ready(function () {
 	
 	$("#createAlbumButton").click(function() {
 		createAlbum($("#newAlbumName").val(), getAccesLevel());
+		$("#new-album").fadeOut(100)
 	});
 	
 	function getAccesLevel() {

@@ -94,4 +94,11 @@ public class PhotoStorageDAO implements PhotoStorage{
 		Photo photo = jdbcTemplate.queryForObject(sql.toString(), new Object[] {link}, new PhotoRowMapper());
 		return photo;
 	}
+
+	@Override
+	public int getAccesLevel(Long photoId) {
+		StringBuilder sql = new StringBuilder("SELECT albums.acces_level FROM photos INNER JOIN albums ON photos.album_id=albums.id WHERE photos.id = ?");
+		int accesLevel = jdbcTemplate.queryForObject(sql.toString(), new Object[] {photoId}, int.class);
+		return accesLevel;
+	}
 }

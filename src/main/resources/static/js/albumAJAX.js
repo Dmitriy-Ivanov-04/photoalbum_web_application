@@ -39,6 +39,9 @@ $(document).ready(function () {
 	    	postLine.appendChild(albumWrapper);
 	    	$(albumWrapper).attr("class", "album-wrapper");
 	    	$(albumWrapper).attr("id", "album-block");
+	    	if(i%3 == 1){
+	    		$(albumWrapper).css("margin", "0 20px");
+	    	}
 	    		
 	    	let albumName = document.createElement("span");
 	    	$(albumName).attr("class", "album-name");

@@ -12,7 +12,14 @@ public class PhotoJsonDTO {
 	private String description;
 	private Date date;
 	private String link;
+	private int accesLevel;
 	
+	public int getAccesLevel() {
+		return accesLevel;
+	}
+	public void setAccesLevel(int accesLevel) {
+		this.accesLevel = accesLevel;
+	}
 	public Long getAlbum_id() {
 		return album_id;
 	}
