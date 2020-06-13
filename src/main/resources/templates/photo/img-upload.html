@@ -14,6 +14,8 @@
     <script defer th:src="@{/js/image-preview.js}"></script>
     <script th:src="@{/js/vertical-menu.js}"></script>
     <!--<script th:src="@{/js/photoAJAX.js}"></script>-->
+    <script th:src="@{/js/addAlbumScript.js}"></script>
+    <script th:src="@{/js/addAlbumAJAX.js}"></script>
 
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
@@ -45,28 +47,18 @@
                 <input type="hidden" th:value="${profileId}" name="profileId">
                 <p><input type="text" th:field="*{tags}" class="divText" placeholder="Теги"></p>
                 <p><input type="text" th:field="*{description}" class="divText" placeholder="Описание"></p>
-                <p><input type="text" th:field="*{albumId}" class="divText" placeholder="Альбом"></p>
+                <p><input type="text" th:field="*{albumName}" class="divText" placeholder="Альбом"></p>
 
-                <p>
-               <div class="dropdown">
-                   <input type="button" value="Выберите альбом" onclick="myFunction()" class="dropbtn">
-                   <div id="myDropdown" class="dropdown-content">
-                       <a href="#">Ссылка 1</a>
-                       <a href="#">Ссылка 2</a>
-                   </div>
-               </div>
-               </p>
+                <p><input type="button" class="enter" value="Добавить альбом" id="addAlbumButton"></p>
 
-                 <p><input type="button" class="enter" value="Добавить альбом"></p>
-                <p>
                  <div id="new-album">
-                    <p><input type="text" placeholder="Имя альбома"></p>
+                    <p><input type="text" placeholder="Имя альбома" id="newAlbumName"></p>
                     <p><input type="radio" name="album-type"><label>Открытый</label></p>
                     <p><input type="radio" name="album-type"><label>Для друзей</label></p>
                     <p><input type="radio" name="album-type"><label>Закрытый</label></p>
-                    <p><input type="button" class="enter" value="Добавить aльбом"></p>
+                    <p><input type="button" class="enter" value="Создать aльбом" id="createAlbumButton"></p>
                  </div>
-                 </p>
+
                 <p><input type="file" name="files"></p>
                 <div id="image-preview">
                     <img th:src="@{/images/imagePreviewDefault.jpg}" id="prev" />

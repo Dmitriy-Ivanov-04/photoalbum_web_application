@@ -200,4 +200,10 @@ public class AjaxController {
 	public List<PhotoJsonDTO> photoListByAlbum(@PathVariable Long albumId) {
 		return photoService.photosByUserAsJson(photoStorage.getPhotosByAlbum(albumId));
 	}
+	
+	@RequestMapping(value = "/create-album")
+    public void createAlbum(@RequestParam("n") String name, @RequestParam("l") int accesLevel) throws IOException {
+        ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        albumStorage.insert(profileStorage.getIdByNickname(profileDetails.getNickname()), name, accesLevel);
+    }
 }

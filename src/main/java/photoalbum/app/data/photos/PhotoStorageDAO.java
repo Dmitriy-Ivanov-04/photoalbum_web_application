@@ -87,4 +87,11 @@ public class PhotoStorageDAO implements PhotoStorage{
 		Photo photo = jdbcTemplate.queryForObject(sql.toString(), new Object[] {photoId}, new PhotoRowMapper());
 		return photo.getProfile_id();
 	}
+
+	@Override
+	public Photo getPhotoByLink(String link) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE link_photo = ?");
+		Photo photo = jdbcTemplate.queryForObject(sql.toString(), new Object[] {link}, new PhotoRowMapper());
+		return photo;
+	}
 }

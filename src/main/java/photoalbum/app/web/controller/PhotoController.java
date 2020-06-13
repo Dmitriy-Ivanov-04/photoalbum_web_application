@@ -46,9 +46,6 @@ public class PhotoController {
     @PostMapping("/photo/img-upload")
     public ModelAndView avatarUploadProcessing(@RequestParam("files") MultipartFile[] files, @RequestParam("profileId") Optional<Long> profileId,
                                                ModelAndView modelAndView, Model model, @ModelAttribute("uploadForm") UploadForm uploadForm) {
-        System.out.println(uploadForm.getTags());
-        System.out.println(uploadForm.getDescription());
-        System.out.println(uploadForm.getAlbumId());
 	    modelAndView.setViewName("redirect:/");
 
         //if (profileId.isPresent()) {
@@ -56,7 +53,7 @@ public class PhotoController {
 
         	if (profile != null) {
                 for (MultipartFile multipartFile : files) {
-                	if (!photoService.savePhoto(multipartFile, profileId.get())) {
+                	if (!photoService.savePhoto(multipartFile, profileId.get(), uploadForm)) {
                 		modelAndView.setViewName("redirect:/photo/upload-error");
                 		break;
                 	}

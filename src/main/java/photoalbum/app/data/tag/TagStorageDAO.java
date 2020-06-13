@@ -24,7 +24,7 @@ public class TagStorageDAO implements TagStorage{
 
 	@Override
 	public void add(Long photoId, String value) {
-		String insertQuery = "INSERT INTO tags (photo_id, value) VALUES (?, ?)"; //value или  tag???
+		String insertQuery = "INSERT INTO tags (photo_id, value) VALUES (?, ?)";
 		Object[] data = new Object[] {photoId, value};
 		int rowAffected = jdbcTemplate.update(insertQuery, data);
 		

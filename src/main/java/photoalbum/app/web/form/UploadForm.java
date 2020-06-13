@@ -6,33 +6,33 @@ public class UploadForm {
     @NotNull
     private String tags;
 
-    @NotNull
+	@NotNull
     private String description;
 
     @NotNull
-    private Long albumId;
+    private String albumName;
 
     public String getTags() {
-        return tags;
-    }
+		return tags;
+	}
 
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Long getAlbumId() {
-        return albumId;
-    }
+	public String getAlbumName() {
+		return albumName;
+	}
 
-    public void setAlbumId(Long albumId) {
-        this.albumId = albumId;
-    }
+	public void setAlbumName(String albumName) {
+		this.albumName = albumName;
+	}
 }

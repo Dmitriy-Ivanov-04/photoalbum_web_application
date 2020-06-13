@@ -3,6 +3,7 @@ package photoalbum.app.domain.tag;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import photoalbum.app.data.TagStorage;
 import photoalbum.app.domain.dto.TagJsonDTO;
@@ -10,6 +11,7 @@ import photoalbum.app.domain.model.Tag;
 @Service
 public class TagServiceDomain implements TagService{
 	
+	@Autowired
 	TagStorage tagStorage;
 	
 	@Override

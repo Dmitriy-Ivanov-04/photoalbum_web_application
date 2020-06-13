@@ -19,17 +19,6 @@ public class AlbumServiceDomain implements AlbumService {
 	AlbumStorage albumStorage;
 
 	@Override
-	public List<Album> getAlbumListByUser(Long profileId) {
-		return null;
-		//return albumStorage.findAlbumsByUser(profileId);
-	}
-
-	@Override
-	public void insertAlbum(Long profileId, String albumName, int numberOfPhotos, AccesLevel accesLevel) {
-		albumStorage.insert(profileId, albumName, numberOfPhotos, accesLevel);		
-	}
-
-	@Override
 	public void updateAlbum(Long id, Long profileId, String albumName, int numberOfPhotos, AccesLevel accesLevel) {
 		albumStorage.update(id, profileId, albumName, numberOfPhotos, accesLevel);
 	}

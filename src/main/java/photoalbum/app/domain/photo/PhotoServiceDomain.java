@@ -16,9 +16,12 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.domain.dto.PhotoJsonDTO;
 import photoalbum.app.domain.model.Photo;
+import photoalbum.app.domain.tag.TagService;
+import photoalbum.app.web.form.UploadForm;
 
 @Service
 public class PhotoServiceDomain implements PhotoService{
@@ -27,24 +30,12 @@ public class PhotoServiceDomain implements PhotoService{
 	
 	@Autowired
 	PhotoStorage photoStorage;
-
-	@Override
-	public List<Photo> getPhotoListByUser(Long profileId) {
-		//photoStorage.getPhotosByUser(profileId);
-		return null;
-	}
-
-	@Override
-	public List<Photo> getPhotoListByAlbum(Long albumId) {
-		photoStorage.getPhotosByAlbum(albumId);
-		return null;
-	}
-
-	@Override
-	public List<Photo> getPhotoListByRating(float rating) {
-		photoStorage.getPhotosByRating(rating);
-		return null;
-	}
+	
+	@Autowired
+	AlbumStorage albumStorage;
+	
+	@Autowired
+	TagService tagService;
 
 	@Override
 	public void uploadPhoto(Long profileId, Long albumId, String description, String link) {
@@ -54,11 +45,6 @@ public class PhotoServiceDomain implements PhotoService{
 	@Override
 	public void deletePhoto(Long id) {
 		photoStorage.delete(id);	
-	}
-
-	@Override
-	public void copyPhoto(Long photoId, Long profileId, Long albumId) {
-		//photoStorage.upload(profileId, albumId, photoStorage.getPhotoById(photoId).getDescription());		
 	}
 
 	@Override
@@ -96,7 +82,7 @@ public class PhotoServiceDomain implements PhotoService{
 
 	}
 	
-	public boolean savePhoto(MultipartFile multipartFile, Long profileId) {
+	public boolean savePhoto(MultipartFile multipartFile, Long profileId, UploadForm uploadForm) {
 		boolean result = true;
 		String randomName = UUID.randomUUID().toString();
 		String filePath = photoDirPath + File.separator + profileId + File.separator;
@@ -111,8 +97,10 @@ public class PhotoServiceDomain implements PhotoService{
 			String fullFilePath = filePath + orgName;
 
 			File dest = new File(fullFilePath);
-			uploadPhoto(profileId, (long) 1, "description", orgName);
 			multipartFile.transferTo(dest);
+			uploadPhoto(profileId, albumStorage.getAlbumByNameAndUser(uploadForm.getAlbumName(), profileId).getId(), uploadForm.getDescription(), orgName);
+			tagService.addTags(photoStorage.getPhotoByLink(orgName).getId(), uploadForm.getTags());
+
 
 		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());

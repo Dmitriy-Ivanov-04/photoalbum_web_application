@@ -15,4 +15,5 @@ public interface PhotoStorage {
 	void delete(Long id);
 	int countPublicationsByUser(Long profileId);
 	Long getProfileIdByPhoto(Long photoId);
+	Photo getPhotoByLink(String link);
 }
