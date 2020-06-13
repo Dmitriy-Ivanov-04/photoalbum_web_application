@@ -1,4 +1,4 @@
-function openImage (src, description, date, id) {
+function openImage (src, description, date, id, accesLevel) {
 	let currentImage = $("#lightbox").find(".lightboxImage");
 	$(currentImage).attr("src", src);
 	document.getElementById("descriptionP").innerHTML = description;
@@ -7,9 +7,10 @@ function openImage (src, description, date, id) {
 	getCommentsByPhoto(id);
 	getMarksByPhoto(id);
 	$("#commentButton").click(function() {
-		console.log($("#commentInput").val());
 		addComment(id, $("#commentInput").val());
 	});
+	if(accesLevel != 0)
+		$("#copyButton").hide();
 	$("#copyButton").click(function(){
         copyPhoto(id);
         $(this).fadeOut(100);
