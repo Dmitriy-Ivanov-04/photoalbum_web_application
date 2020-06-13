@@ -63,3 +63,44 @@ a{
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
 }
+.tcal{
+    float: right;
+    margin-top: 15px;
+    margin-left: 10px;
+    outline: none;
+}
+/*rating*/
+
+/* Контейнер <div> - необходим для размещения выпадающего содержимого */
+.rating-menu {
+    float: right;
+    position: relative;
+    display: inline-block;
+}
+
+/* Выпадающее содержимое (скрыто по умолчанию) */
+.rating-menu-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 55px;
+    left: 10px;
+    border-radius: 5px;
+}
+
+/* Ссылки внутри выпадающего списка */
+.rating-menu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Изменение цвета выпадающих ссылок при наведении курсора */
+.rating-menu-content a:hover {background-color: #ddd;}
+
+/* Показать выпадающее меню при наведении курсора */
+.rating-menu:hover .rating-menu-content {display: block;}
