@@ -229,11 +229,6 @@
     max-width: 1420px;
     border-radius: 0 10px 0 0;
 }
-.content-img{
-    margin-top: 2.113%;
-    margin-left: 2.113%;
-    /*min-height: 400px; а если картинка очень длинная*/
-}
 .album-img{
     margin-top: 2.113%;
     margin-left: 2.113%;    
@@ -263,7 +258,7 @@ label.tab.active{
 }
 #post-line{
     display: flex;
-    padding: 15px;
+    padding: 15px 23px;
 }
 #image-wrapper{
     width: 444px;
@@ -291,8 +286,11 @@ label.tab.active{
     height: 100%;
     object-fit: cover;
 }
-.middle{
-    margin: 0 20px;
+.second{
+    margin-left: 20px;
+}
+.third{
+    margin-left: 40px;
 }
 /*
 #overlay{
