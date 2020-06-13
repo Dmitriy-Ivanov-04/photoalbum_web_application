@@ -7,9 +7,6 @@ $(document).ready(function () {
 	for(let i = 0; i < groups.length; i++){
 		groupAJAX($(groups[i]).attr("id"));
 	}
-	//groupAJAX("friends");
-	//groupAJAX("followers");
-	//groupAJAX("subscriptions");
 	
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/ajax/my-profile', true);
@@ -27,7 +24,6 @@ $(document).ready(function () {
     	}
     }
     xhr.send("n=" + nick);
-
 	
 	function groupAJAX(divId){
 		var xhr = new XMLHttpRequest();
@@ -49,27 +45,7 @@ $(document).ready(function () {
 	    }
 	    xhr.send("n=" + nick);
 	}
-    /*
-    function fillList1(divId, jsonArr){
-    	let group = document.getElementById(divId);
-    	for(let i = 0; i < jsonArr.length; i++){
-    		$(group).find("#start").after('<div id="profile-block">'
-	        + '<div id="f-avatar">'
-	        	+ '<img src="/images/avatar.png" alt="" width="100px" height="100px">' //th:src="@{/images/avatar.png}"  //добавить ссылку на аву, когда сделаем 
-	        + '</div>'
-	        + '<div id="nick-name">'
-		        + '<a href="#" class="nick-post"><p>' + jsonArr[i].nickname + '</p></a>'
-		        + '<a href="#" class="name-people">' + jsonArr[i].fullName + '</a>'
-	        + '</div>'
-	        + '<div id="actions">'
-		        + '<img src="/images/cross.png" alt="">'//th:src="@{/images/cross.png}"
-	        + '</div>'
-        + '</div>'
-        + '<hr>'
-    	);
-    	}
-    }
-    */
+
     function fillList(divId, jsonArr){
     	let group = document.getElementById(divId);
     	for(let i = 0; i < jsonArr.length; i++){

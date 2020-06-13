@@ -38,11 +38,13 @@ public class ProfileController {
 	public String profile(Model model, @PathVariable String nickname) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long profileId = profileStorage.getIdByNickname(nickname);
-		model.addAttribute("nickname", nickname);
+		model.addAttribute("nickname", profileDetails.getNickname());
+		model.addAttribute("nicknameView", nickname);
 		model.addAttribute("publications", photoStorage.countPublicationsByUser(profileId));
 		model.addAttribute("friends", relationshipsStorage.findFriends(profileId).size());
 		model.addAttribute("followers", relationshipsStorage.findFollowers(profileId).size());
 		model.addAttribute("subscribes", relationshipsStorage.findSubscriptions(profileId).size());
+		model.addAttribute("profileId", profileId);
 		
 		model.addAttribute("deleteFriend", "Delete friend");
 		//relationshipsServise.buttonText(profileStorage.getIdByNickname(profileDetails.getNickname()), profileId);

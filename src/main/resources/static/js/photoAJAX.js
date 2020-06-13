@@ -1,4 +1,6 @@
-$(document).ready(function () {	
+$(document).ready(function () {
+	let flag = profileCheck();
+	console.log(flag);
 	var nick = document.getElementById("nick").innerHTML;
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;
@@ -14,14 +16,14 @@ $(document).ready(function () {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		if(xhr.responseText != 0){
-    			fillContentDiv(JSON.parse(xhr.responseText), "content-publications");
+    			fillContentDiv(JSON.parse(xhr.responseText), "content-publications", flag);
     		}
     	}
     }
     xhr.send("n=" + nick);
 });
 
-function fillContentDiv(jsonArr, divToFill){
+function fillContentDiv(jsonArr, divToFill, flag){
 	let contentDiv = document.getElementById(divToFill);
 	contentDiv.innerHTML = "";
 	let postLine;
@@ -40,9 +42,15 @@ function fillContentDiv(jsonArr, divToFill){
     	$(img).attr("class", "content-img");
     	let src = "/img/" + jsonArr[i].id;
     	$(img).attr("src", "/img/" + jsonArr[i].id);
+    	if(i%3 == 1){
+    		$(img).attr("class", "middle");
+    	}
     		
     	$(img).click(function (){
-    		openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id);
+    		//console.log(flag);
+    		if(flag)
+    			$("#copyButton").show();
+    		openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id, jsonArr[i].accesLevel);
     	});
 	}
 }

@@ -45,25 +45,25 @@
             <h1>Добавление новой фотографии</h1>
             <form action="" th:action="@{/photo/img-upload}" method="post" enctype="multipart/form-data" th:object="${uploadForm}">
                 <input type="hidden" th:value="${profileId}" name="profileId">
-                <p><input type="text" th:field="*{tags}" class="divText" placeholder="Теги"></p>
-                <p><input type="text" th:field="*{description}" class="divText" placeholder="Описание"></p>
-                <p><input type="text" th:field="*{albumName}" class="divText" placeholder="Альбом"></p>
+                <p><input type="text" th:field="*{tags}" class="divText" placeholder="Теги" th:placeholder="#{placeholder.tags}"></p>
+                <p><input type="text" th:field="*{description}" class="divText" placeholder="Описание" th:placeholder="#{placeholder.description}"></p>
+                <p><input type="text" th:field="*{albumName}" class="divText" placeholder="Альбом" th:placeholder="#{placeholder.album}"></p>
 
-                <p><input type="button" class="enter" value="Добавить альбом" id="addAlbumButton"></p>
+                <p><input type="button" class="enter" value="Добавить альбом" id="addAlbumButton" th:value="#{button.addAlbum}"></p>
 
                  <div id="new-album">
                     <p><input type="text" placeholder="Имя альбома" id="newAlbumName"></p>
-                    <p><input type="radio" name="album-type"><label>Открытый</label></p>
-                    <p><input type="radio" name="album-type"><label>Для друзей</label></p>
-                    <p><input type="radio" name="album-type"><label>Закрытый</label></p>
-                    <p><input type="button" class="enter" value="Создать aльбом" id="createAlbumButton"></p>
+                    <p><input type="radio" name="album-type"><label th:text="#{label.open}">Открытый</label></p>
+                    <p><input type="radio" name="album-type"><label th:text="#{label.forFriends}">Для друзей</label></p>
+                    <p><input type="radio" name="album-type"><label th:text="#{label.closed}">Закрытый</label></p>
+                    <p><input type="button" class="enter" value="Создать aльбом" th:value="#{button.createAlbum}" id="createAlbumButton"></p>
                  </div>
 
-                <p><input type="file" name="files"></p>
+                <p><input type="file" name="files" value="Загрузить картинку" th:value="#{button.select}"></p>
                 <div id="image-preview">
                     <img th:src="@{/images/imagePreviewDefault.jpg}" id="prev" />
                 </div>
-                <input type="submit" class="enter" value="Добавить">
+                <input type="submit" class="enter" value="Добавить" th:value="#{submit.addImage}">
             </form>
         </div>
     </div>

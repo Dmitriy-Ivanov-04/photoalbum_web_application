@@ -16,4 +16,5 @@ public interface PhotoStorage {
 	int countPublicationsByUser(Long profileId);
 	Long getProfileIdByPhoto(Long photoId);
 	Photo getPhotoByLink(String link);
+	int getAccesLevel(Long photoId);
 }

@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,6 +65,7 @@ public class PhotoServiceDomain implements PhotoService{
 				photoDTO.setDescription(photo.getDescription());
 				photoDTO.setDate(photo.getDate());
 				photoDTO.setLink(photo.getLink_photo());
+				photoDTO.setAccesLevel(photoStorage.getAccesLevel(photo.getId()));
 				
 				photosJson.add(photoDTO);
 			}
@@ -146,7 +148,15 @@ public class PhotoServiceDomain implements PhotoService{
 			String fullFilePath = filePath + orgName;
 
 			copyFile(photoPath, fullFilePath);
-			uploadPhoto(profileId, (long) 1, "description", orgName);
+			
+			Long copyAlbumId;
+			try{
+				copyAlbumId = albumStorage.getAlbumByNameAndUser("Copied photos", profileId).getId();
+			} catch (EmptyResultDataAccessException e){
+				albumStorage.insert(profileId, "Copied photos", 2);
+				copyAlbumId = albumStorage.getAlbumByNameAndUser("Copied photos", profileId).getId();
+			}
+			uploadPhoto(profileId, copyAlbumId, photoStorage.getPhotoById(photoId).getDescription(), orgName);
 
 		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());
