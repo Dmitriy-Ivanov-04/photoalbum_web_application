@@ -154,25 +154,6 @@ public class ProfileServiceDomain implements ProfileService {
         return true;
 	}
 	
-	
-
-	/*@Override
-	public boolean fourCodePasswordRecovery(String code) {
-		
-		Profile user = profileStorage.findByActivationCode(code);
-		
-		if (user == null) {
-            return false;
-        }
-		
-		user.setPassword(bCrypt.encode(codeForm.getPassword()));
-        user.setActivationCode(null);
-        
-        profileStorage.save(user);
-
-        return true;
-	}*/
-
 	@Override
 	public boolean saveCodeForCodeForm(CodeForm codeForm) {
 		
