@@ -1,3 +1,10 @@
+$(document).ready(function () {
+	$("#copyButton").click(function(){
+        copyPhoto(Number.parseInt(document.getElementById("photo-id").innerHTML));
+        $(this).fadeOut(100);
+    });
+});
+
 function copyPhoto(photoId) {
     var token = document.head.querySelector("meta[name='_csrf']").content;
     var header = document.head.querySelector("meta[name='_csrf_header']").content;

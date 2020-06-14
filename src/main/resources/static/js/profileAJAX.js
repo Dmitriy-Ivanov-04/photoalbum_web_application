@@ -1,4 +1,4 @@
-function profileCheck() {
+function profileCheck() {//не используется
 	var nick = document.getElementById("nick").innerHTML;
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;

@@ -1,3 +1,10 @@
+$(document).ready(function () {
+	$("#commentButton").click(function() {
+		addComment(Number.parseInt(document.getElementById("photo-id").innerHTML), $("#commentInput").val());
+	});
+});
+
+
 function getCommentsByPhoto(photoId) {
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;
@@ -65,8 +72,7 @@ function fillComments(jsonArr){
    		let commentText = document.createElement("div");
    		comment.appendChild(commentText);
    		$(commentText).attr("id", "comment-text");
-   		/*let textP = document.createElement("p"); //p не помогает
-   		commentText.appendChild(textP);*/
+   		
    		let text = document.createTextNode(jsonArr[i].text);
    		commentText.appendChild(text);
    	}

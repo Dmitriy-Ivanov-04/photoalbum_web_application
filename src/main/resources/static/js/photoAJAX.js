@@ -1,6 +1,4 @@
 $(document).ready(function () {
-	let flag = profileCheck();
-	console.log(flag);
 	var nick = document.getElementById("nick").innerHTML;
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;
@@ -16,14 +14,14 @@ $(document).ready(function () {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		if(xhr.responseText != 0){
-    			fillContentDiv(JSON.parse(xhr.responseText), "content-publications", flag);
+    			fillContentDiv(JSON.parse(xhr.responseText), "content-publications");
     		}
     	}
     }
     xhr.send("n=" + nick);
 });
 
-function fillContentDiv(jsonArr, divToFill, flag){
+function fillContentDiv(jsonArr, divToFill){
 	let contentDiv = document.getElementById(divToFill);
 	contentDiv.innerHTML = "";
 	let postLine;
@@ -49,9 +47,7 @@ function fillContentDiv(jsonArr, divToFill, flag){
 		}
     		
     	$(img).click(function (){
-    		//console.log(flag);
-    		if(flag)
-    			$("#copyButton").show();
+    		$("#copyButton").show();
     		openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id, jsonArr[i].accesLevel);
     	});
 	}

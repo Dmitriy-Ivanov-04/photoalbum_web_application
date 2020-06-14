@@ -7,15 +7,8 @@ function openImage (src, description, date, id, accesLevel) {
 	getTagsByPhoto(id);
 	getCommentsByPhoto(id);
 	getMarksByPhoto(id);
-	$("#commentButton").click(function() {
-		addComment(id, $("#commentInput").val());
-	});
 	if(accesLevel != 0)
 		$("#copyButton").hide();
-	$("#copyButton").click(function(){
-        copyPhoto(id);
-        $(this).fadeOut(100);
-    });
 	$("#lightbox").fadeIn(100);
 }
     
