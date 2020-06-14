@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script th:src="@{https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js}"></script>
     <script th:src="@{/js/showPass.js}"></script>
-    <script defer th:src="@{/js/registrationScript.js}"></script>
     <script defer th:src="@{/js/notification.js}"></script>
+    <script th:src="@{/js/inputEmptyValid.js}"></script>
 </head>
 <body>
     <div id="container">
@@ -24,24 +24,24 @@
                </div>
                <div id="input-wrapper">
                    <div id="input-left">
-                       <input type="text" placeholder="Имя" th:field="*{firstName}" th:placeholder="#{placeholder.name}">
-                       <input type="text" placeholder="Фамилия" th:field="*{lastName}" th:placeholder="#{placeholder.NAME}">
-                       <input type="text" placeholder="Псевдоним" th:field="*{nickname}" th:placeholder="#{placeholder.nickname}">
+                       <input type="text" class="rfield" placeholder="Имя" th:field="*{firstName}" th:placeholder="#{placeholder.name}" required>
+                       <input type="text"  class="rfield" placeholder="Фамилия" th:field="*{lastName}" th:placeholder="#{placeholder.NAME}" required>
+                       <input type="text"  class="rfield" placeholder="Псевдоним" th:field="*{nickname}" th:placeholder="#{placeholder.nickname}" required>
                    </div>
                    <div id="input-right">
-                        <input type="text" placeholder="Email" th:field="*{email}">
+                        <input type="email" class="rfield" placeholder="Email" th:field="*{email}" required>
                         <div id="pass-wrapper">
-                            <input type="password" id="password1" placeholder="Пароль" name="password" th:field="*{password}" th:placeholder="#{placeholder.password}">
+                            <input type="password" class="rfield" id="password1" placeholder="Пароль" name="password" th:field="*{password}" th:placeholder="#{placeholder.password}" required>
                             <a href="#" class="password-control" id="eye1"  onclick="showPassword('#password1', '#eye1')"></a>
                         </div>
                         <div id="pass-wrapper">
-                            <input type="password" id="password2" placeholder="Повторите пароль" name="password" th:field="*{passwordConfirm}" th:placeholder="#{placeholder.againPassword}">
+                            <input type="password" class="rfield" id="password2" placeholder="Повторите пароль" name="password" th:field="*{passwordConfirm}" th:placeholder="#{placeholder.againPassword}" required>
                             <a href="#" class="password-control" id="eye2" onclick="showPassword('#password2', '#eye2')"></a>
                         </div>
                    </div> 
                </div>
                 <div id="field3">
-                   <input type="submit" class="enter" value="Зарегестрироваться" th:value="#{registration}">
+                   <input type="submit" class="enter disabled" value="Зарегестрироваться" th:value="#{registration}" id="button">
                 </div>
             </form>
         </div>

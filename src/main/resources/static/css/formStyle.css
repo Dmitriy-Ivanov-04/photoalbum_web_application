@@ -11,6 +11,9 @@ input::-webkit-input-placeholder{
     font-size: 24px;
     color: #c7c7c7;
 }
+.req:invalid {
+    border-color: red;
+}
 input{
     padding-left: 30px;
     border: solid #c7c7c7 1px;
@@ -22,6 +25,7 @@ input{
     font-size: 24px;
     color: #838383;
 }
+
 input[type="submit"]{
     padding-left: 0;
 }
