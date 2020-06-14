@@ -48,7 +48,7 @@ public class PhotoController {
                                                ModelAndView modelAndView, Model model, @ModelAttribute("uploadForm") UploadForm uploadForm) {
 	    modelAndView.setViewName("redirect:/");
 
-        //if (profileId.isPresent()) {
+        if (profileId.isPresent()) {
         	Profile profile = profileService.findById(profileId.get());
 
         	if (profile != null) {
@@ -59,13 +59,15 @@ public class PhotoController {
                 	}
                 }
         	}
-        //}
+        }
 
         return modelAndView;
     }       
 
     @GetMapping("/photo/upload-error")
-    public String uploadError() {
+    public String uploadError(Model model) {
+        ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("nickname", profileDetails.getNickname());
         return "/photo/upload-error";
     }
     
