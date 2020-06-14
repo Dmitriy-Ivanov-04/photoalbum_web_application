@@ -35,4 +35,6 @@ public interface ProfileStorage {
 	Profile loadById(Long profileId);
 	
 	Profile findByEmail(String email);
+	
+	String findEmailById(Long id);
 }

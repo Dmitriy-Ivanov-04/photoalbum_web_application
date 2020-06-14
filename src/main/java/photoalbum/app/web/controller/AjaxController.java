@@ -1,7 +1,6 @@
 package photoalbum.app.web.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +30,11 @@ import photoalbum.app.domain.dto.PhotoJsonDTO;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.dto.TagJsonDTO;
 import photoalbum.app.domain.mark.MarkService;
-import photoalbum.app.domain.model.Photo;
 import photoalbum.app.domain.model.Relationships;
 import photoalbum.app.domain.model.Status;
 import photoalbum.app.domain.photo.PhotoService;
 import photoalbum.app.domain.photo.PhotoServiceDomain;
 import photoalbum.app.domain.profile.ProfileService;
-import photoalbum.app.domain.profile.ProfileServiceDomain;
 import photoalbum.app.domain.relationships.RelationshipsService;
 import photoalbum.app.domain.tag.TagService;
 import photoalbum.app.spring.ProfileDetailsImpl;
@@ -45,6 +42,7 @@ import photoalbum.app.spring.ProfileDetailsImpl;
 @RestController
 @RequestMapping("/ajax")
 public class AjaxController {
+	
 	@Autowired
 	RelationshipsStorage relationshipsStorage;
 	
@@ -166,19 +164,21 @@ public class AjaxController {
 	public List<MarkJsonDTO> rate(@RequestParam("m") int mark, @RequestParam("id") Long photoId) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long authorId = profileStorage.getIdByNickname(profileDetails.getNickname());
+		
 		try {
-			markStorage.getMarkByPhotoAndUser(photoId, authorId);
-			markStorage.change(photoId, authorId, mark);
-		}catch(EmptyResultDataAccessException e) {
-			markStorage.add(photoId, authorId, mark);
+			markService.findMarkByUserAndPhoto(photoId, authorId);
+			markService.changeMark(photoId, authorId, mark);
+		} catch(EmptyResultDataAccessException e) {
+			markService.addMark(photoId, authorId, mark);
 		}
+		
 		return markService.marksByPhotoAsJson(markStorage.getMarksByPhoto(photoId));
 	}
 	
 	@RequestMapping(value = "/comments/add", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<CommentJsonDTO> addComment(@RequestParam("id") Long photoId, @RequestParam("t") String text) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		commentStorage.add(photoId, profileStorage.getIdByNickname(profileDetails.getNickname()), text);
+		commentService.addComment(photoId, profileStorage.getIdByNickname(profileDetails.getNickname()), text);
 		return commentService.commentsByPhotoAsJson(commentStorage.getCommentsByPhoto(photoId));
 	}
 	

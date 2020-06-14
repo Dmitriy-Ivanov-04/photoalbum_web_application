@@ -1,6 +1,5 @@
 package photoalbum.app.data.comment;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -12,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import photoalbum.app.data.CommentStorage;
 import photoalbum.app.domain.model.Comment;
+
 @Repository
 public class CommentStorageDAO implements CommentStorage {
 	
