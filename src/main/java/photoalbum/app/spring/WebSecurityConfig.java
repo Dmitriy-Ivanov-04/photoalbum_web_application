@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/", "/login/**","/profile/registration/**","/recovery","/change_password",
 					"/friend_list","/registration_notification", "/confirm", "/activate/**", "/user/{nickname}",
-					"/change_password/*","/recovery/*","/css/**", "/images/**", "/js/**").permitAll()
+					"/change_password/*","/search","/recovery/*","/css/**", "/images/**", "/js/**").permitAll()
 			.anyRequest().authenticated()
 			.and().exceptionHandling().accessDeniedPage("/access-denied")			
 			.and().formLogin().loginPage("/login").permitAll()

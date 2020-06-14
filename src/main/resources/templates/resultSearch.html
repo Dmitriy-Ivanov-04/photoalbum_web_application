@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" th:href="@{css/resultSearchStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/profileStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/resultSearchStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/polosaStyle.css}"/>
+    <link rel="stylesheet" th:href="@{/css/tcal.css}">
 	<link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
     <title>Search</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{js/searchScript.js}"></script>
 	<script defer th:src="@{js/imageAlign.js}"></script>
 	<script th:src="@{js/tabScript.js}"></script>
+    <script th:src="@{/js/tcal.js}"></script>
 </head>
 <body>
     <div id="container">
         <div id="header-wrapper">
             <div id="polosa">
                 <div id="search-exit">
-                  <a href="#" th:href="/logout" th:text="#{button.exit}" class="exit">Выйти</a>
+                  <a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
                     <a th:href="@{/}"><img th:src="@{images/rfln.png}" alt="" class="logo"></a>
-                   <div id="session">
+                   <!--<div id="session">
                        <a th:href = "@{'/user/' + ${nickname}}"><img th:src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
                        <a class="nick-session" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
-                    </div>
+                    </div>-->
                    <img th:src="@{images/rating.png}" class="rate" alt="" >
                    <img th:src="@{images/date.png}" class="date" alt="" >
                    <input type="text" id="search">
@@ -31,34 +33,12 @@
                 </div>
             </div>
         </div>
-        <div id="content-wrapper">
-            <div id="content-menu-wrapper">
-            <label class="tab active" id="publications-tab" th:text="#{button.publications}">Публикации</label>
-            <label class="tab" id="albums-tab" th:text="#{button.albums}">Альбомы</label>
-			<label class='tab' id="one-album-tab" th:text="#{button.albuuuumssss}">Альбоооооооом картинки</label>
+		<div class="publications" id="content-publications">
+
         </div>
-		<div class="publications" id="content">
-            <img src="https://dummyimage.com/768x490/000/fff" class="content-img" alt="">
-            <img src="https://dummyimage.com/251x242/000/fff" class="content-img" alt="">
-            <img src="https://dummyimage.com/1200x806/000/fff" class="content-img" alt="">
-            <img src="https://dummyimage.com/3840x2052/000/fff" class="content-img" alt="">
-            <img src="https://dummyimage.com/340x260/000/fff" class="content-img" alt="">
-            <img src="https://dummyimage.com/400x200/000/fff" class="content-img" alt="">
-            <img src="https://dummyimage.com/500x500/000/fff" class="content-img" alt="">
-			<img src="https://dummyimage.com/1000x700/000/fff" class="content-img" alt="">
-			<img src="https://dummyimage.com/601x400/000/fff" class="content-img" alt="">
-        </div>
-        <div class="albums" id="content">
-            <img src="https://dummyimage.com/345x500/000/fff" class="album-img" alt="">
-            <img src="https://dummyimage.com/750x500/000/fff" class="album-img" alt="">
-        </div>
-		<div class="one-album" id="content">
-            <img src="https://dummyimage.com/500x333/ff3399/fff" class="content-img" alt="">
-            <img src="https://dummyimage.com/250x666/99ff33/fff" class="content-img" alt="">
-        </div>
-        <div class="overlay">
+        <!--<div class="overlay">
             <img src="" class="open-img">
-        </div>
+        </div>-->
         </div>
     </div>
 </body>
