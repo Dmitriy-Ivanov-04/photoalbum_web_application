@@ -10,7 +10,6 @@ $(document).ready(function () {
 	searchInput.addEventListener('keypress', function (e) {
 	    if (e.key === 'Enter'/* && $(searchInput).val() != ""*/) {
 	      search($(searchInput).val(), rating, $("#dateSelector").val());
-	      //console.log($("#dateSelector").val().split("/"));
 	    }
 	});
 });
@@ -30,9 +29,41 @@ function search(query, rating, date){
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		if(xhr.responseText != 0){
-    			console.log(JSON.parse(xhr.responseText));
+    			fillContentDiv(JSON.parse(xhr.responseText));
     		}
     	}
     }
     xhr.send("q=" + query + "&r=" + rating + "&d=" + date);
+}
+
+function fillContentDiv(jsonArr){
+	let contentDiv = document.getElementById("content-publications");
+	contentDiv.innerHTML = "";
+	let postLine;
+	for(let i = 0; i < jsonArr.length; i++){
+		if(i%3 == 0){
+	    	postLine = document.createElement("div");
+	    	contentDiv.appendChild(postLine);
+	    	$(postLine).attr("id", "post-line");
+		}
+    	let imageWrapper = document.createElement("div");
+    	postLine.appendChild(imageWrapper);
+    	$(imageWrapper).attr("id", "image-wrapper");
+    		
+    	let img = document.createElement("img");
+    	imageWrapper.appendChild(img);
+    	let src = "/img/" + jsonArr[i].id;
+    	$(img).attr("src", "/img/" + jsonArr[i].id);
+    	if(i%3 == 1){
+    		$(img).attr("class", "second");
+    	}
+		if(i%3 == 2){
+			$(img).attr("class", "third");
+		}
+    		
+    	$(img).click(function (){
+    		$("#copyButton").show();
+    		openImage(src, jsonArr[i].description, jsonArr[i].date, jsonArr[i].id, jsonArr[i].accesLevel);
+    	});
+	}
 }

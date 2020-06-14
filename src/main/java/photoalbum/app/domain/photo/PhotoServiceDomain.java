@@ -175,9 +175,7 @@ public class PhotoServiceDomain implements PhotoService{
 		List<Photo> photos = photoStorage.getPhotosByParametrs(query, date);
 		if(rating > 0) {
 			for(int i = 0; i < photos.size(); i++) {
-				System.out.println("cycle: " + i);
 				if(markStorage.getRatingByPhoto(photos.get(i).getId()) < rating) {
-					System.out.println(markStorage.getRatingByPhoto(photos.get(i).getId()) + "|" + i);
 					photos.remove(i);
 					i--;
 				}
