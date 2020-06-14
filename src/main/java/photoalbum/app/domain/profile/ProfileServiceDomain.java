@@ -2,6 +2,7 @@ package photoalbum.app.domain.profile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
@@ -18,6 +19,8 @@ import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.model.Role;
+import photoalbum.app.web.form.CodeForm;
+import photoalbum.app.web.form.EmailForm;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 
 @Service
@@ -125,5 +128,50 @@ public class ProfileServiceDomain implements ProfileService {
 	public Profile findById(Long profileId) {
 		return (profileId != null) ? profileStorage.loadById(profileId) : null;
 	}
+
+	@Override
+	public boolean passwordRecovery(EmailForm emailForm) {	
+		
+		Profile profile = profileStorage.findByEmail(emailForm.getEmail());
+		System.out.println(profile.toString());
+		Random random = new Random();
+	    Integer rage=9999;
+	    Integer generator=1000+random.nextInt(rage-1000);
+		profile.setActivationCode(generator.toString());
+
+        profileStorage.save(profile);
+		
+        if (!StringUtils.isEmpty(profile.getEmail())) {
+        	String message = String.format(
+                    "Hello, %s! \n" +
+                            "Welcome to Sweater. Password recovery code: %s",
+                    profile.getEmail(),
+                    profile.getActivationCode()
+            );       
+        	mailClient.sendMail("rfln.support@gmail.com", emailForm.getEmail(), "Password recovery", message);
+        }
+        
+        return true;
+	}
+	
+	@Override
+	public boolean saveCodeForCodeForm(CodeForm codeForm) {
+		
+		Profile user = profileStorage.findByActivationCode(codeForm.getCode());
+		
+		if (user == null) {
+            return false;
+        }
+		
+		user.setPassword(bCrypt.encode(codeForm.getPassword()));
+		user.setActivationCode(null);
+		
+		profileStorage.save(user);
+		
+		return true;
+		
+	}
+	
+	
 	
 }

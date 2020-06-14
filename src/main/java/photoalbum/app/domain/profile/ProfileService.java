@@ -4,6 +4,8 @@ import java.util.List;
 
 import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.model.Profile;
+import photoalbum.app.web.form.CodeForm;
+import photoalbum.app.web.form.EmailForm;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 
 public interface ProfileService {
@@ -21,4 +23,8 @@ public interface ProfileService {
 	public List<ProfileJsonDTO> usersByUserAsJson(Long profileId, String divId);
 	
 	Profile findById(Long profileId);
+	
+	public boolean passwordRecovery(EmailForm emailForm);
+		
+	public boolean saveCodeForCodeForm(CodeForm codeForm);
 }

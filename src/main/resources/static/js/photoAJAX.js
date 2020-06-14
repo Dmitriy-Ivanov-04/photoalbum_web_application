@@ -39,12 +39,14 @@ function fillContentDiv(jsonArr, divToFill, flag){
     		
     	let img = document.createElement("img");
     	imageWrapper.appendChild(img);
-    	$(img).attr("class", "content-img");
     	let src = "/img/" + jsonArr[i].id;
     	$(img).attr("src", "/img/" + jsonArr[i].id);
     	if(i%3 == 1){
-    		$(img).attr("class", "middle");
+    		$(img).attr("class", "second");
     	}
+		if(i%3 == 2){
+			$(img).attr("class", "third");
+		}
     		
     	$(img).click(function (){
     		//console.log(flag);

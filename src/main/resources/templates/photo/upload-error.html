@@ -1,20 +1,49 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:th="https://www.thymeleaf.org" 
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout}">
+<html  xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" th:href="@{/css/profileStyle.css}">
+	<link rel="stylesheet" th:href="@{/css/formStyle.css}">
+	<link rel="stylesheet" th:href="@{/css/imageOverlay.css}">
+	<link rel="stylesheet" th:href="@{/css/polosaStyle.css}"/>
+	<link rel="stylesheet" th:href="@{/css/addPhoto.css}"/>
+	<link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
+	<title>Profile</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script th:src="@{/js/vertical-menu.js}"></script>
+
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+</head>
 
 <body>
-	<th:block layout:fragment="content">
-		<h1 th:text="#{page.car.image.upload.error.title}"></h1>
+<div id="container">
+	<div id="header-wrapper">
+		<div id="polosa">
+			<div id="search-exit">
+				<form id="logoutForm" action="#" th:action="@{/logout}" method="post">
+					<a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
+				</form>
+				<a th:href="@{/}"><img th:src="@{/images/rfln.png}" alt="" class="logo"></a>
+				<div id="session">
+					<a th:href = "@{'/user/' + ${nickname}}"><img th:src="@{/images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
+					<a class="nick-session" id="nickname" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
+				</div>
+				<img th:src="@{/images/rating.png}" class="rate" alt="" >
+				<img th:src="@{/images/date.png}" class="date" alt="" >
+				<input type="text" id="search">
+				<img th:src="@{/images/loupeBackground.png}" class="loupe" alt="">
+			</div>
+		</div>
+	</div>
 
-		<div th:text="#{page.car.image.upload.error.msg}"></div><br>
-
-		<a class="stdBtn" th:href="@{/car/page}">Car List</a>
-
-	</th:block>
-
+	<div class="publications" id="content-publications">
+		<h1>ЗАГРУЗКА НЕ УДАЛАСЬ!!!!!!!!!!!!!!</h1>
+	</div>
+</div>
 </body>
 
 </html>
