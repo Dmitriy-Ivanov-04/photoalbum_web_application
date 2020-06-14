@@ -16,4 +16,5 @@ public interface PhotoStorage {
 	Photo getPhotoByLink(String link);
 	int getAccesLevel(Long photoId);
 	List<Photo> getPhotosByParametrs(String query, String date);
+	List<Photo> getPhotosByTag(String tag);
 }

@@ -211,4 +211,9 @@ public class AjaxController {
 	public List<PhotoJsonDTO> searchByParametrs(@RequestParam("q") String query, @RequestParam("r") int rating, @RequestParam("d") String date) {
 		return photoService.photosByUserAsJson(photoService.searchByParametrs(query, rating, date));
 	}
+	
+	@RequestMapping(value = "/search/tag", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<PhotoJsonDTO> searchByTag(@RequestParam("t") String tag) {
+		return photoService.photosByUserAsJson(photoService.searchByTag(tag));
+	}
 }

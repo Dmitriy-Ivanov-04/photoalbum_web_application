@@ -73,11 +73,14 @@ public class MarkStorageDAO implements MarkStorage{
 	public float getRatingByPhoto(Long photoId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM marks WHERE photo_id = ?");
 		List<Mark> marks = jdbcTemplate.query(sql.toString(), new Object[] {photoId}, new MarkRowMapper());
-		float rating = 0;
+		Float rating = (float) 0;
 		for(int i = 0; i < marks.size(); i++) {
 			rating += marks.get(i).getValue();
 		}
-		return rating/marks.size();
+		rating = rating/marks.size();
+		if(rating.isNaN())
+			return -1;
+		return rating;
 	}
 	
 }

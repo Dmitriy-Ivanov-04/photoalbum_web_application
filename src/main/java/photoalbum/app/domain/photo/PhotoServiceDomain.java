@@ -184,7 +184,18 @@ public class PhotoServiceDomain implements PhotoService{
 				}
 			}
 		}
+		for(int i = 0; i < photos.size(); i++) {
+			 if(photoStorage.getAccesLevel(photos.get(i).getId()) != 0) {
+				 photos.remove(i);
+					i--;
+			 }
+		}
 		return photos;
+	}
+
+	@Override
+	public List<Photo> searchByTag(String tag) {
+		return photoStorage.getPhotosByTag(tag);
 	}
 
 }
