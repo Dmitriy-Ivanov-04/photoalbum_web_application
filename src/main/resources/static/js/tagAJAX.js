@@ -1,4 +1,6 @@
 function getTagsByPhoto(photoId) {
+	let tagP = document.getElementById("hashtagsP");
+	tagP.innerHTML = "";
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;
 	var xhr = new XMLHttpRequest();
@@ -22,8 +24,13 @@ function getTagsByPhoto(photoId) {
 
 function fillTags(jsonArr){
 	let tagP = document.getElementById("hashtagsP");
-	tagP.innerHTML = "";
+	//tagP.innerHTML = "";
    	for(let i = 0; i < jsonArr.length; i++){
-   		tagP.innerHTML += "#" + jsonArr[i].tag + " ";
+   		let a = document.createElement("a");
+   		tagP.appendChild(a);
+   		$(a).attr("href", "/search?t=" + jsonArr[i].tag);
+   		let tag = document.createTextNode("#" + jsonArr[i].tag);
+   		a.appendChild(tag);
+   		tagP.innerHTML += " ";
    	}
 }

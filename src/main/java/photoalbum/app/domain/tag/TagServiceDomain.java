@@ -19,9 +19,12 @@ public class TagServiceDomain implements TagService{
 		value.replace(",", "");
 		value.replace(".", "");
 		value.replace(";", "");
+		value.replace("#", "");
 		String[] tags = value.split(" ");
-		for(int i = 0; i < tags.length; i++)
-			tagStorage.add(photoId, tags[i]);
+		for(int i = 0; i < tags.length; i++) {
+			if(!tags[i].isEmpty())
+				tagStorage.add(photoId, tags[i]);
+		}
 	}
 
 	@Override

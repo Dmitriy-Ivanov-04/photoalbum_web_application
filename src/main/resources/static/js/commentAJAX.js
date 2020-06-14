@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	$("#commentButton").click(function() {
 		addComment(Number.parseInt(document.getElementById("photo-id").innerHTML), $("#commentInput").val());
+		$("#commentInput").val("");
 	});
 });
 

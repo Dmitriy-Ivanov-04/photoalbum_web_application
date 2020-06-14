@@ -119,4 +119,12 @@ public class PhotoStorageDAO implements PhotoStorage{
 			return jdbcTemplate.query(sql.toString(), new Object[] {query, query}, new PhotoRowMapper());
 		}
 	}
+
+	@Override
+	public List<Photo> getPhotosByTag(String tag) {
+		StringBuilder sql = new StringBuilder("SELECT photos.id, photos.profile_id, photos.album_id, description, date, link_photo "
+				+ "FROM photos INNER JOIN tags ON photos.id = tags.photo_id WHERE tags.value = ? ORDER BY photos.id  DESC");
+		return jdbcTemplate.query(sql.toString(), new Object[] {tag}, new PhotoRowMapper());
+		
+	}
 }
