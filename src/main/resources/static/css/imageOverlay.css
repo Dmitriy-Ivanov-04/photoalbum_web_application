@@ -108,6 +108,12 @@ a{
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
 }
+#hashtags-post a{
+    color: #85a1c1;
+}
+#hashtags-post a:visited{
+    color: #85a1c1;
+}
 #rating-post{
     overflow: hidden;
     margin-top: 15px;

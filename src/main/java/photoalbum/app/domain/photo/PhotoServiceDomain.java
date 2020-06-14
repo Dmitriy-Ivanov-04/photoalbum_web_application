@@ -103,6 +103,10 @@ public class PhotoServiceDomain implements PhotoService{
 		if (!(new File(filePath).exists())) {
 			new File(filePath).mkdirs();
 		}
+		
+		if (!multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().length() - 3).equals("jpg")) {
+			return false;
+		}
 
 		try {
 			
@@ -113,7 +117,6 @@ public class PhotoServiceDomain implements PhotoService{
 			multipartFile.transferTo(dest);
 			uploadPhoto(profileId, albumStorage.getAlbumByNameAndUser(uploadForm.getAlbumName(), profileId).getId(), uploadForm.getDescription(), orgName);
 			tagService.addTags(photoStorage.getPhotoByLink(orgName).getId(), uploadForm.getTags());
-
 
 		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());
