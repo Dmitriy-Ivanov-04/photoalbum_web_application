@@ -33,22 +33,7 @@
                     <a th:href = "@{'/user/' + ${nicknameView}}"><img th:src="@{/images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
                     <a class="nick-session" id="nickView" th:text="${nicknameView}" th:href = "@{'/user/' + ${nicknameView}}">Nickname</a>
                 </div>
-                <div class="rating-menu">
-                    <a href="#"><img th:src="@{/images/rating.png}" class="rate" alt=""></a>
-                    <div class="rating-menu-content">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                    </div>
-                </div>
-                <input type="text" name="date" class="tcal" value="" />
-
-                <form action="#" method="post">
-                    <input type="text" id="search">
-                </form>
-                <img th:src="@{/images/loupeBackground.png}" class="loupe" alt="">
+                <a href="#" th:href="@{/search}" th:text="#{button.search}" class="exit">Поиск</a>
             </div>
         </div>
     </div>

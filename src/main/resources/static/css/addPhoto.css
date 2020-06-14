@@ -31,8 +31,13 @@ h1{
 #container{
     height: 100%;
 }
+#content-wrapper{
+    width: 100%;
+    margin-top: 70px;
+}
 #content-publications{
-    margin: 70px auto;
+    margin: 0 auto;
+    min-height: calc(100vh - 70px);
     border-radius: 0 0 10px 10px;
 }
 #postUpload-wrapper{
