@@ -188,6 +188,11 @@ public class AjaxController {
         photoServiceDomain.copyPhoto(profileStorage.getIdByNickname(profileDetails.getNickname()), photoId);
     }
 	
+	@RequestMapping(value = "/photos/delete")
+    public void deletePhoto(@RequestParam("id") Long photoId) throws IOException {
+        photoServiceDomain.deletePhoto(photoId);
+    }
+	
 	@RequestMapping(value = "/albums", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<AlbumJsonDTO> albumList(@RequestParam("n") String nick) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

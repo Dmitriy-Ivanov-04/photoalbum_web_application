@@ -50,4 +50,15 @@ public class CommentStorageDAO implements CommentStorage {
 		return comments;
 	}
 
+	@Override
+	public void deleteByPhoto(Long photoId) {
+		String updateQuery = "DELETE FROM comments WHERE photo_id = ?";
+		Object[] data = new Object[] {photoId};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+
+		if (rowAffected == 0) {
+			logger.error("Error during delete record for Comments");
+		}
+	}
+
 }

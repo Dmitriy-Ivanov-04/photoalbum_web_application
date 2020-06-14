@@ -1,4 +1,4 @@
-function profileCheck() {//не используется
+function profileCheck() {
 	var nick = document.getElementById("nick").innerHTML;
 	var token = document.head.querySelector("meta[name='_csrf']").content;
 	var header = document.head.querySelector("meta[name='_csrf_header']").content;
@@ -15,13 +15,10 @@ function profileCheck() {//не используется
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
     		if(xhr.responseText == "true")
-    			$("#copyButton").hide();
+    			document.getElementById("copyButton").remove();
+    		else
+    			document.getElementById("deleteButton").remove();
     	}
     }
     xhr.send("n=" + nick);
-    
-    if(xhr.responseText == "true"){
-		return false;
-	} else 
-		return true;
 }

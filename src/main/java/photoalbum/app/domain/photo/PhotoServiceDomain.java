@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import photoalbum.app.data.AlbumStorage;
+import photoalbum.app.data.CommentStorage;
 import photoalbum.app.data.MarkStorage;
 import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.domain.dto.PhotoJsonDTO;
@@ -41,6 +42,9 @@ public class PhotoServiceDomain implements PhotoService{
 	
 	@Autowired
 	MarkStorage markStorage;
+	
+	@Autowired
+	CommentStorage commentStorage;
 
 	@Override
 	public void uploadPhoto(Long profileId, Long albumId, String description, String link) {
@@ -48,8 +52,11 @@ public class PhotoServiceDomain implements PhotoService{
 	}
 
 	@Override
-	public void deletePhoto(Long id) {
-		photoStorage.delete(id);	
+	public void deletePhoto(Long photoId) {
+		photoStorage.delete(photoId);
+		commentStorage.deleteByPhoto(photoId);
+		markStorage.deleteByPhoto(photoId);
+		tagService.deleteTagsByPhoto(photoId);
 	}
 
 	@Override
@@ -192,7 +199,14 @@ public class PhotoServiceDomain implements PhotoService{
 
 	@Override
 	public List<Photo> searchByTag(String tag) {
-		return photoStorage.getPhotosByTag(tag);
+		List<Photo> photos = photoStorage.getPhotosByTag(tag);
+		for(int i = 0; i < photos.size(); i++) {
+			 if(photoStorage.getAccesLevel(photos.get(i).getId()) != 0) {
+				 photos.remove(i);
+					i--;
+			 }
+		}
+		return photos;
 	}
 
 }

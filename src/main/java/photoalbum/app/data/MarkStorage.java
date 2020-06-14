@@ -11,4 +11,5 @@ public interface MarkStorage {
 	Mark getMarkByPhotoAndUser(Long photoId, Long profileId);
 	void change(Long photoId, Long authorId, int value);
 	float getRatingByPhoto(Long photoId);
+	void deleteByPhoto(Long photoId);
 }

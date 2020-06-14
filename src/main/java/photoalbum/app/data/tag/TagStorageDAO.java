@@ -50,4 +50,15 @@ public class TagStorageDAO implements TagStorage{
 		List<Tag> tags = jdbcTemplate.query(sql.toString(), new Object[] {photoId}, new TagRowMapper());
 		return tags;
 	}
+
+	@Override
+	public void deleteByPhoto(Long photoId) {
+		String updateQuery = "DELETE FROM tags WHERE photo_id = ?";
+		Object[] data = new Object[] {photoId};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+
+		if (rowAffected == 0) {
+			logger.error("Error during delete record for Tags");
+		}
+	}
 }

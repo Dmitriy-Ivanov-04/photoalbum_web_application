@@ -83,8 +83,6 @@ $(document).ready(function () {
 	    		$(".publications").hide();
 	    		$(".albums").hide();
 	    		$(".one-album").show();
-	    		let imageList = $(".one-album").find("> img");
-	    		imageAlign(imageList, $(".one-album").width(), 2);
 	        });
     	}
     }

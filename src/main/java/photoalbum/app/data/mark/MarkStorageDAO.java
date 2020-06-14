@@ -82,5 +82,16 @@ public class MarkStorageDAO implements MarkStorage{
 			return -1;
 		return rating;
 	}
+
+	@Override
+	public void deleteByPhoto(Long photoId) {
+		String updateQuery = "DELETE FROM marks WHERE photo_id = ?";
+		Object[] data = new Object[] {photoId};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+
+		if (rowAffected == 0) {
+			logger.error("Error during delete record for Marks");
+		}
+	}
 	
 }

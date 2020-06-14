@@ -20,4 +20,6 @@ $(document).ready(function () {
 		//$(".add-photo-text").queue('fx', []);
 		$(".add-photo-text").fadeOut(0);
 	})
+	
+	profileCheck();
 });
