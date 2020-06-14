@@ -25,9 +25,8 @@
 	<script th:src="@{/js/copyAJAX.js}"></script>
     <script th:src="@{/js/tcal.js}"></script>
     <script th:src="@{/js/profileAJAX.js}"></script>
-    <script th:src="@{/js/searchAJAX.js}"></script>
 
-	
+
 	<meta name="_csrf" th:content="${_csrf.token}" />
 	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
@@ -103,21 +102,7 @@
                         <a th:href = "@{'/user/' + ${nickname}}"><img th:src="@{/images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
                         <a class="nick-session" id="nickname" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
                     </div>
-                    <div class="rating-menu">
-                        <a href="#"><img th:src="@{/images/rating.png}" class="rate" alt="" id="ratingImage"></a>
-                        <div class="rating-menu-content" id="rating-numbers">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                        </div>
-                    </div>
-
-                    <input type="text" name="date" class="tcal" id="dateSelector" value="" />
-
-                   <input type="text" id="search">
-                   <img th:src="@{/images/loupeBackground.png}" class="loupe" alt="">
+                    <a href="#" th:href="@{/search}" th:text="#{button.search}" class="exit">Поиск</a>
                 </div>
             </div>
             

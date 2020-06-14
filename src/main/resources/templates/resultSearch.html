@@ -10,26 +10,42 @@
 	<link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
     <title>Search</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script th:src="@{js/searchScript.js}"></script>
-	<script defer th:src="@{js/imageAlign.js}"></script>
 	<script th:src="@{js/tabScript.js}"></script>
     <script th:src="@{/js/tcal.js}"></script>
+    <script th:src="@{/js/searchAJAX.js}"></script>
+
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 <body>
     <div id="container">
         <div id="header-wrapper">
             <div id="polosa">
                 <div id="search-exit">
-                  <a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
-                    <a th:href="@{/}"><img th:src="@{images/rfln.png}" alt="" class="logo"></a>
-                   <!--<div id="session">
-                       <a th:href = "@{'/user/' + ${nickname}}"><img th:src="@{images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
-                       <a class="nick-session" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
-                    </div>-->
-                   <img th:src="@{images/rating.png}" class="rate" alt="" >
-                   <img th:src="@{images/date.png}" class="date" alt="" >
-                   <input type="text" id="search">
-                   <img th:src="@{images/loupeBackground.png}" class="loupe" alt="">
+
+                    <form id="logoutForm" action="#" th:action="@{/logout}" method="post">
+                        <a href="#" th:href="@{/logout}" th:text="#{button.exit}" class="exit">Выйти</a>
+                    </form>
+                    <a th:href="@{/}"><img th:src="@{/images/rfln.png}" alt="" class="logo"></a>
+                    <div id="session">
+                        <a th:href = "@{'/user/' + ${nickname}}"><img th:src="@{/images/avatar.png}" class="avatar-session" alt="" width="50px" height="50px"></a>
+                        <a class="nick-session" id="nickname" th:text="${nickname}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
+                    </div>
+                    <div class="rating-menu">
+                        <a href="#"><img th:src="@{/images/rating.png}" class="rate" alt="" id="ratingImage"></a>
+                        <div class="rating-menu-content" id="rating-numbers">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                        </div>
+                    </div>
+
+                    <input type="text" name="date" class="tcal" id="dateSelector" value="" />
+
+                    <input type="text" id="search">
+                    <img th:src="@{/images/loupeBackground.png}" class="loupe" alt="">
                 </div>
             </div>
         </div>
