@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.jboss.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.stereotype.Repository;
@@ -125,8 +126,12 @@ public class ProfileStorageDAO implements ProfileStorage {
 	@Override
 	public Long getIdByNickname(String nickname) {
 		StringBuilder sql = new StringBuilder("SELECT id FROM profile WHERE nickname = ?");
-		Long id = jdbcTemplate.queryForObject(sql.toString(), new Object[] {nickname}, Long.class);
-		return id;
+		try {
+			Long id = jdbcTemplate.queryForObject(sql.toString(), new Object[] {nickname}, Long.class);
+			return id;
+		} catch(EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	@Override

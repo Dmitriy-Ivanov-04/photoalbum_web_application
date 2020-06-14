@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    /* images align*/
-	//let imageList = $(".publications").find("> img");
-	//imageAlign(imageList, $(".publications").width(), 2);
     /*plus drive*/
     $(".add-friend-text").hide();	
 	$(".add-friend").mouseenter(function(){

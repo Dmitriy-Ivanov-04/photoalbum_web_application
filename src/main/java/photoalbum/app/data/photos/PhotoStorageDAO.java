@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.stereotype.Repository;
 import photoalbum.app.data.PhotoStorage;
-import photoalbum.app.data.relationships.RelationshipsRowMapper;
 import photoalbum.app.domain.model.Photo;
 @Repository
 public class PhotoStorageDAO implements PhotoStorage{
@@ -33,21 +32,21 @@ public class PhotoStorageDAO implements PhotoStorage{
 	@Override
 	public List<Photo> getPhotosByUser(Long profileId, int accesLevel) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM photos INNER JOIN albums ON photos.album_id=albums.id "
-				+ "WHERE photos.profile_id = ? AND albums.acces_level <= ? ORDER BY date");
-		List<Photo> photos = (List<Photo>) jdbcTemplate.query(sql.toString(), new Object[] {profileId, accesLevel}, new PhotoRowMapper());
+				+ "WHERE photos.profile_id = ? AND albums.acces_level <= ? ORDER BY photos.id  DESC");
+		List<Photo> photos = jdbcTemplate.query(sql.toString(), new Object[] {profileId, accesLevel}, new PhotoRowMapper());
 		return photos;
 	}
 
 	@Override
 	public List<Photo> getPhotosByAlbum(Long albumId) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE album_id = ? ORDER BY date");
-		List<Photo> photos = (List<Photo>) jdbcTemplate.query(sql.toString(), new Object[] {albumId}, new PhotoRowMapper());
+		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE album_id = ? ORDER BY photos.id  DESC");
+		List<Photo> photos = jdbcTemplate.query(sql.toString(), new Object[] {albumId}, new PhotoRowMapper());
 		return photos;
 	}
 
 	@Override
 	public List<Photo> getPhotosByRating(float rating) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE rating = ? ORDER BY date");
+		StringBuilder sql = new StringBuilder("SELECT * FROM photos WHERE rating = ? ORDER BY photos.id  DESC");
 		List<Photo> photos = (List<Photo>) jdbcTemplate.query(sql.toString(), new Object[] {rating}, new PhotoRowMapper());
 		return photos;
 	}
@@ -100,5 +99,24 @@ public class PhotoStorageDAO implements PhotoStorage{
 		StringBuilder sql = new StringBuilder("SELECT albums.acces_level FROM photos INNER JOIN albums ON photos.album_id=albums.id WHERE photos.id = ?");
 		int accesLevel = jdbcTemplate.queryForObject(sql.toString(), new Object[] {photoId}, int.class);
 		return accesLevel;
+	}
+
+	@Override
+	public List<Photo> getPhotosByParametrs(String query, String date) {
+		StringBuilder sql = new StringBuilder("SELECT photos.id, photos.profile_id, photos.album_id, description, date, link_photo "
+				+ "FROM photos INNER JOIN tags ON photos.id = tags.photo_id INNER JOIN profile ON photos.profile_id=profile.id "
+				+ "WHERE (tags.value LIKE ? OR profile.nickname LIKE ?)");
+		String sqlDate;
+		query = "%" + query + "%";
+		if(date != "") {
+			String[] dateArr = date.split("/");
+			sqlDate = dateArr[2] + "-" + dateArr[0] + "-" + dateArr[1];
+			sql.append(" AND photos.date = ?");
+			sql.append(" ORDER BY photos.id  DESC");
+			return jdbcTemplate.query(sql.toString(), new Object[] {query, query, sqlDate}, new PhotoRowMapper());
+		} else {
+		sql.append(" ORDER BY photos.id  DESC");
+			return jdbcTemplate.query(sql.toString(), new Object[] {query, query}, new PhotoRowMapper());
+		}
 	}
 }

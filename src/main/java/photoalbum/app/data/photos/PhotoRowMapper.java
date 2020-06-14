@@ -16,10 +16,8 @@ public class PhotoRowMapper  implements RowMapper<Photo>{
 		photo.setId(rs.getLong("id"));
 		photo.setProfile_id(rs.getLong("profile_id"));
 		photo.setAlbum_id(rs.getLong("album_id"));
-		photo.setRating(rs.getFloat("rating"));
 		photo.setDescription(rs.getString("description"));
 		photo.setDate(rs.getDate("date"));
-		photo.setMark_counter(rs.getInt("mark_counter"));
 		photo.setLink_photo(rs.getString("link_photo"));
 
 		return photo;

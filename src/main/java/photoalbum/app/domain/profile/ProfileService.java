@@ -25,8 +25,6 @@ public interface ProfileService {
 	Profile findById(Long profileId);
 	
 	public boolean passwordRecovery(EmailForm emailForm);
-	
-	//public boolean fourCodePasswordRecovery(String code);
-	
+		
 	public boolean saveCodeForCodeForm(CodeForm codeForm);
 }

@@ -10,9 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.stereotype.Repository;
 import photoalbum.app.data.MarkStorage;
-import photoalbum.app.data.photos.PhotoRowMapper;
 import photoalbum.app.domain.model.Mark;
-import photoalbum.app.domain.model.Photo;
 @Repository
 public class MarkStorageDAO implements MarkStorage{
 	
@@ -69,6 +67,17 @@ public class MarkStorageDAO implements MarkStorage{
 		if (rowAffected == 0) {
 			logger.error("Error during update record for Marks");
 		}
+	}
+
+	@Override
+	public float getRatingByPhoto(Long photoId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM marks WHERE photo_id = ?");
+		List<Mark> marks = jdbcTemplate.query(sql.toString(), new Object[] {photoId}, new MarkRowMapper());
+		float rating = 0;
+		for(int i = 0; i < marks.size(); i++) {
+			rating += marks.get(i).getValue();
+		}
+		return rating/marks.size();
 	}
 	
 }

@@ -1,4 +1,5 @@
 function openImage (src, description, date, id, accesLevel) {
+	document.getElementById("photo-id").innerHTML = id; //костыль
 	let currentImage = $("#lightbox").find(".lightboxImage");
 	$(currentImage).attr("src", src);
 	document.getElementById("descriptionP").innerHTML = description;
