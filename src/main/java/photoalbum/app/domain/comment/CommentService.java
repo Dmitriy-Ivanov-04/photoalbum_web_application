@@ -8,5 +8,8 @@ import photoalbum.app.domain.model.Comment;
 public interface CommentService {
 	
 	List<Comment> getListComments(Long photoId);
+	
 	public List<CommentJsonDTO> commentsByPhotoAsJson(List<Comment> comments);
+	
+	public void addComment(Long photoId, Long authorId, String text);
 }

@@ -9,7 +9,7 @@ var A_TCALCONF = {
 	'nextyear'   : 'Следующий год',
 	'prevmonth'  : 'Предыдущий месяц',
 	'nextmonth'  : 'Следующий месяц',
-	'format'     : 'm/d/Y' // 'd-m-Y', Y-m-d', 'l, F jS Y'
+	'format'     :   'd-m-Y', //'m/d/Y' 'Y-m-d', 'l, F jS Y'
 };
 
 var A_TCALTOKENS = [

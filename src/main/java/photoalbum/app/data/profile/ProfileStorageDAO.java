@@ -191,4 +191,16 @@ public class ProfileStorageDAO implements ProfileStorage {
 		return profile;
 	}
 
+	@Override
+	public String findEmailById(Long id) {
+		
+		StringBuilder sql = new StringBuilder("SELECT email FROM profile where id = ?");
+		
+		String email = jdbcTemplate.queryForObject(sql.toString(), new Object[] {id}, String.class);
+		
+		return email;
+	}
+	
+	
+
 }

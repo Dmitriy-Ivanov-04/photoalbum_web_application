@@ -6,10 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
 import photoalbum.app.data.CommentStorage;
+import photoalbum.app.data.PhotoStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.domain.dto.CommentJsonDTO;
+import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.model.Comment;
+
 @Service
 public class CommentServiceDomain implements CommentService {
 	
@@ -18,6 +23,12 @@ public class CommentServiceDomain implements CommentService {
 	
 	@Autowired
 	ProfileStorage profileStorage;
+	
+	@Autowired
+	PhotoStorage photoStorage;
+	
+	@Autowired
+	MailClient mailClient;
 
 	@Override
 	public List<Comment> getListComments(Long photoId) {
@@ -42,6 +53,26 @@ public class CommentServiceDomain implements CommentService {
 			}
 		}
 		return commentsJson;
+	}
+
+	@Override
+	public void addComment(Long photoId, Long authorId, String text) {
+		commentStorage.add(photoId, authorId, text);
+		String emailProfile = profileStorage.findEmailById(photoStorage.getProfileIdByPhoto(photoId));
+		String nicknameAuthor = profileStorage.getNicknameById(authorId);
+		String nicknameUser = profileStorage.getNicknameById(photoStorage.getProfileIdByPhoto(photoId));
+		
+		if (!StringUtils.isEmpty(emailProfile)) {
+        	String message = String.format(
+                    "Hello, %s! \n" +
+                            "User %s left a comment on one of your photos: '%s'",
+                    nicknameUser,
+                    nicknameAuthor,
+                    text
+            );       
+        	mailClient.sendMail("rfln.support@gmail.com", emailProfile, "Password recovery", message);
+        }
+		
 	}
 
 }
