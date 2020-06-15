@@ -15,13 +15,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.data.CommentStorage;
 import photoalbum.app.data.MarkStorage;
 import photoalbum.app.data.PhotoStorage;
+import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.domain.dto.PhotoJsonDTO;
+import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.model.Photo;
 import photoalbum.app.domain.tag.TagService;
 import photoalbum.app.web.form.UploadForm;
@@ -45,6 +48,12 @@ public class PhotoServiceDomain implements PhotoService{
 	
 	@Autowired
 	CommentStorage commentStorage;
+	
+	@Autowired
+	MailClient mailClient;
+	
+	@Autowired
+	ProfileStorage profileStorage;
 
 	@Override
 	public void uploadPhoto(Long profileId, Long albumId, String description, String link) {
@@ -53,10 +62,25 @@ public class PhotoServiceDomain implements PhotoService{
 
 	@Override
 	public void deletePhoto(Long photoId) {
+		
+		String emailProfile = profileStorage.findEmailById(photoStorage.getProfileIdByPhoto(photoId));
+		String nicknameAuthor = profileStorage.findNicknameByEmail(emailProfile);
+		String description = photoStorage.getPhotoById(photoId).getDescription();
+		
 		photoStorage.delete(photoId);
 		commentStorage.deleteByPhoto(photoId);
 		markStorage.deleteByPhoto(photoId);
 		tagService.deleteTagsByPhoto(photoId);
+		
+		if (!StringUtils.isEmpty(emailProfile)) {
+        	String message = String.format(
+                    "Hello, %s! \n" +
+                            "Deleted photo with description: %s",
+                    nicknameAuthor,
+                    description
+            );       
+        	mailClient.sendMail("rfln.support@gmail.com", emailProfile, "Delete photo", message);
+        }
 	}
 
 	@Override

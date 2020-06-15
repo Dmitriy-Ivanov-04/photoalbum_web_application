@@ -70,7 +70,7 @@ public class CommentServiceDomain implements CommentService {
                     nicknameAuthor,
                     text
             );       
-        	mailClient.sendMail("rfln.support@gmail.com", emailProfile, "Password recovery", message);
+        	mailClient.sendMail("rfln.support@gmail.com", emailProfile, "Adding a comment", message);
         }
 		
 	}
