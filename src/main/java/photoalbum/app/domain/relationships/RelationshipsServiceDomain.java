@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.domain.model.Relationships;
 import photoalbum.app.domain.model.Status;
+
 @Service
 public class RelationshipsServiceDomain implements RelationshipsService{
 	

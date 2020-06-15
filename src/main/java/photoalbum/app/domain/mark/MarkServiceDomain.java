@@ -50,7 +50,7 @@ public class MarkServiceDomain implements MarkService{
                     nicknameAuthor,
                     value
             );       
-        	mailClient.sendMail("rfln.support@gmail.com", emailProfile, "Password recovery", message);
+        	mailClient.sendMail("rfln.support@gmail.com", emailProfile, "Adding grade", message);
         }
 		
 	}
