@@ -28,6 +28,7 @@ import photoalbum.app.domain.dto.MarkJsonDTO;
 import photoalbum.app.domain.dto.PhotoJsonDTO;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.dto.TagJsonDTO;
+import photoalbum.app.domain.dto.UserAttrsJsonDTO;
 import photoalbum.app.domain.mark.MarkService;
 import photoalbum.app.domain.photo.PhotoService;
 import photoalbum.app.domain.photo.PhotoServiceDomain;
@@ -103,13 +104,14 @@ public class AjaxController {
 		return relationshipsService.buttonText(loginProfileId, profileId);
 	}
 	
-	@RequestMapping(value = "/my-profile")
-	public boolean showAddFriendButton(@RequestParam("n") String nick) {
+	@RequestMapping(value = "/my-profile", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<UserAttrsJsonDTO> showAddFriendButton(@RequestParam("n") String nick) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(profileDetails.getNickname().equals(nick))	
-			return true;
-		else
-			return false;
+		boolean owner = false;
+		String loginNick = profileDetails.getNickname();
+		if(loginNick.equals(nick))
+			owner = true;
+		return profileService.attrsByUserAsJson(profileStorage.getIdByNickname(loginNick), owner);
 	}
 	
 	@RequestMapping(value = "/friend-list/{divId}", produces = MediaType.APPLICATION_JSON_VALUE)

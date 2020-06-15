@@ -14,11 +14,20 @@ function profileCheck() {
     	if (xhr.status != 200) {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
-    		if(xhr.responseText == "true"){
-    			document.getElementById("copyButton").remove();
+    		if(xhr.responseText != 0){
+    			let attrs = JSON.parse(xhr.responseText);
+    			if(attrs[0].owner){
+    				$("#session").hide();
+    				document.getElementById("copyButton").remove();
+    			}
+    			if(!attrs[0].owner && attrs[0].role == "USER"){
+    				document.getElementById("deleteButton").remove();
+    			}
+    		}
+    			/*document.getElementById("copyButton").remove();
     			$("#session").hide();
     		} else
-    			document.getElementById("deleteButton").remove();
+    			document.getElementById("deleteButton").remove();*/
     	}
     }
     xhr.send("n=" + nick);

@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
+import photoalbum.app.domain.dto.UserAttrsJsonDTO;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.model.Role;
 import photoalbum.app.web.form.CodeForm;
@@ -170,6 +171,17 @@ public class ProfileServiceDomain implements ProfileService {
 		
 		return true;
 		
+	}
+
+	@Override
+	public List<UserAttrsJsonDTO> attrsByUserAsJson(Long profileId, boolean owner) {
+		List<UserAttrsJsonDTO> attrJson = null;
+		attrJson = new ArrayList<>(1);
+		UserAttrsJsonDTO attrDTO = new UserAttrsJsonDTO();
+		attrDTO.setOwner(owner);
+		attrDTO.setRole(profileStorage.getRole(profileId));
+		attrJson.add(attrDTO);
+		return attrJson;
 	}
 	
 	

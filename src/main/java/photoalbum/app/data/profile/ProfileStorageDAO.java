@@ -200,7 +200,12 @@ public class ProfileStorageDAO implements ProfileStorage {
 		
 		return email;
 	}
-	
-	
 
+	@Override
+	public String getRole(Long id) {
+		
+		StringBuilder sql = new StringBuilder("SELECT roles FROM profile where id = ?");
+		
+		return jdbcTemplate.queryForObject(sql.toString(), new Object[] {id}, String.class);
+	}
 }

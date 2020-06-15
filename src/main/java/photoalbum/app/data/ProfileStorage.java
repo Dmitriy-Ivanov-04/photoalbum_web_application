@@ -37,4 +37,6 @@ public interface ProfileStorage {
 	Profile findByEmail(String email);
 	
 	String findEmailById(Long id);
+	
+	String getRole(Long id);
 }
