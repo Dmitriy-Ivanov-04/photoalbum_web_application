@@ -30,4 +30,6 @@ public interface PhotoStorage {
 	
 	List<Photo> getPhotosByTag(String tag);
 	
+	void uploadAvatarAndBackground(Long profileId);
+	
 }
