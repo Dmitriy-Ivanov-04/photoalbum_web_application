@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.domain.model.AccesLevel;
 import photoalbum.app.domain.model.Album;
+
 @Repository
 public class AlbumStorageDAO implements AlbumStorage {
 	
@@ -29,6 +30,7 @@ public class AlbumStorageDAO implements AlbumStorage {
 		List<Album> album = jdbcTemplate.query(sql.toString(), new Object[] {profile_id, accesLevel}, new AlbumRowMapper());
 		return album;
 	}
+	
 	@Override
 	public void insert(Long profileId, String albumName, int accesLevel) {
 		String insertQuery = "INSERT INTO albums (profile_id, album_name, acces_level) VALUES (?, ?, ?)";
@@ -38,6 +40,7 @@ public class AlbumStorageDAO implements AlbumStorage {
 			logger.error("Error during update record for Album");
 		}
 	}
+	
 	@Override
 	public void update(Long id, Long profileId, String albumName, int numberOfPhotos, AccesLevel accesLevel) {
 		String updateQuery = "UPDATE albums SET profile_id = ?, album_name = ?, number_of_photos = ?, acces_level = ? WHERE id = ?";
@@ -77,4 +80,16 @@ public class AlbumStorageDAO implements AlbumStorage {
 			logger.error("Error during update record for Album");
 		}
 	}
+
+	@Override
+	public String getAlbumNameById(Long albumId) {
+
+		StringBuilder sql = new StringBuilder("SELECT album_name FROM albums WHERE id = ?");
+		
+		String albumName = jdbcTemplate.queryForObject(sql.toString(), new Object[] {albumId}, String.class);
+
+		return albumName;
+	}
+	
+	
 }
