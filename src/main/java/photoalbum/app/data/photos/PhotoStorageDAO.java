@@ -104,7 +104,7 @@ public class PhotoStorageDAO implements PhotoStorage{
 	@Override
 	public List<Photo> getPhotosByParametrs(String query, String date) {
 		StringBuilder sql = new StringBuilder("SELECT photos.id, photos.profile_id, photos.album_id, description, date, link_photo "
-				+ "FROM photos INNER JOIN tags ON photos.id = tags.photo_id INNER JOIN profile ON photos.profile_id=profile.id "
+				+ "FROM photos LEFT JOIN tags ON photos.id = tags.photo_id INNER JOIN profile ON photos.profile_id=profile.id "
 				+ "WHERE (tags.value LIKE ? OR profile.nickname LIKE ?)");
 		String sqlDate;
 		query = "%" + query + "%";
