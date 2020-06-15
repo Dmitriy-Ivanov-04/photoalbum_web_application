@@ -267,9 +267,16 @@ label.tab.active{
 .album-wrapper{
     width: 444px;
     height: 444px;
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
+}
+#cross-wrapper{
+    position: absolute;
+    top: 2%;
+    left: 92%;
+}
+#albumName-wrapper{
+    margin: auto;
 }
 #album-block{
     background-color: #c7c7c7;

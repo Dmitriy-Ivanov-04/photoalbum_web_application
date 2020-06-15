@@ -202,6 +202,16 @@ public class ProfileStorageDAO implements ProfileStorage {
 	}
 
 	@Override
+	public String findNicknameByEmail(String email) {
+		
+		StringBuilder sql = new StringBuilder("SELECT nickname FROM profile WHERE email = ?");
+		
+		String nickname = jdbcTemplate.queryForObject(sql.toString(), new Object[] {email}, String.class);
+
+		return nickname;
+	}
+
+	@Override
 	public String getRole(Long id) {
 		
 		StringBuilder sql = new StringBuilder("SELECT roles FROM profile where id = ?");
