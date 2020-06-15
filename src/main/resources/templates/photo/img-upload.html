@@ -41,7 +41,7 @@
             <h1>Добавление новой фотографии</h1>
             <form action="" th:action="@{/photo/img-upload}" method="post" enctype="multipart/form-data" th:object="${uploadForm}">
                 <input type="hidden" th:value="${profileId}" name="profileId">
-                <p><input type="text" th:field="*{tags}" class="divText" placeholder="Теги" th:placeholder="#{placeholder.tags}" pattern="^[A-Za-zА-Яа-яЁё0-9_]+$"></p>
+                <p><input type="text" th:field="*{tags}" class="divText" placeholder="Теги" th:placeholder="#{placeholder.tags}" pattern="^[A-Za-zА-Яа-яЁё0-9_\s]+$"></p>
                 <p><input type="text" th:field="*{description}" class="divText" placeholder="Описание" th:placeholder="#{placeholder.description}"></p>
                 <p><input type="text" th:field="*{albumName}" class="divText" placeholder="Альбом" th:placeholder="#{placeholder.album}"></p>
 

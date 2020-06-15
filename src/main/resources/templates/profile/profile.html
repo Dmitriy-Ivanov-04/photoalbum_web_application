@@ -39,9 +39,18 @@
                     <img src="" class="lightboxImage" alt="">
                     <a href="#">
                     <div class="copy" id="copyButton">
-                        <img class="copy-plus" th:src="@{/images/plus.png}" alt="">
-                        <span class="copy-text">Скопировать себе</span>
+                        <div class="copy-menu">
+                            <img class="copy-plus" th:src="@{/images/plus.png}" alt="">
+                            <span class="copy-text">Скопировать себе</span>
+                            <div class="copy-menu-content" id="copy-albums">
+                                <a href="#">album 1</a>
+                                <a href="#">album 2</a>
+                                <a href="#">album 3</a>
+                            </div>
+                        </div>
                     </div>
+                    </a>
+                    <a href="#">
                     <div class="delete" id="deleteButton">
                         <img class="delete-plus" th:src="@{/images/x.png}" alt="">
                         <span class="copy-text">Удалить</span>
@@ -117,7 +126,7 @@
                 <div id="profile-info">
                     <div id="avatar">
 						<!--<div id="blackout"><a class="upload-ref" href="#">0 Публикации</a></div>-->
-                        <img th:src="@{/images/avatar.png}" alt="">
+                        <a href="#"><img th:src="@{/images/avatar.png}" alt=""></a>
                     </div>
                     <div id="text-profile">
                         <div id="nickPlus">
@@ -147,6 +156,18 @@
 								<li><a href="#" th:text="${subscribes} + ' ' + #{user.subscribes}" th:href = "@{'/user/' + ${nicknameView} + '/friend_list'}">0 подписок</a></li>
                             </ul>
                         </div>
+                    </div>
+                    <div id="button-block">
+                        <a href="#">
+                            <div id="upload-background">
+                                <span class="copy-text">Изменить фон</span>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div id="ban">
+                                <span class="copy-text">Заблокировать</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
