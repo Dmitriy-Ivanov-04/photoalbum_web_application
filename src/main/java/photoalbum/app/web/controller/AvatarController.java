@@ -32,7 +32,7 @@ public class AvatarController {
 	private PhotoServiceDomain photoService;
 	
 	@GetMapping("/photo/avatar-upload")
-    public ModelAndView avatarUpload(ModelAndView modelAndView, @RequestParam("profileId") Optional<Long> profileId, Model model, UploadForm uploadForm) {
+    public ModelAndView avatarUploada(ModelAndView modelAndView, @RequestParam("profileId") Optional<Long> profileId, Model model, UploadForm uploadForm) {
     	if (profileId.isEmpty()) {
     		modelAndView.setViewName("redirect:/");
     	} else {
@@ -45,7 +45,7 @@ public class AvatarController {
     }
 
     @PostMapping("/photo/avatar-upload")
-    public ModelAndView avatarUploadProcessing(@RequestParam("files") MultipartFile[] files, @RequestParam("profileId") Optional<Long> profileId,
+    public ModelAndView avatarUploadProcessinga(@RequestParam("files") MultipartFile[] files, @RequestParam("profileId") Optional<Long> profileId,
                                                ModelAndView modelAndView, Model model) {
 	    modelAndView.setViewName("redirect:/");
 
@@ -64,17 +64,10 @@ public class AvatarController {
 
         return modelAndView;
     }       
-
-    @GetMapping("/photo/upload-error")
-    public String uploadError(Model model) {
-        ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("nickname", profileDetails.getNickname());
-        return "/photo/upload-error";
-    }
     
-    @GetMapping(value="/img/{photoId}", produces=MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value="/avatar/{photoId}", produces=MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
-    public FileSystemResource photo(ModelAndView modelAndView, @PathVariable Long photoId) {
+    public FileSystemResource photoa(ModelAndView modelAndView, @PathVariable Long photoId) {
         return photoService.getImage(photoId);
     }
 
