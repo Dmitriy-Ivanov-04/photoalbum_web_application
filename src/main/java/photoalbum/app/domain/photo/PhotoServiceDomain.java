@@ -235,5 +235,38 @@ public class PhotoServiceDomain implements PhotoService{
 		}
 		return photos;
 	}
+	
+	public boolean saveAvatarAndBackground(MultipartFile multipartFile, Long profileId) {
+		boolean result = true;
+		String randomName = UUID.randomUUID().toString();
+		String filePath = photoDirPath + File.separator + profileId + File.separator;
+
+		if (!(new File(filePath).exists())) {
+			new File(filePath).mkdirs();
+		}
+		
+		if (!multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().length() - 3).equals("jpg")) {
+			return false;
+		}
+
+		try {
+			
+			String orgName = randomName + multipartFile.getOriginalFilename();
+			String fullFilePath = filePath + orgName;
+
+			File dest = new File(fullFilePath);
+			multipartFile.transferTo(dest);
+			photoStorage.uploadAvatarAndBackground(profileId);
+
+		} catch (IllegalStateException e) {
+			logger.severe(e.getMessage());
+			result = false;
+		} catch (IOException e) {
+			logger.severe(e.getMessage());
+			result = false;
+		}
+
+		return result;
+	}
 
 }
