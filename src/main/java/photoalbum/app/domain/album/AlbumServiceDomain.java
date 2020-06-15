@@ -31,13 +31,12 @@ public class AlbumServiceDomain implements AlbumService {
 	}
 
 	@Override
-	public void deleteAlbum(Long profileId, String albumName) {
-		Long albumId = albumStorage.getAlbumByNameAndUser(albumName, profileId).getId();
-		List<Photo> photos = photoStorage.getPhotosByAlbum(albumId);
+	public void deleteAlbum(Long profileId, Long id) {
+		List<Photo> photos = photoStorage.getPhotosByAlbum(id);
 		for(int i = 0; i < photos.size(); i++) {
 			photoService.deletePhoto(photos.get(i).getId());
 		}
-		albumStorage.delete(albumId);
+		albumStorage.delete(id);
 	}
 
 	@Override

@@ -24,6 +24,38 @@ $(document).ready(function () {
     }
     xhr.send("n=" + nick);
     
+    let flag1 = 0;
+   	var xhr1 = new XMLHttpRequest();
+   	xhr1.open('POST', '/ajax/my-profile', true);
+    xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr1.setRequestHeader(header, token);
+       
+    xhr1.onreadystatechange = function() {
+   	if (xhr1.readyState != 4) 
+      		return;
+      	if (xhr1.status != 200) {
+    		alert(xhr1.status + ': ' + xhr1.statusText);
+     	} else {
+    		if(xhr1.responseText != 0){
+    			let attrs = JSON.parse(xhr1.responseText);
+				if(!attrs[0].owner && attrs[0].role == "USER")
+					flag1 = 1;
+     		}
+     	}
+    }
+    xhr1.send("n=" + nick);
+
+    function deleteAlbum(id) {
+    	var token = document.head.querySelector("meta[name='_csrf']").content;
+    	var header = document.head.querySelector("meta[name='_csrf_header']").content;
+    	var xhr = new XMLHttpRequest();
+    	xhr.open('POST', '/ajax/albums/delete', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader(header, token);
+        
+        xhr.send("id=" + id);
+    }
+    
     function fillAlbums(jsonArr){
     	let albums = document.getElementById("content-album");
     	albums.innerHTML = "";
@@ -43,14 +75,6 @@ $(document).ready(function () {
 	    		$(albumWrapper).css("margin", "0 20px");
 	    	}
 
-			let crossDiv = document.createElement("div");
-			albumWrapper.appendChild(crossDiv);
-			$(crossDiv).attr("id", "cross-wrapper");
-
-			let cross = document.createElement("img");
-			crossDiv.appendChild(cross);
-			$(cross).attr("src", "/images/x.png");
-
 			let albumNameDiv = document.createElement("div");
 			albumWrapper.appendChild(albumNameDiv);
 			$(albumNameDiv).attr("id", "albumName-wrapper");
@@ -61,41 +85,62 @@ $(document).ready(function () {
 	    	let albumNameText = document.createTextNode(jsonArr[i].name)
 	    	albumName.appendChild(albumNameText);
 			albumNameDiv.appendChild(albumName);
+			
+			let flag = 0;
+			if(flag1 == 0){
+				let a = document.createElement("a");
+		    	albumWrapper.appendChild(a);
+		    	
+				let crossDiv = document.createElement("div");
+				a.appendChild(crossDiv);
+				$(crossDiv).attr("id", "cross-wrapper");
+	
+				let cross = document.createElement("img");
+				crossDiv.appendChild(cross);
+				$(cross).attr("src", "/images/x.png");
+				$(crossDiv).click(function() {
+					flag = 1;
+					$(albumWrapper).fadeOut(100);
+					deleteAlbum(jsonArr[i].id);
+				});
+			}
 	    		
 	    	$(albumWrapper).click(function() {
-	    		let oneAlbumTab = document.getElementById("one-album-tab");
-	    		oneAlbumTab.innerHTML = "";
-	    		let albumNameText1 = document.createTextNode(jsonArr[i].name)
-	    		oneAlbumTab.appendChild(albumNameText1);
-	    		
-	    		var nick = document.getElementById("nick").innerHTML;
-	    		xhr = new XMLHttpRequest();
-	    		xhr.open('POST', '/ajax/photos/' + jsonArr[i].id, true);
-	    	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	    	    xhr.setRequestHeader(header, token);
-	    	    
-	    	    xhr.onreadystatechange = function() {
-	    	    	if (xhr.readyState != 4) 
-	    	    		return;
-	    	    	if (xhr.status != 200) {
-	    	    		alert(xhr.status + ': ' + xhr.statusText);
-	    	    	} else {
-	    	    		if(xhr.responseText != 0){
-	    	    			fillContentDiv(JSON.parse(xhr.responseText), "content-one-album");
-	    	    		} else{
-	    	    			let contentDiv = document.getElementById("content-one-album");
-	    	    			contentDiv.innerHTML = "";
-	    	    		}
-	    	    	}
-	    	    }
-	    	    xhr.send();
-	    		
-	            $("#one-album-tab").show();
-	    		$(".tab").removeClass("active");
-	    		$("#one-album-tab").addClass("active");
-	    		$(".publications").hide();
-	    		$(".albums").hide();
-	    		$(".one-album").show();
+	    		if(flag == 0){
+		    		let oneAlbumTab = document.getElementById("one-album-tab");
+		    		oneAlbumTab.innerHTML = "";
+		    		let albumNameText1 = document.createTextNode(jsonArr[i].name)
+		    		oneAlbumTab.appendChild(albumNameText1);
+		    		
+		    		var nick = document.getElementById("nick").innerHTML;
+		    		xhr = new XMLHttpRequest();
+		    		xhr.open('POST', '/ajax/photos/' + jsonArr[i].id, true);
+		    	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		    	    xhr.setRequestHeader(header, token);
+		    	    
+		    	    xhr.onreadystatechange = function() {
+		    	    	if (xhr.readyState != 4) 
+		    	    		return;
+		    	    	if (xhr.status != 200) {
+		    	    		alert(xhr.status + ': ' + xhr.statusText);
+		    	    	} else {
+		    	    		if(xhr.responseText != 0){
+		    	    			fillContentDiv(JSON.parse(xhr.responseText), "content-one-album");
+		    	    		} else{
+		    	    			let contentDiv = document.getElementById("content-one-album");
+		    	    			contentDiv.innerHTML = "";
+		    	    		}
+		    	    	}
+		    	    }
+		    	    xhr.send();
+		    		
+		            $("#one-album-tab").show();
+		    		$(".tab").removeClass("active");
+		    		$("#one-album-tab").addClass("active");
+		    		$(".publications").hide();
+		    		$(".albums").hide();
+		    		$(".one-album").show();
+	    		}
 	        });
     	}
     }

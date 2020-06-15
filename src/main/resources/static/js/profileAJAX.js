@@ -24,10 +24,6 @@ function profileCheck() {
     				document.getElementById("deleteButton").remove();
     			}
     		}
-    			/*document.getElementById("copyButton").remove();
-    			$("#session").hide();
-    		} else
-    			document.getElementById("deleteButton").remove();*/
     	}
     }
     xhr.send("n=" + nick);

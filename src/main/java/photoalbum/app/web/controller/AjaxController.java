@@ -186,10 +186,10 @@ public class AjaxController {
 	}
 	
 	@RequestMapping(value = "/albums/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-	public void deleteAlbum(@RequestParam("a") String albumName) {
+	public void deleteAlbum(@RequestParam("id") Long id) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long profileId = profileStorage.getIdByNickname(profileDetails.getNickname());
-		albumService.deleteAlbum(profileId, albumName);
+		albumService.deleteAlbum(profileId, id);
 	}
 	
 	@RequestMapping(value = "/photos/{albumId}", produces = MediaType.APPLICATION_JSON_VALUE)
