@@ -9,6 +9,6 @@ import photoalbum.app.domain.model.Album;
 public interface AlbumService {
 
 	void updateAlbum(Long id, Long profileId, String albumName, int numberOfPhotos, AccesLevel accesLevel);
-	void deleteAlbum(Long id);
+	void deleteAlbum(Long profileId, String albumName);
 	public List<AlbumJsonDTO> albumsByUserAsJson(List<Album> albums);
 }

@@ -183,12 +183,19 @@ public class AjaxController {
 		return albumService.albumsByUserAsJson(albumStorage.findAlbumsByUser(profileId, relationshipsService.getAccesLevel(profileId, loginProfileId)));
 	}
 	
+	@RequestMapping(value = "/albums/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void deleteAlbum(@RequestParam("a") String albumName) {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long profileId = profileStorage.getIdByNickname(profileDetails.getNickname());
+		albumService.deleteAlbum(profileId, albumName);
+	}
+	
 	@RequestMapping(value = "/photos/{albumId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PhotoJsonDTO> photoListByAlbum(@PathVariable Long albumId) {
 		return photoService.photosByUserAsJson(photoStorage.getPhotosByAlbum(albumId));
 	}
 	
-	@RequestMapping(value = "/create-album")
+	@RequestMapping(value = "/albums/create")
     public void createAlbum(@RequestParam("n") String name, @RequestParam("l") int accesLevel) throws IOException {
         ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         albumStorage.insert(profileStorage.getIdByNickname(profileDetails.getNickname()), name, accesLevel);
