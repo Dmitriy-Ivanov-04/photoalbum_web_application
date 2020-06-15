@@ -192,10 +192,22 @@ public class ProfileServiceDomain implements ProfileService {
 	@Secured("ADMIN")
 	@Override
 	public void banUser(Long profileId) {
+		String emailProfile = profileStorage.findEmailById(profileId);
+		String nickname = profileStorage.getNicknameById(profileId);
+		
 		profileStorage.ban(profileId);
 		List<Album> albums = albumStorage.findAlbumsByUser(profileId, 10);
 		for(int i = 0; i < albums.size(); i++) {
 			albumStorage.setAccesLevel(albums.get(i).getId(), 10);
 		}
+		
+		if (!StringUtils.isEmpty(emailProfile)) {
+        	String message = String.format(
+                    "Hello, %s! \n" +
+                            "You were blocked for non-compliance with the requirements of the site.",
+                    nickname
+            );       
+        	mailClient.sendMail("rfln.support@gmail.com", emailProfile, "Account lockout", message);
+        }
 	}
 }
