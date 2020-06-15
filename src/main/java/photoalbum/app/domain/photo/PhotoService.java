@@ -12,7 +12,7 @@ public interface PhotoService {
 	
 	void deletePhoto(Long id);
 	
-	boolean copyPhoto(Long profileId, Long photoId)  throws IOException;
+	boolean copyPhotoIn(Long profileId, Long photoId, Long albumId)  throws IOException;
 	
 	//public List<PhotoJsonDTO> photosByUserAsJson(Long profileId);
 	

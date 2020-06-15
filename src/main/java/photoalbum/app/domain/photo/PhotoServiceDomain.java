@@ -170,7 +170,7 @@ public class PhotoServiceDomain implements PhotoService{
 		
 	}
 	
-	public boolean copyPhoto(Long profileId, Long photoId) throws IOException {
+	public boolean copyPhotoIn(Long profileId, Long photoId, Long albumId) throws IOException {
 		boolean result = true;
 		String randomName = UUID.randomUUID().toString();
 		String filePath = photoDirPath + File.separator + profileId + File.separator;
@@ -187,14 +187,7 @@ public class PhotoServiceDomain implements PhotoService{
 
 			copyFile(photoPath, fullFilePath);
 			
-			Long copyAlbumId;
-			try{
-				copyAlbumId = albumStorage.getAlbumByNameAndUser("Copied photos", profileId).getId();
-			} catch (EmptyResultDataAccessException e){
-				albumStorage.insert(profileId, "Copied photos", 2);
-				copyAlbumId = albumStorage.getAlbumByNameAndUser("Copied photos", profileId).getId();
-			}
-			uploadPhoto(profileId, copyAlbumId, photoStorage.getPhotoById(photoId).getDescription(), orgName);
+			uploadPhoto(profileId, albumId, photoStorage.getPhotoById(photoId).getDescription(), orgName);
 
 		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());

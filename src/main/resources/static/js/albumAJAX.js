@@ -43,7 +43,7 @@ $(document).ready(function () {
      		}
      	}
     }
-    xhr1.send("n=" + nick);
+    xhr1.send("n=" + nick);   
 
     function deleteAlbum(id) {
     	var token = document.head.querySelector("meta[name='_csrf']").content;
@@ -145,3 +145,41 @@ $(document).ready(function () {
     	}
     }
 });
+
+function albumListCopy(){
+	var token = document.head.querySelector("meta[name='_csrf']").content;
+	var header = document.head.querySelector("meta[name='_csrf_header']").content;
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/ajax/albums/copy', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader(header, token);
+    
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState != 4) 
+    		return;
+    	if (xhr.status != 200) {
+    		alert(xhr.status + ': ' + xhr.statusText);
+    	} else {
+    		if(xhr.responseText != 0){
+    			if($("#copy-albums").length){
+	    			let albums = JSON.parse(xhr.responseText);
+	    			let copyAlbums = document.getElementById("copy-albums");
+	    			copyAlbums.innerHTML = "";
+	    			for(let i = 0; i < albums.length; i++){
+	    				let a = document.createElement("a");
+	    				copyAlbums.appendChild(a);
+	    				$(a).attr("href", "#");
+	    				let albumName = document.createTextNode(albums[i].name);
+	    				a.appendChild(albumName);
+	    				
+	    				$(a).click(function() {
+	    					copyPhotoInAlbum(Number.parseInt(document.getElementById("photo-id").innerHTML), albums[i].id);
+	    					$("#copyButton").fadeOut(100);
+	    				});
+	    			}
+    			}
+    		}
+    	}
+    }
+    xhr.send();
+}

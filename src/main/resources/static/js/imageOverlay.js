@@ -7,6 +7,8 @@ function openImage (src, description, date, id, accesLevel) {
 	getTagsByPhoto(id);
 	getCommentsByPhoto(id);
 	getMarksByPhoto(id);
+	if($("#copyButton").length)
+		albumListCopy();
 	if(accesLevel != 0)
 		$("#copyButton").hide();
 	$("#lightbox").fadeIn(100);
@@ -14,14 +16,7 @@ function openImage (src, description, date, id, accesLevel) {
     
 $(document).ready(function () {
 	$("#lightbox").hide();
-	//$("#copyButton").hide();
     $("#overlay").click(function () {
         $("#lightbox").fadeOut(100);
     });
-    /*$("image-window").mouseenter(function(){
-    	$("#copyButton").fadeIn(100);
-    });
-    $("image-window").mouseleave(function(){
-    	$("#copyButton").fadeOut(100);
-    });*/
 });

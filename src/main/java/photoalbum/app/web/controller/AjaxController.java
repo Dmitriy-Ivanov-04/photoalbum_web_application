@@ -166,12 +166,6 @@ public class AjaxController {
 		return commentService.commentsByPhotoAsJson(commentStorage.getCommentsByPhoto(photoId));
 	}
 	
-	@RequestMapping(value = "/photos/copy")
-    public void copyPhoto(@RequestParam("id") Long photoId) throws IOException {
-        ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        photoServiceDomain.copyPhoto(profileStorage.getIdByNickname(profileDetails.getNickname()), photoId);
-    }
-	
 	@RequestMapping(value = "/photos/delete")
     public void deletePhoto(@RequestParam("id") Long photoId) throws IOException {
         photoServiceDomain.deletePhoto(photoId);
@@ -202,6 +196,23 @@ public class AjaxController {
         ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         albumStorage.insert(profileStorage.getIdByNickname(profileDetails.getNickname()), name, accesLevel);
     }
+	
+	@RequestMapping(value = "/albums/copy", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AlbumJsonDTO> albumListCopy() {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long profileId = profileStorage.getIdByNickname(profileDetails.getNickname());
+		return albumService.albumsByUserAsJson(albumStorage.findAlbumsByUser(profileId, relationshipsService.getAccesLevel(profileId, profileId)));
+	}
+	
+	@RequestMapping(value = "/albums/copy-in", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void copyPhotoInAlbum(@RequestParam("id") Long photoId, @RequestParam("a") Long albumId) {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+			photoService.copyPhotoIn(profileStorage.getIdByNickname(profileDetails.getNickname()), photoId, albumId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@RequestMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PhotoJsonDTO> searchByParametrs(@RequestParam("q") String query, @RequestParam("r") int rating, @RequestParam("d") String date) {
