@@ -3,7 +3,6 @@ package photoalbum.app.domain.relationships;
 import java.util.List;
 
 import photoalbum.app.domain.model.Relationships;
-import photoalbum.app.domain.model.Status;
 
 
 public interface RelationshipsService {
@@ -17,4 +16,5 @@ public interface RelationshipsService {
 	void unsubscribe(Long id);
 	String buttonText(Long profileId, Long targetId);
 	int getAccesLevel(Long profileId, Long targetId);
+	void changeRelationship(Long profileId, Long targetId);
 }

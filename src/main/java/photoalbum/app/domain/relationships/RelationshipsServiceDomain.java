@@ -50,16 +50,28 @@ public class RelationshipsServiceDomain implements RelationshipsService{
 	@Override
 	public String buttonText(Long profileId, Long targetId) {
 		if(profileId != targetId) {
+			Relationships relationship;
 			try {
-				Status status = relationshipsStorage.findRelationshipsByUsers(profileId, targetId).getStatus();
+				relationship = relationshipsStorage.findRelationshipsByUsers(profileId, targetId);
+				Status status = relationship.getStatus();
 				if(status == Status.SUBSCRIBER)
-					return "Unsubscribe";
+					return "unsubscribe";
 				if (status == Status.FRIEND)
-					return "Remove friend";	
+					return "delete";
 			} catch(EmptyResultDataAccessException e) {
-				return "Add frined";
+				try {
+					relationship = relationshipsStorage.findRelationshipsByUsers(targetId, profileId);
+					Status status = relationship.getStatus();
+					if(status == Status.SUBSCRIBER)
+						return "add";
+					if (status == Status.FRIEND)
+						return "delete";
+				} catch(EmptyResultDataAccessException e1) {
+					return "add";
+				}
 			}
-		}
+		} else 
+			return "hide";
 		return null;
 	}
 
@@ -88,5 +100,29 @@ public class RelationshipsServiceDomain implements RelationshipsService{
 			}
 		}
 		return accesLevel;
+	}
+
+	@Override
+	public void changeRelationship(Long profileId, Long targetId) {
+		Relationships relationship;
+		try {
+			relationship = relationshipsStorage.findRelationshipsByUsers(profileId, targetId);
+			Status status = relationship.getStatus();
+			if(status == Status.SUBSCRIBER)
+				relationshipsStorage.unsubscribe(relationship.getId());
+			if (status == Status.FRIEND)
+				relationshipsStorage.deleteFriend(targetId, profileId, relationship.getId());
+		} catch(EmptyResultDataAccessException e) {
+			try {
+				relationship = relationshipsStorage.findRelationshipsByUsers(targetId, profileId);
+				Status status = relationship.getStatus();
+				if(status == Status.SUBSCRIBER)
+					relationshipsStorage.acceptInvite(relationship.getId());
+				if (status == Status.FRIEND)
+					relationshipsStorage.deleteFriend(targetId, profileId, relationship.getId());
+			} catch(EmptyResultDataAccessException e1) {
+				relationshipsStorage.sendInvite(profileId, targetId);
+			}
+		}
 	}
 }

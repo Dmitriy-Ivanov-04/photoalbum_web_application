@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,8 +29,6 @@ import photoalbum.app.domain.dto.PhotoJsonDTO;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.dto.TagJsonDTO;
 import photoalbum.app.domain.mark.MarkService;
-import photoalbum.app.domain.model.Relationships;
-import photoalbum.app.domain.model.Status;
 import photoalbum.app.domain.photo.PhotoService;
 import photoalbum.app.domain.photo.PhotoServiceDomain;
 import photoalbum.app.domain.profile.ProfileService;
@@ -88,37 +85,22 @@ public class AjaxController {
 	@Autowired
 	PhotoServiceDomain photoServiceDomain;
 	
-	@Value("${project.manager.photo.dir.path}")
-    private String photoDirPath;
-	
 	@RequestMapping(value = "/add-friend")
 	public void addFriend(@RequestParam("n") String nickname) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
 		Long profileId = profileStorage.getIdByNickname(nickname);
 		Long loginProfileId = profileStorage.getIdByNickname(profileDetails.getNickname());
 		if(loginProfileId != profileId) {
-			Relationships relationship;
-			try {
-				relationship = relationshipsStorage.findRelationshipsByUsers(loginProfileId, profileId);
-				Status status = relationship.getStatus();
-				if(status == Status.SUBSCRIBER)
-					relationshipsStorage.unsubscribe(relationship.getId());
-				if (status == Status.FRIEND)
-					relationshipsStorage.deleteFriend(profileId, loginProfileId, relationship.getId());
-			} catch(EmptyResultDataAccessException e) {
-				try {
-					relationship = relationshipsStorage.findRelationshipsByUsers(profileId, loginProfileId);
-					Status status = relationship.getStatus();
-					if(status == Status.SUBSCRIBER)
-						relationshipsStorage.acceptInvite(relationship.getId());
-					if (status == Status.FRIEND)
-						relationshipsStorage.deleteFriend(profileId, loginProfileId, relationship.getId());
-				} catch(EmptyResultDataAccessException e1) {
-					relationshipsStorage.sendInvite(loginProfileId, profileId);
-				}
-			}
+			relationshipsService.changeRelationship(loginProfileId, profileId);
 		}
+	}
+	
+	@RequestMapping(value = "/add-friend/button-text")
+	public String addFriendButtonText(@RequestParam("n") String nickname) {
+		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long profileId = profileStorage.getIdByNickname(nickname);
+		Long loginProfileId = profileStorage.getIdByNickname(profileDetails.getNickname());
+		return relationshipsService.buttonText(loginProfileId, profileId);
 	}
 	
 	@RequestMapping(value = "/my-profile")

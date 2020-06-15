@@ -14,9 +14,10 @@ function profileCheck() {
     	if (xhr.status != 200) {
     		alert(xhr.status + ': ' + xhr.statusText);
     	} else {
-    		if(xhr.responseText == "true")
+    		if(xhr.responseText == "true"){
     			document.getElementById("copyButton").remove();
-    		else
+    			$("#session").hide();
+    		} else
     			document.getElementById("deleteButton").remove();
     	}
     }

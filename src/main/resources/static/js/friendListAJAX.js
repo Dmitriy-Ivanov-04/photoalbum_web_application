@@ -86,7 +86,10 @@ $(document).ready(function () {
     	    $(actions).attr("id", "actions");
     	    let imgActions = document.createElement("img");
     	    actions.appendChild(imgActions);
-    	    $(imgActions).attr("src", "/images/cross.png");
+    	    if(divId == "followers")
+    	    	$(imgActions).attr("src", "/images/check.png");
+    	    else
+    	    	$(imgActions).attr("src", "/images/cross.png");
     	    
     	    let hr = document.createElement("hr");
     	    group.appendChild(hr);

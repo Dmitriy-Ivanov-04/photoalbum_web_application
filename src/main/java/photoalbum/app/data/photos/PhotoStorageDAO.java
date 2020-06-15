@@ -109,8 +109,8 @@ public class PhotoStorageDAO implements PhotoStorage{
 		String sqlDate;
 		query = "%" + query + "%";
 		if(date != "") {
-			String[] dateArr = date.split("/");
-			sqlDate = dateArr[2] + "-" + dateArr[0] + "-" + dateArr[1];
+			String[] dateArr = date.split("-");
+			sqlDate = dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0];
 			sql.append(" AND photos.date = ?");
 			sql.append(" ORDER BY photos.id  DESC");
 			return jdbcTemplate.query(sql.toString(), new Object[] {query, query, sqlDate}, new PhotoRowMapper());

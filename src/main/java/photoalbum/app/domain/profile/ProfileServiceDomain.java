@@ -92,7 +92,7 @@ public class ProfileServiceDomain implements ProfileService {
 	}
 
 	@Override
-	public List<ProfileJsonDTO> usersByUserAsJson(Long profileId, String divId) { // переименовать метод?
+	public List<ProfileJsonDTO> usersByUserAsJson(Long profileId, String divId) {
 		List<Profile> profiles = null;
 		List<ProfileJsonDTO> profilesJson = null;
 		
