@@ -42,12 +42,25 @@ $(document).ready(function () {
 	    	if(i%3 == 1){
 	    		$(albumWrapper).css("margin", "0 20px");
 	    	}
-	    		
+
+			let crossDiv = document.createElement("div");
+			albumWrapper.appendChild(crossDiv);
+			$(crossDiv).attr("id", "cross-wrapper");
+
+			let cross = document.createElement("img");
+			crossDiv.appendChild(cross);
+			$(cross).attr("src", "/images/x.png");
+
+			let albumNameDiv = document.createElement("div");
+			albumWrapper.appendChild(albumNameDiv);
+			$(albumNameDiv).attr("id", "albumName-wrapper");
+
 	    	let albumName = document.createElement("span");
 	    	$(albumName).attr("class", "album-name");
+
 	    	let albumNameText = document.createTextNode(jsonArr[i].name)
 	    	albumName.appendChild(albumNameText);
-	    	albumWrapper.appendChild(albumName);
+			albumNameDiv.appendChild(albumName);
 	    		
 	    	$(albumWrapper).click(function() {
 	    		let oneAlbumTab = document.getElementById("one-album-tab");

@@ -59,8 +59,23 @@ a{
     background-color: #dfdfdf;
     border-radius: 10px 10px 10px 10px;
 }
+.delete{
+    position: absolute;
+    left: 64%;
+    top: 93%;
+    right: 0;
+    bottom: 0;
+    width: 207px;
+    height: 40px;
+    background-color: #dfdfdf;
+    border-radius: 10px 10px 10px 10px;
+}
 .copy-plus{
     padding: 5px;
+    vertical-align: middle;
+}
+.delete-plus{
+    padding: 8px;
     vertical-align: middle;
 }
 .copy:hover{
