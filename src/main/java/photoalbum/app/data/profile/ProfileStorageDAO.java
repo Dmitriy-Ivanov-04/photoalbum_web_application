@@ -218,4 +218,15 @@ public class ProfileStorageDAO implements ProfileStorage {
 		
 		return jdbcTemplate.queryForObject(sql.toString(), new Object[] {id}, String.class);
 	}
+
+	@Override
+	public void ban(Long id) {
+		String updateQuery = "UPDATE profile SET enabled = ? WHERE id = ?";
+		Object[] data = new Object[] {0, id};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+
+		if (rowAffected == 0) {
+			logger.error("Error during update record for Profile");
+		}
+	}
 }

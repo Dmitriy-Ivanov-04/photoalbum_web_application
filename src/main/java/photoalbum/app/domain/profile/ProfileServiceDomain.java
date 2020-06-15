@@ -7,17 +7,19 @@ import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-
+import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.domain.mail.MailClient;
 import photoalbum.app.domain.dto.ProfileJsonDTO;
 import photoalbum.app.domain.dto.UserAttrsJsonDTO;
+import photoalbum.app.domain.model.Album;
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.model.Role;
 import photoalbum.app.web.form.CodeForm;
@@ -29,6 +31,9 @@ public class ProfileServiceDomain implements ProfileService {
 	
 	@Autowired
 	ProfileStorage profileStorage;
+	
+	@Autowired
+	AlbumStorage albumStorage;
 	
 	@Autowired
 	MailClient mailClient;
@@ -183,7 +188,14 @@ public class ProfileServiceDomain implements ProfileService {
 		attrJson.add(attrDTO);
 		return attrJson;
 	}
-	
-	
-	
+
+	@Secured("ADMIN")
+	@Override
+	public void banUser(Long profileId) {
+		profileStorage.ban(profileId);
+		List<Album> albums = albumStorage.findAlbumsByUser(profileId, 10);
+		for(int i = 0; i < albums.size(); i++) {
+			albumStorage.setAccesLevel(albums.get(i).getId(), 10);
+		}
+	}
 }

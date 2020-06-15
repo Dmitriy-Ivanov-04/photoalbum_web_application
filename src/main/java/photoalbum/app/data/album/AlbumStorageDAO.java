@@ -66,4 +66,15 @@ public class AlbumStorageDAO implements AlbumStorage {
 		Album album = jdbcTemplate.queryForObject(sql.toString(), new Object[] {profileId, albumName}, new AlbumRowMapper());
 		return album;
 	}
+
+	@Override
+	public void setAccesLevel(Long albumId, int level) {
+		String updateQuery = "UPDATE albums SET acces_level = ? WHERE id = ?";
+		Object[] data = new Object[] {level, albumId};
+		int rowAffected = jdbcTemplate.update(updateQuery, data);
+		
+		if (rowAffected == 0) {
+			logger.error("Error during update record for Album");
+		}
+	}
 }

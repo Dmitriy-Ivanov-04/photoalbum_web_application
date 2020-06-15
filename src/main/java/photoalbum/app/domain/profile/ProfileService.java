@@ -30,4 +30,6 @@ public interface ProfileService {
 	public boolean saveCodeForCodeForm(CodeForm codeForm);
 	
 	public List<UserAttrsJsonDTO> attrsByUserAsJson(Long profileId, boolean owner);
+
+	void banUser(Long profileId);
 }

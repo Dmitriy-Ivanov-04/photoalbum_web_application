@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import photoalbum.app.data.ProfileStorage;
 import photoalbum.app.data.RelationshipsStorage;
 import photoalbum.app.domain.model.Relationships;
 import photoalbum.app.domain.model.Status;
@@ -15,6 +16,9 @@ public class RelationshipsServiceDomain implements RelationshipsService{
 	
 	@Autowired
 	RelationshipsStorage relationshipsStorage;
+	
+	@Autowired
+	ProfileStorage profileStorage;
 	
 	public List<Relationships> getSubscribersList(Long targetId){
 		return relationshipsStorage.findFollowers(targetId);
@@ -79,6 +83,12 @@ public class RelationshipsServiceDomain implements RelationshipsService{
 	@Override
 	public int getAccesLevel(Long profileId, Long loginProfileId) {
 		int accesLevel = 0;
+		if(profileStorage.getRole(loginProfileId).equals("MODERATOR")) {
+			return 5;
+		}
+		if(profileStorage.getRole(loginProfileId).equals("ADMIN")) {
+			return 10;
+		}
 		if(profileId == loginProfileId)
 			accesLevel = 2;
 		else {

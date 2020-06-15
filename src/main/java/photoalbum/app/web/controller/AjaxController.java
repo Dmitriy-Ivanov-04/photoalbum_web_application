@@ -212,4 +212,10 @@ public class AjaxController {
 	public List<PhotoJsonDTO> searchByTag(@RequestParam("t") String tag) {
 		return photoService.photosByUserAsJson(photoService.searchByTag(tag));
 	}
+	
+	@RequestMapping(value = "/ban")
+	public void ban(@RequestParam("n") String nick) {
+		Long profileId = profileStorage.getIdByNickname(nick);
+		profileService.banUser(profileId);
+	}
 }

@@ -12,4 +12,5 @@ public interface AlbumStorage {
 	void update(Long id, Long profileId, String albumName, int numberOfPhotos, AccesLevel accesLevel);
 	void delete(Long id);
 	Album getAlbumByNameAndUser(String albumName, Long profileId);
+	void setAccesLevel(Long albumId, int level);
 }

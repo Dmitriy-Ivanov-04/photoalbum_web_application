@@ -41,4 +41,6 @@ public interface ProfileStorage {
 	String getRole(Long id);
 	
 	String findNicknameByEmail(String email);
+	
+	void ban(Long id);
 }

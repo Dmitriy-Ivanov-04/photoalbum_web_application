@@ -14,7 +14,8 @@ $(document).ready(function () {
 	let searchInput = document.getElementById("search");
 	searchInput.addEventListener('keypress', function (e) {
 	    if (e.key === 'Enter'/* && $(searchInput).val() != ""*/) {
-	      search($(searchInput).val(), rating, $("#dateSelector").val());
+		      document.getElementById("content-publications").innerHTML = "";
+		      search($(searchInput).val(), rating, $("#dateSelector").val());
 	    }
 	});
 });
