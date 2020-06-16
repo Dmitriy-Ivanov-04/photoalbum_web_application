@@ -23,8 +23,6 @@ public class ProfileRowMapper implements RowMapper<Profile> {
 		profile.setPassword(rs.getString("password"));
 		profile.setEnabled(rs.getBoolean("enabled"));
 		profile.setToken(rs.getString("token"));
-		profile.setLinkAvatar(rs.getString("link_avatar"));
-		profile.setLinkBackground(rs.getString("link_background"));
 
         String roles = rs.getString("roles");
         if (roles.contains(",")) {

@@ -41,17 +41,6 @@ public class MarkStorageDAO implements MarkStorage{
 	}
 
 	@Override
-	public void delete(Long id) {
-		String updateQuery = "DELETE FROM marks WHERE id = ?";
-		Object[] data = new Object[] {id};
-		int rowAffected = jdbcTemplate.update(updateQuery, data);
-
-		if (rowAffected == 0) {
-			logger.error("Error during delete record for Marks");
-		}
-	}
-
-	@Override
 	public Mark getMarkByPhotoAndUser(Long photoId, Long profileId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM marks WHERE photo_id = ? AND author_id = ?");
 		Mark mark = jdbcTemplate.queryForObject(sql.toString(), new Object[] {photoId, profileId}, new MarkRowMapper());

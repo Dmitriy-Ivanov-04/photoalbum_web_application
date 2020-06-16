@@ -26,15 +26,6 @@ public class ProfileStorageDAO implements ProfileStorage {
 	}
 
 	@Override
-	public List<Profile> findAll() {
-		
-		StringBuilder sql = new StringBuilder("SELECT * FROM profile");
-		List<Profile> profile = jdbcTemplate.query(sql.toString(), new ProfileRowMapper());
-		
-		return profile;
-	}
-
-	@Override
 	public int countByEmail(String email) {
 		
 		StringBuilder sql = new StringBuilder("SELECT COUNT(*) as cnt FROM profile WHERE email = ?");
@@ -86,41 +77,6 @@ public class ProfileStorageDAO implements ProfileStorage {
 		if (rowAffected == 0) {
 			logger.error("Error during insert record for Profile");
 		}
-	}
-	
-	@Override
-	public void addAvatar(Profile profile) {
-		String updateQuery = "UPDATE profile SET linkAvatar = ? WHERE id = ?";
-		Object[] data = new Object[] {
-				profile.getLinkAvatar(), profile.getId()
-		};
-		int rowAffected = jdbcTemplate.update(updateQuery, data);
-		
-		if (rowAffected == 0) {
-			logger.error("Error during update avatar for Profile");
-		}
-		
-	}
-	
-	@Override
-	public void addBackground(Profile profile) {
-		String updateQuery = "UPDATE profile SET linkBackground = ? WHERE id = ?";
-		Object[] data = new Object[] {
-				profile.getLinkBackground(), profile.getId()
-		};
-		int rowAffected = jdbcTemplate.update(updateQuery, data);
-		
-		if (rowAffected == 0) {
-			logger.error("Error during update background for Profile");
-		}
-		
-	}
-
-	@Override
-	public Profile getProfileByNickname(String nickname) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM profile WHERE nickname = ?");
-		Profile profile = jdbcTemplate.queryForObject(sql.toString(), new Object[] {nickname}, new ProfileRowMapper());
-		return profile;
 	}
 	
 	@Override

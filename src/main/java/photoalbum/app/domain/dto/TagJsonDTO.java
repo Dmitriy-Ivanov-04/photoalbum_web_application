@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class TagJsonDTO {
+
 	private String tag;
 
 	public String getTag() {

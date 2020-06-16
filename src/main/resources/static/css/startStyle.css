@@ -1,6 +1,6 @@
 .form-wrapper{
     max-width: 400px;
-    height: 533px;
+    height: 570px;
     margin: 5.4% auto 0 auto;
     background-color: #FFF;
     border-radius: 30px;
@@ -20,16 +20,13 @@
 }
 #field3{
     width: 300px;
-    margin: 26px auto;
+    margin: 26px auto 0;
 }
 .password-control{
     top: 50px;
     right: 60px;
     width: 40px;
     height: 20px;
-}
-#restore-wrapper{
-    margin-top:25px;
 }
 #field5{
    margin-top: 19px;

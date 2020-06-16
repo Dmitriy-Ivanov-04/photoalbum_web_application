@@ -10,8 +10,6 @@ import photoalbum.app.web.form.EmailForm;
 import photoalbum.app.web.form.ProfileRegistrationForm;
 
 public interface ProfileService {
-	
-	List<Profile> getList();
 
 	boolean isUserWithEmailExist(String email);
 

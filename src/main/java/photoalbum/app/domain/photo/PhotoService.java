@@ -14,8 +14,6 @@ public interface PhotoService {
 	
 	boolean copyPhotoIn(Long profileId, Long photoId, Long albumId)  throws IOException;
 	
-	//public List<PhotoJsonDTO> photosByUserAsJson(Long profileId);
-	
 	List<PhotoJsonDTO> photosByUserAsJson(List<Photo> photos);
 	
 	List<Photo> searchByParametrs(String query, int rating, String date);

@@ -127,28 +127,4 @@ public class PhotoStorageDAO implements PhotoStorage{
 		return jdbcTemplate.query(sql.toString(), new Object[] {tag}, new PhotoRowMapper());
 		
 	}
-
-	@Override
-	public void uploadAvatar(Long profileId, String link) {
-		String insertQuery = "INSERT INTO profile (link_avatar) VALUES (?) WHERE profile_id = ?";
-		Object[] data = new Object[] {link, profileId};
-		int rowAffected = jdbcTemplate.update(insertQuery, data);
-		
-		if (rowAffected == 0) {
-			logger.error("Error during insert record for Photos");
-		}
-	}
-
-	@Override
-	public void uploadBackground(Long profileId, String orgName) {
-		String insertQuery = "INSERT INTO profile (background_avatar) VALUES (?) WHERE profile_id = ?";
-		Object[] data = new Object[] {orgName, profileId};
-		int rowAffected = jdbcTemplate.update(insertQuery, data);
-		
-		if (rowAffected == 0) {
-			logger.error("Error during insert record for Photos");
-		}
-	}
-	
-	
 }

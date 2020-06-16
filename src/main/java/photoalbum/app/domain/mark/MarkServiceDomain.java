@@ -56,11 +56,6 @@ public class MarkServiceDomain implements MarkService{
 	}
 
 	@Override
-	public void deleteMark(Long id) {
-		markStorage.delete(id);
-	}
-
-	@Override
 	public List<MarkJsonDTO> marksByPhotoAsJson(List<Mark> marks1) {
 		List<Mark> marks = marks1;
 		List<MarkJsonDTO> marksJson = null;

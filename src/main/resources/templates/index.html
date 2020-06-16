@@ -1,31 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" th:href="@{/css/profileStyle.css}">
-    <link rel="stylesheet" th:href="@{/css/imageOverlay.css}">
     <link rel="stylesheet" th:href="@{/css/polosaStyle.css}"/>
     <link rel="stylesheet" th:href="@{/css/tcal.css}">
     <link rel="stylesheet" th:href="@{/css/indexStyle.css}">
     <link rel="shortcut icon" th:href="@{/images/icon.png}" type="image/png">
     <title>Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script th:src="@{/js/profileScript.js}"></script>
-    <script th:src="@{/js/imageOverlay.js}"></script>
-    <script th:src="@{/js/tabScript.js}"></script>
-    <!--<script th:src="@{/js/addFriendScript.js}"></script>-->
-    <script th:src="@{/js/addFriendAJAX.js}"></script>
-    <script th:src="@{/js/photoAJAX.js}"></script>
-    <script th:src="@{/js/tagAJAX.js}"></script>
-    <script th:src="@{/js/commentAJAX.js}"></script>
-    <script th:src="@{/js/markAJAX.js}"></script>
-    <script th:src="@{/js/albumAJAX.js}"></script>
-    <script th:src="@{/js/copyAJAX.js}"></script>
     <script th:src="@{/js/tcal.js}"></script>
-    <script th:src="@{/js/profileAJAX.js}"></script>
 
 
     <meta name="_csrf" th:content="${_csrf.token}" />
@@ -33,79 +18,6 @@
 </head>
 <body>
 <div id="container">
-    <div id="lightbox">
-        <div id="overlay"></div>
-        <div id="image-window">
-            <div id="image-post">
-                <img src="" class="lightboxImage" alt="">
-                <a href="#">
-                    <div class="copy" id="copyButton">
-                        <div class="copy-menu">
-                            <img class="copy-plus" th:src="@{/images/plus.png}" alt="">
-                            <span class="copy-text">Скопировать себе</span>
-                            <div class="copy-menu-content" id="copy-albums">
-                                <a href="#">album 1</a>
-                                <a href="#">album 2</a>
-                                <a href="#">album 3</a>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="delete" id="deleteButton">
-                        <img class="delete-plus" th:src="@{/images/x.png}" alt="">
-                        <span class="copy-text">Удалить</span>
-                    </div>
-                </a>
-            </div>
-            <div id="info-post">
-                <div id="scroll-block">
-                    <div id="header-post">
-                        <img th:src="@{/images/avatar.png}" alt="" width="60px" height="60px">
-                        <div id="nickDate-align">
-                            <a href="#" class="nick-post" th:text="${nicknameView}" th:href = "@{'/user/' + ${nickname}}">Nickname</a>
-                            <span class="date-post" id="postDate"></span>
-                        </div>
-                    </div>
-                    <div id="hashtags-post"><p id = "hashtagsP"></p></div>
-                    <div id="description-post"><p id = "descriptionP"></p></div>
-                    <div id="rating-post">
-                        <div id="rating-circle"></div>
-                        <div id="rating-circle"></div>
-                        <div id="rating-circle"></div>
-                        <div id="rating-circle"></div>
-                        <div id="rating-circle"></div>
-                        <span class="rating" id="rating"></span>
-                        <a href=""><img th:src="@{/images/comment-sign.png}" class="comment-sign"alt=""></a>
-                        <span class="number-comment" id="commentNumber"></span>
-                    </div>
-                    <div id="hr-wrapper">
-                        <hr>
-                    </div>
-                    <div id="comments-post">
-
-                        <div id="comment">
-                            <div id="avatar-comment">
-                                <img th:src="@{/images/avatar.png}" alt="" width="50px" height="50px">
-                            </div>
-                            <div id="nickDate-comment">
-                                <a href="#" class="nick-post">Nickname</a>
-                                <span class="date-post">dd.mm.yyyy   00:00</span>
-                            </div>
-                            <div id="comment-text">
-                                Comment Comment Comment
-                            </div>
-                        </div>
-                    </div>
-                    <div id="addComment">
-                        <img th:src="@{/images/avatar.png}" class="avatar-comment1" alt="" width="50px" height="50px">
-                        <input type="text" class="user-comment" id="commentInput" maxlength="200">
-                        <a href="#"><img th:src="@{/images/addComment.png}" class="addComment-sign" id="commentButton" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="header-wrapper">
         <div id="polosa">
             <div id="search-exit">

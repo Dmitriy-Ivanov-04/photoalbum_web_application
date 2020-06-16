@@ -43,11 +43,6 @@ public class ProfileServiceDomain implements ProfileService {
 	private BCryptPasswordEncoder bCrypt;
 
 	@Override
-	public List<Profile> getList() {
-		return profileStorage.findAll();
-	}
-
-	@Override
 	public boolean isUserWithEmailExist(String email) {
 		return profileStorage.countByEmail(email) != 0 ? true : false;
 	}
@@ -126,7 +121,6 @@ public class ProfileServiceDomain implements ProfileService {
 				
 				profileDTO.setNickname(profile.getNickname());
 				profileDTO.setFullName(profile.getFullName());
-				profileDTO.setLinkAvatar(profile.getLinkAvatar());
 				
 				profilesJson.add(profileDTO);
 			}

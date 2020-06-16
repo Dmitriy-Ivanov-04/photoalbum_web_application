@@ -29,6 +29,14 @@ input{
 input[type="submit"]{
     padding-left: 0;
 }
+input[type="checkbox"]{
+    vertical-align: middle;
+    margin: 0;
+}
+label{
+    margin-left: 15px;
+    vertical-align: middle;
+}
 #container{
     background-color: #c6ccd8;
     width: 100vw;

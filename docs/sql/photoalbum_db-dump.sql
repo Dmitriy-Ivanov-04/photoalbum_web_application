@@ -51,8 +51,6 @@ CREATE TABLE `profile` (
   `enabled` tinyint(1) DEFAULT 0,
   `token` varchar(32) CHARACTER SET utf8 DEFAULT NULL,
   `roles` varchar(128) CHARACTER SET utf8 DEFAULT 'USER',
-  `link_avatar` varchar(320) CHARACTER SET utf8 DEFAULT NULL,
-  `link_background` varchar(320) CHARACTER SET utf8 DEFAULT NULL,
   `activation_code` varchar(320) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -22,8 +22,6 @@ public class Profile implements Serializable {
 	private String token;
 	private Set<Role> profileRoles;
     private String activationCode;
-	private String linkAvatar;
-	private String linkBackground;
 	
 	
 	public Long getId() {
@@ -95,22 +93,6 @@ public class Profile implements Serializable {
 			profileRoles = new HashSet<>();
 		}
 		return profileRoles;
-	}
-	
-	public String getLinkAvatar() {
-		return linkAvatar;
-	}
-	
-	public void setLinkAvatar(String linkAvatar) {
-		this.linkAvatar = linkAvatar;
-	}
-	
-	public String getLinkBackground() {
-		return linkBackground;
-	}
-	
-	public void setLinkBackground(String linkBackground) {
-		this.linkBackground = linkBackground;
 	}
 
 	@Override

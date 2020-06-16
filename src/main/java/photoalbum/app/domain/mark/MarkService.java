@@ -11,8 +11,6 @@ public interface MarkService {
 	
 	void addMark(Long photoId, Long authorId, int value);
 	
-	void deleteMark(Long id);
-	
 	public List<MarkJsonDTO> marksByPhotoAsJson(List<Mark> marks);
 	
 	void changeMark(Long photoId, Long authorId, int value);

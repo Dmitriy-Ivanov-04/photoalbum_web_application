@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
@@ -15,7 +13,6 @@
 	<script th:src="@{/js/profileScript.js}"></script>
 	<script th:src="@{/js/imageOverlay.js}"></script>
 	<script th:src="@{/js/tabScript.js}"></script>
-	<!--<script th:src="@{/js/addFriendScript.js}"></script>-->
 	<script th:src="@{/js/addFriendAJAX.js}"></script>
 	<script th:src="@{/js/photoAJAX.js}"></script>
 	<script th:src="@{/js/tagAJAX.js}"></script>
@@ -125,7 +122,6 @@
             <div id="profile-back">
                 <div id="profile-info">
                     <div id="avatar">
-						<!--<div id="blackout"><a class="upload-ref" href="#">0 Публикации</a></div>-->
                         <a href="#"><img th:src="@{/images/avatar.png}" alt=""></a>
                     </div>
                     <div id="text-profile">
@@ -158,7 +154,6 @@
                         </div>
                     </div>
                     <div id="button-block">
-                     
                         <a href="#">
                             <div id="ban">
                                 <span class="copy-text">Заблокировать</span>
@@ -175,7 +170,7 @@
             <label class="tab" id="albums-tab" th:text="#{button.albums}">Альбомы</label>
 			<label class='tab' id="one-album-tab" th:text="#{button.album}">Альбооооооооооом картинкиии</label>
 
-            <a th:href = "@{'/photo/img-upload?profileId=' + ${profileId}}"> <!-- th:href="@{/photo/img-upload(profileId=${profile.id})}" -->
+            <a th:href = "@{'/photo/img-upload?profileId=' + ${profileId}}">
 			    <div class="add-photo" id="addPhotoButton">
                     <img class="add-photo-camera" th:src="@{/images/camera.png}">
                     <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>
