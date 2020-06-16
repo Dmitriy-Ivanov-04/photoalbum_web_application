@@ -54,7 +54,7 @@ public class BackgroundController {
 
         	if (profile != null) {
                 for (MultipartFile multipartFile : files) {
-                	if (!photoService.saveAvatarAndBackground(multipartFile, profileId.get())) {
+                	if (!photoService.saveBackground(multipartFile, profileId.get())) {
                 		modelAndView.setViewName("redirect:/photo/upload-error");
                 		break;
                 	}
