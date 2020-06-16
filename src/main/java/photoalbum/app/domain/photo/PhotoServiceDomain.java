@@ -17,6 +17,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.HtmlUtils;
 
 import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.data.CommentStorage;
@@ -140,7 +141,9 @@ public class PhotoServiceDomain implements PhotoService{
 			File dest = new File(fullFilePath);
 			multipartFile.transferTo(dest);
 			uploadPhoto(profileId, albumStorage.getAlbumByNameAndUser(uploadForm.getAlbumName(), profileId).getId(), uploadForm.getDescription(), orgName);
+			HtmlUtils.htmlEscape(uploadForm.toString());
 			tagService.addTags(photoStorage.getPhotoByLink(orgName).getId(), uploadForm.getTags());
+			HtmlUtils.htmlEscape(uploadForm.toString());
 
 		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());
