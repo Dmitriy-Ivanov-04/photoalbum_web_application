@@ -17,6 +17,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.HtmlUtils;
 
 import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.data.CommentStorage;
@@ -85,8 +86,6 @@ public class PhotoServiceDomain implements PhotoService{
 
 	@Override
 	public List<PhotoJsonDTO> photosByUserAsJson(List<Photo> photos1) {
-	//public List<PhotoJsonDTO> photosByUserAsJson(Long profileId) {
-		//List<Photo> photos = photoStorage.getPhotosByUser(profileId);
 		List<Photo> photos = photos1;
 		List<PhotoJsonDTO> photosJson = null;
 		
@@ -140,7 +139,9 @@ public class PhotoServiceDomain implements PhotoService{
 			File dest = new File(fullFilePath);
 			multipartFile.transferTo(dest);
 			uploadPhoto(profileId, albumStorage.getAlbumByNameAndUser(uploadForm.getAlbumName(), profileId).getId(), uploadForm.getDescription(), orgName);
+			HtmlUtils.htmlEscape(uploadForm.toString());
 			tagService.addTags(photoStorage.getPhotoByLink(orgName).getId(), uploadForm.getTags());
+			HtmlUtils.htmlEscape(uploadForm.toString());
 
 		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());
@@ -229,7 +230,7 @@ public class PhotoServiceDomain implements PhotoService{
 		return photos;
 	}
 	
-	public boolean saveAvatarAndBackground(MultipartFile multipartFile, Long profileId) {
+	public boolean saveAvatar(MultipartFile multipartFile, Long profileId) {
 		boolean result = true;
 		String randomName = UUID.randomUUID().toString();
 		String filePath = photoDirPath + File.separator + profileId + File.separator;
@@ -249,7 +250,7 @@ public class PhotoServiceDomain implements PhotoService{
 
 			File dest = new File(fullFilePath);
 			multipartFile.transferTo(dest);
-			photoStorage.uploadAvatarAndBackground(profileId);
+			photoStorage.uploadAvatar(profileId, orgName);
 
 		} catch (IllegalStateException e) {
 			logger.severe(e.getMessage());
@@ -261,5 +262,37 @@ public class PhotoServiceDomain implements PhotoService{
 
 		return result;
 	}
+	
+	public boolean saveBackground(MultipartFile multipartFile, Long profileId) {
+		boolean result = true;
+		String randomName = UUID.randomUUID().toString();
+		String filePath = photoDirPath + File.separator + profileId + File.separator;
 
+		if (!(new File(filePath).exists())) {
+			new File(filePath).mkdirs();
+		}
+		
+		if (!multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().length() - 3).equals("jpg")) {
+			return false;
+		}
+
+		try {
+			
+			String orgName = randomName + multipartFile.getOriginalFilename();
+			String fullFilePath = filePath + orgName;
+
+			File dest = new File(fullFilePath);
+			multipartFile.transferTo(dest);
+			photoStorage.uploadBackground(profileId, orgName);
+
+		} catch (IllegalStateException e) {
+			logger.severe(e.getMessage());
+			result = false;
+		} catch (IOException e) {
+			logger.severe(e.getMessage());
+			result = false;
+		}
+
+		return result;
+	}
 }

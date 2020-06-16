@@ -158,11 +158,7 @@
                         </div>
                     </div>
                     <div id="button-block">
-                        <a href="#">
-                            <div id="upload-background">
-                                <span class="copy-text">Изменить фон</span>
-                            </div>
-                        </a>
+                     
                         <a href="#">
                             <div id="ban">
                                 <span class="copy-text">Заблокировать</span>
@@ -180,7 +176,7 @@
 			<label class='tab' id="one-album-tab" th:text="#{button.album}">Альбооооооооооом картинкиии</label>
 
             <a th:href = "@{'/photo/img-upload?profileId=' + ${profileId}}"> <!-- th:href="@{/photo/img-upload(profileId=${profile.id})}" -->
-			    <div class="add-photo">
+			    <div class="add-photo" id="addPhotoButton">
                     <img class="add-photo-camera" th:src="@{/images/camera.png}">
                     <span class="add-photo-text" th:text="#{button.addPhoto}">Добавить фото</span>
                 </div>

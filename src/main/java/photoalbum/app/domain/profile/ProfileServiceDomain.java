@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.util.HtmlUtils;
 
 import photoalbum.app.data.AlbumStorage;
 import photoalbum.app.data.ProfileStorage;
@@ -57,9 +58,13 @@ public class ProfileServiceDomain implements ProfileService {
 		Profile u = new Profile();
 
         BeanUtils.copyProperties(userForm, u);
+        HtmlUtils.htmlEscape(userForm.toString());
         u.setPassword(bCrypt.encode(userForm.getPassword()));
+        HtmlUtils.htmlEscape(userForm.toString());
         u.getProfileRoles().add(Role.USER);
+        HtmlUtils.htmlEscape(userForm.toString());
         u.setActivationCode(UUID.randomUUID().toString());
+        HtmlUtils.htmlEscape(userForm.toString());
 
         profileStorage.save(u);
         
@@ -139,11 +144,12 @@ public class ProfileServiceDomain implements ProfileService {
 	public boolean passwordRecovery(EmailForm emailForm) {	
 		
 		Profile profile = profileStorage.findByEmail(emailForm.getEmail());
-		System.out.println(profile.toString());
+		HtmlUtils.htmlEscape(emailForm.toString());
 		Random random = new Random();
 	    Integer rage=9999;
 	    Integer generator=1000+random.nextInt(rage-1000);
 		profile.setActivationCode(generator.toString());
+		HtmlUtils.htmlEscape(emailForm.toString());
 
         profileStorage.save(profile);
 		
@@ -164,12 +170,14 @@ public class ProfileServiceDomain implements ProfileService {
 	public boolean saveCodeForCodeForm(CodeForm codeForm) {
 		
 		Profile user = profileStorage.findByActivationCode(codeForm.getCode());
+		HtmlUtils.htmlEscape(codeForm.toString());
 		
 		if (user == null) {
             return false;
         }
 		
 		user.setPassword(bCrypt.encode(codeForm.getPassword()));
+		HtmlUtils.htmlEscape(codeForm.toString());
 		user.setActivationCode(null);
 		
 		profileStorage.save(user);

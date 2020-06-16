@@ -54,7 +54,7 @@ public class AvatarController {
 
         	if (profile != null) {
                 for (MultipartFile multipartFile : files) {
-                	if (!photoService.saveAvatarAndBackground(multipartFile, profileId.get())) {
+                	if (!photoService.saveAvatar(multipartFile, profileId.get())) {
                 		modelAndView.setViewName("redirect:/photo/upload-error");
                 		break;
                 	}
