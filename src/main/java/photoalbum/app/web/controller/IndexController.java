@@ -23,7 +23,7 @@ public class IndexController {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("title", messageSource.getMessage("home.title",null, locale));
 		model.addAttribute("nickname", profileDetails.getNickname());
-		return "feed";
+		return "index";
 	}
 
 }
