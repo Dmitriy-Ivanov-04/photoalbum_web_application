@@ -89,7 +89,7 @@ public class AjaxController {
 	@RequestMapping(value = "/add-friend")
 	public void addFriend(@RequestParam("n") String nickname) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Long profileId = profileStorage.getIdByNickname(nickname);
+		Long profileId = profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nickname));
 		Long loginProfileId = profileStorage.getIdByNickname(profileDetails.getNickname());
 		if(loginProfileId != profileId) {
 			relationshipsService.changeRelationship(loginProfileId, profileId);
@@ -99,7 +99,7 @@ public class AjaxController {
 	@RequestMapping(value = "/add-friend/button-text")
 	public String addFriendButtonText(@RequestParam("n") String nickname) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Long profileId = profileStorage.getIdByNickname(nickname);
+		Long profileId = profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nickname));
 		Long loginProfileId = profileStorage.getIdByNickname(profileDetails.getNickname());
 		return relationshipsService.buttonText(loginProfileId, profileId);
 	}
@@ -109,7 +109,7 @@ public class AjaxController {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		boolean owner = false;
 		String loginNick = profileDetails.getNickname();
-		if(loginNick.equals(nick))
+		if(loginNick.equals(HtmlUtils.htmlEscape(nick)))
 			owner = true;
 		return profileService.attrsByUserAsJson(profileStorage.getIdByNickname(loginNick), owner);
 	}
@@ -162,7 +162,7 @@ public class AjaxController {
 	@RequestMapping(value = "/comments/add", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<CommentJsonDTO> addComment(@RequestParam("id") Long photoId, @RequestParam("t") String text) {
 		ProfileDetailsImpl profileDetails = (ProfileDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		commentService.addComment(photoId, profileStorage.getIdByNickname(profileDetails.getNickname()), text);
+		commentService.addComment(photoId, profileStorage.getIdByNickname(profileDetails.getNickname()), HtmlUtils.htmlEscape(text));
 		return commentService.commentsByPhotoAsJson(commentStorage.getCommentsByPhoto(photoId));
 	}
 	
@@ -226,7 +226,7 @@ public class AjaxController {
 	
 	@RequestMapping(value = "/ban")
 	public void ban(@RequestParam("n") String nick) {
-		Long profileId = profileStorage.getIdByNickname(nick);
+		Long profileId = profileStorage.getIdByNickname(HtmlUtils.htmlEscape(nick));
 		profileService.banUser(profileId);
 	}
 }

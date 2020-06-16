@@ -23,6 +23,9 @@ function profileCheck() {
     			if(!attrs[0].owner && attrs[0].role == "USER"){
     				document.getElementById("deleteButton").remove();
     			}
+    			if(!attrs[0].owner){
+    				$("#addPhotoButton").hide();
+    			}
     			if(!(attrs[0].role == "ADMIN"))
     				document.getElementById("ban").remove();
     			else{
