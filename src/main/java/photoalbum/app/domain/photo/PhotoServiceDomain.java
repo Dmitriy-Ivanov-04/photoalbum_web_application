@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -33,7 +34,7 @@ import photoalbum.app.web.form.UploadForm;
 @Service
 public class PhotoServiceDomain implements PhotoService{
 	
-	private Logger logger = Logger.getLogger(this.getClass().getName());
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
 	
 	@Autowired
 	PhotoStorage photoStorage;
@@ -55,6 +56,9 @@ public class PhotoServiceDomain implements PhotoService{
 	
 	@Autowired
 	ProfileStorage profileStorage;
+
+	@Value("#{${upload.images.allowTypes}}")
+	List<String> allowImageTypes;
 
 	@Override
 	public void uploadPhoto(Long profileId, Long albumId, String description, String link) {
@@ -120,14 +124,24 @@ public class PhotoServiceDomain implements PhotoService{
 	
 	public boolean savePhoto(MultipartFile multipartFile, Long profileId, UploadForm uploadForm) {
 		boolean result = true;
+
 		String randomName = UUID.randomUUID().toString();
 		String filePath = System.getProperty("user.dir") + photoDirPath + File.separator + profileId + File.separator;
 
 		if (!(new File(filePath).exists())) {
 			new File(filePath).mkdirs();
 		}
-		
-		if (!multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().length() - 3).equals("jpg")) {
+
+		String fileName = multipartFile.getOriginalFilename();
+
+		if (fileName == null || fileName.isEmpty()) {
+			return false;
+		}
+
+		boolean allowFileName = allowImageTypes.stream()
+				.anyMatch(fileName::endsWith);
+
+		if (!allowFileName) {
 			return false;
 		}
 
@@ -143,10 +157,7 @@ public class PhotoServiceDomain implements PhotoService{
 			tagService.addTags(photoStorage.getPhotoByLink(orgName).getId(), uploadForm.getTags());
 			HtmlUtils.htmlEscape(uploadForm.toString());
 
-		} catch (IllegalStateException e) {
-			logger.severe(e.getMessage());
-			result = false;
-		} catch (IOException e) {
+		} catch (IllegalStateException | IOException e) {
 			logger.severe(e.getMessage());
 			result = false;
 		}
