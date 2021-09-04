@@ -1,7 +1,6 @@
 package photoalbum.app.web.controller;
 
-import java.util.Optional;
-
+import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
@@ -12,12 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import photoalbum.app.domain.model.Profile;
 import photoalbum.app.domain.photo.PhotoServiceDomain;
 import photoalbum.app.domain.profile.ProfileService;
 import photoalbum.app.spring.ProfileDetailsImpl;
 import photoalbum.app.web.form.UploadForm;
+
+import java.util.Optional;
 
 @Controller
 @Secured({"USER", "MODERATOR", "ADMIN"})
@@ -70,10 +70,15 @@ public class PhotoController {
         model.addAttribute("nickname", profileDetails.getNickname());
         return "/photo/upload-error";
     }
-    
+
     @GetMapping(value="/img/{photoId}", produces=MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
     public FileSystemResource photo(ModelAndView modelAndView, @PathVariable Long photoId) {
         return photoService.getImage(photoId);
+    }
+
+    @ExceptionHandler(FileSizeLimitExceededException.class)
+    public ModelAndView handleSizeException(FileSizeLimitExceededException ex) {
+        return new ModelAndView("photo/upload-error");
     }
 }
