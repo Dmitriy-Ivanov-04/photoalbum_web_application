@@ -111,7 +111,7 @@ public class PhotoServiceDomain implements PhotoService{
 	private String photoDirPath;
 
 	public FileSystemResource getImage(Long photoId) {
-		String photoPath = photoDirPath + File.separator + photoStorage.getProfileIdByPhoto(photoId) + File.separator + photoStorage.getPhotoById(photoId).getLink_photo();
+		String photoPath = System.getProperty("user.dir") + photoDirPath + File.separator + photoStorage.getProfileIdByPhoto(photoId) + File.separator + photoStorage.getPhotoById(photoId).getLink_photo();
 
 		File f = new File(photoPath);
 		return new FileSystemResource(f);
@@ -121,7 +121,7 @@ public class PhotoServiceDomain implements PhotoService{
 	public boolean savePhoto(MultipartFile multipartFile, Long profileId, UploadForm uploadForm) {
 		boolean result = true;
 		String randomName = UUID.randomUUID().toString();
-		String filePath = photoDirPath + File.separator + profileId + File.separator;
+		String filePath = System.getProperty("user.dir") + photoDirPath + File.separator + profileId + File.separator;
 
 		if (!(new File(filePath).exists())) {
 			new File(filePath).mkdirs();
